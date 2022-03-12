@@ -5,11 +5,11 @@ using UnityEngine;
 namespace Hamster.TouchPuzzle {
 
     public class TouchPuzzeWorld : World, ITouchProcessor {
-
         public TouchRaycaster TouchRaycaster = null;
         public TransitionsPanel TransitionsPanel = null;
         public AtlasManager AtlasManager = new AtlasManager();
         public ItemManager ItemManager = new ItemManager();
+        public EventActionBlackboard Blackboard = new EventActionBlackboard();
 
         private int _usingItemID = 0;
 
@@ -21,6 +21,8 @@ namespace Hamster.TouchPuzzle {
 
             TransitionsPanel.gameObject.SetActive(true);
             TransitionsPanel.Execute(BeginLoad);
+
+            ItemManager.BindChangeCallback(OnItemChange);
         }
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
@@ -84,9 +86,8 @@ namespace Hamster.TouchPuzzle {
             Single<FieldManager>.GetInstance().Register(field);
         }
 
-        private void LoadField(string path, bool isFirst=false) {
+        private void LoadField(string path, bool isFirst = false) {
             if (isFirst) {
-                // TransitionsPanel.Execute();
                 Asset.LoadSync(path, OnLoadFirstFieldComplete, 1);
             }
             else {
@@ -95,9 +96,20 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void SetUsingItem(int id) {
-            _usingItemID = id; 
+            _usingItemID = id;
+        }
+
+        public static int GetBlockboardKey(int blackBoardTypeKey, int MainKey, int ID, int value) {
+            return (blackBoardTypeKey << 24) | (MainKey << 16) | (ID << 8) | value;
+        }
+
+        private int GetItemManagerKey(int index) {
+            return GetBlockboardKey((int)EBlackBoardKey.System, (int)ESystemBlackboardKey.ITEM_MANAGER, 0, index);
+        }
+
+        private void OnItemChange(int id, int index, bool isAdd) {
+            Blackboard.SetValue(GetItemManagerKey(index), isAdd ? id : 0);
         }
     }
-
 
 }

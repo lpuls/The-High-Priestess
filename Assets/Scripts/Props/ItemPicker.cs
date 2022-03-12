@@ -5,7 +5,7 @@
 
         public override void OnClick(int propID) {
             World.GetWorld<TouchPuzzeWorld>().ItemManager.AddItem((int)ID);
-            Destroy();
+            Destroy(gameObject);
         }
     }
 }

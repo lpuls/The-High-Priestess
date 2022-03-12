@@ -27,6 +27,8 @@ namespace Hamster.TouchPuzzle {
 
         public void Clean() {
             _id = 0;
+            _select = false;
+            _icon.color = _select ? Color.black : Color.white;
             _icon.enabled = false;
             _itemName.enabled = false;
         }

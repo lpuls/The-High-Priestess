@@ -24,7 +24,7 @@ namespace Hamster.TouchPuzzle {
 
         public void RemoveItem(int id) {
             int index = _items.IndexOf(id);
-            _items.RemoveAt(index);
+            _items[index] = 0;
             _onItemChange?.Invoke(id, index, false);
         }
 

@@ -4,7 +4,8 @@
         Candle,
         CandleStick,
         Matches,
-        Cake
+        Cake,
+        Door
     }
 
     public enum EFieldID {
@@ -15,4 +16,16 @@
         ExitDoor,
         DetailTraibuteTableLeftUp
     }
+
+    public enum EBlackBoardKey {
+        None,
+        System = 1,
+        Prop = 2
+    }
+
+    public enum ESystemBlackboardKey {
+        None,
+        ITEM_MANAGER = 1,
+    }
+
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c335e7cfeee2424fad5150e68101453
+guid: 9ed67cf94251be34da15614bd82b1b70
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -88,5 +88,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: resources/sprites/paperman
+  assetBundleName: 
   assetBundleVariant: 

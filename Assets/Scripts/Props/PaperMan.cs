@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
-    public class PaperMan : Props {
+
+    public class PaperHuman : Props {
         public EPropID TargetProp = EPropID.None;
         public string AnimaTriggerName = string.Empty;
         public GameObject OriginItem = null;
         public GameObject TargetItem = null;
 
-        private Animator _animator = null;
+        protected Animator _animator = null;
 
-        private void Awake() {
+        protected virtual void Awake() {
             _animator = GetComponent<Animator>();
             OriginItem.SetActive(false);
             TargetItem.SetActive(false);
@@ -17,12 +18,20 @@ namespace Hamster.TouchPuzzle {
 
         public override void OnClick(int propID) {
             if (propID == (int)TargetProp) {
+                World.GetWorld<TouchPuzzeWorld>().ItemManager.RemoveItem(propID);
                 _animator.SetBool(AnimaTriggerName, true);
-                OriginItem.SetActive(true);
             }
         }
 
-        public void ChengeItem() {
+        protected virtual void OnAnimationComplete() {
+            OriginItem.SetActive(false);
+            TargetItem.SetActive(true);
+        }
+    }
+
+    public class PaperMan : PaperHuman {
+
+        protected override void OnAnimationComplete() {
             OriginItem.SetActive(false);
             TargetItem.SetActive(true);
         }

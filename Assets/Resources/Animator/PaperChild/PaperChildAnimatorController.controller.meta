@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: be53a8dd8778c2e4b8b55f475a325e9e
-PrefabImporter:
+guid: bf1a4e7c91024f9449487f4d6c5785b1
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: res/fields/field_right
   assetBundleVariant: 
