@@ -27,6 +27,7 @@ public class NewActionOrConditionWindow : EditorWindow {
             }
             if (GUILayout.Button("Cancel")) {
                 OnComplete?.Invoke(false);
+
             }
             GUILayout.EndHorizontal();
         }

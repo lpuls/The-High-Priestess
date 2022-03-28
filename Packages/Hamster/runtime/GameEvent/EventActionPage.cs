@@ -1,8 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using System.Reflection;
+using UnityEditor;
+
+public interface IActionDrawer {
+    void DrawMoveUp(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveUp);
+    void DrawMoveDown(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveDown);
+    void DrawDel(float baseWidth, float maxWidth, float minWidth, Action Del);
+    void OnClickAction(EventActionCallback eventAction, Action<bool> callback);
+
+    void AddNewAction(object userData, Action<bool, object> callback);
+
+    string GetPath();
+}
+
+public interface IDrawContext {
+    void Draw(IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth);
+}
+
+#endif
 
 [System.Serializable]
-public class EventActionPage : ScriptableObject {
+public class EventActionPage : ScriptableObject, IDrawContext {
     public delegate bool CheckActionComplete();
 
     public string Name = string.Empty;
@@ -15,6 +36,10 @@ public class EventActionPage : ScriptableObject {
 
     public int CodeIndex {
         get; set;
+    }
+
+    public void Initialize() {
+        Condition.SetOwnerPage(this);
     }
 
     public bool CheckCondition() {
@@ -36,7 +61,8 @@ public class EventActionPage : ScriptableObject {
         for (int i = 0; i < ActionCalls.Count; i++) {
             ActionCalls[i].Reset();
         }
-        Condition.Reset();
+        if (null != Condition)
+            Condition.Reset();
     }
 
     public void AddVariable<T>(string name, T value = default) {
@@ -77,6 +103,49 @@ public class EventActionPage : ScriptableObject {
             UnityEditor.EditorUtility.SetDirty(ActionCalls[i]);
         }
         UnityEditor.EditorUtility.SetDirty(this);
+    }
+
+    public void Draw(IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
+        for (int i = 0; i < ActionCalls.Count; i++) {
+            EventActionCallback eventActionArgs = ActionCalls[i];
+            if (eventActionArgs is IDrawContext) {
+                (eventActionArgs as IDrawContext).Draw(drawer, baseWidth, maxWidth, minWidth);
+            }
+            else {
+                EditorGUILayout.BeginHorizontal();
+                EventActionInfoAttribute attribute = eventActionArgs.GetType().GetCustomAttribute<EventActionInfoAttribute>();
+                string context = attribute.DisplayName + " -> " + eventActionArgs.Descript;
+                if (context.Length >= 75) {
+                    context = context.Substring(0, 75);
+                }
+                else {
+                    for (int k = context.Length; k < 75; k++) {
+                        context += " ";
+                    }
+                }
+                GUILayout.Label(i.ToString(), GUILayout.Width(0.05f * baseWidth),
+                    GUILayout.MaxWidth(0.05f * maxWidth),
+                    GUILayout.MinWidth(0.05f * minWidth));
+                if (GUILayout.Button(context,
+                    GUILayout.Width(0.65f * baseWidth),
+                    GUILayout.MaxWidth(0.65f * maxWidth),
+                    GUILayout.MinWidth(0.65f * minWidth))) {
+                    drawer.OnClickAction(eventActionArgs, (bool success) => { });
+                }
+                drawer.DrawMoveUp(baseWidth, maxWidth, minWidth, i >= 1, ()=> {
+                    ActionCalls.RemoveAt(i);
+                    ActionCalls.Insert(i - 1, eventActionArgs);
+                });
+                drawer.DrawMoveDown(baseWidth, maxWidth, minWidth, i < ActionCalls.Count - 1, () => {
+                    ActionCalls.RemoveAt(i);
+                    ActionCalls.Insert(i + 1, eventActionArgs);
+                });
+                drawer.DrawDel(baseWidth, maxWidth, minWidth, () => {
+                    ActionCalls.RemoveAt(i);
+                });
+                EditorGUILayout.EndHorizontal();
+            }
+        }
     }
 #endif
 }

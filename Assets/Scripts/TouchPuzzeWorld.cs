@@ -10,6 +10,7 @@ namespace Hamster.TouchPuzzle {
         public AtlasManager AtlasManager = new AtlasManager();
         public ItemManager ItemManager = new ItemManager();
         public EventActionBlackboard Blackboard = new EventActionBlackboard();
+        public MessageManager MessageManager = new MessageManager();
 
         private int _usingItemID = 0;
 
@@ -65,6 +66,7 @@ namespace Hamster.TouchPuzzle {
             LoadField("Res/Fields/Field_Middle", true);
             LoadField("Res/Fields/Field_Right");
             LoadField("Res/Fields/FieldDetailTraibuteTableLeftUp");
+            LoadField("Res/Fields/FieldDetailTraibuteTableRightUp");
         }
 
         private void OnLoadFirstFieldComplete(Object field) {
@@ -109,6 +111,10 @@ namespace Hamster.TouchPuzzle {
 
         private void OnItemChange(int id, int index, bool isAdd) {
             Blackboard.SetValue(GetItemManagerKey(index), isAdd ? id : 0);
+        }
+
+        public static int GetCandleCountKey() {
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.CandleCount, 0, 0);
         }
     }
 

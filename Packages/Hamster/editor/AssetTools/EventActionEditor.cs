@@ -2,13 +2,16 @@
 using UnityEditor;
 using System.Reflection;
 using System.Collections.Generic;
+using System;
 
-public class EventActionEditor : EditorWindow {
 
+public class EventActionEditor : EditorWindow, IActionDrawer {
 
-    [MenuItem("Tools/Editor/EventActionEditor")]
-    static void ShowEventActionEditor() {
+    public static void ShowEventActionEditor(List<Assembly> assemblies) {
         EditorWindow editorWindow = EditorWindow.GetWindow(typeof(EventActionEditor));
+        for (int i = 0; i < assemblies.Count; i++) {
+            EventActionInfoAttribute.Spawner(assemblies[i]);
+        }
     }
 
     private float _splitterWidth = 5;
@@ -160,8 +163,9 @@ public class EventActionEditor : EditorWindow {
                         });
                 }
                 if (null != page.Condition) {
-                    if (GUILayout.Button("编辑条件")) {
-                        page.Condition.DrawInspector();
+                    if (GUILayout.Button(/*"编辑条件"*/page.Condition.Descript)) {
+                        NewActionOrConditionWindow.NewWindow(page.Condition, (bool value)=> { });
+                        //page.Condition.DrawInspector();
                     }
                 }
             }
@@ -193,6 +197,52 @@ public class EventActionEditor : EditorWindow {
         EditorGUILayout.EndVertical();
     }
 
+    public void DrawMoveUp(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveUp) {
+        if (valid) {
+            if (GUILayout.Button("MoveUp",
+            GUILayout.Width(0.1f * baseWidth),
+            GUILayout.MaxWidth(0.1f * maxWidth),
+            GUILayout.MinWidth(0.1f * minWidth))) {
+                OnMoveUp?.Invoke();
+            }
+        }
+        else {
+            GUILayout.Box("MoveUp",
+                GUILayout.Width(0.1f * baseWidth),
+                GUILayout.MaxWidth(0.1f * maxWidth),
+                GUILayout.MinWidth(0.1f * minWidth));
+        }
+    }
+    public void DrawMoveDown(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveDown) {
+        if (valid) {
+            if (GUILayout.Button("MoveDown",
+            GUILayout.Width(0.1f * baseWidth),
+            GUILayout.MaxWidth(0.1f * maxWidth),
+            GUILayout.MinWidth(0.1f * minWidth))) {
+                OnMoveDown?.Invoke();
+            }
+        }
+        else {
+            GUILayout.Box("MoveDown",
+                GUILayout.Width(0.1f * baseWidth),
+                GUILayout.MaxWidth(0.1f * maxWidth),
+                GUILayout.MinWidth(0.1f * minWidth));
+        }
+    }
+
+    public void DrawDel(float baseWidth, float maxWidth, float minWidth, Action Del) {
+        if (GUILayout.Button("Del",
+            GUILayout.Width(0.1f * baseWidth),
+            GUILayout.MaxWidth(0.1f * maxWidth),
+            GUILayout.MinWidth(0.1f * minWidth))) {
+            Del?.Invoke();
+        }
+    }
+
+    public void OnClickAction(EventActionCallback eventAction, Action<bool> callback) {
+        NewActionOrConditionWindow.NewWindow(eventAction, callback);
+    }
+
     private void DrawActionList() {
         EditorGUILayout.BeginVertical(GUILayout.Width(position.width * _listPanelSize),
                      GUILayout.MaxWidth(maxSize.x * _listPanelSize),
@@ -207,69 +257,7 @@ public class EventActionEditor : EditorWindow {
                 float maxBaseWidth = maxSize.x * _listPanelSize;
                 float minBaseWidth = minSize.x * _listPanelSize;
                 EventActionPage page = _currentActionInst.Pages[_currentActionPageIndex];
-                for (int i = 0; i < page.ActionCalls.Count; i++) {
-                    EventActionCallback eventActionArgs = page.ActionCalls[i];
-                    EditorGUILayout.BeginHorizontal();
-                    EventActionInfoAttribute attribute = eventActionArgs.GetType().GetCustomAttribute<EventActionInfoAttribute>();
-                    string context = attribute.DisplayName + " -> " + eventActionArgs.Descript;
-                    if (context.Length >= 75) {
-                        context = context.Substring(0, 75);
-                    }
-                    else {
-                        for (int k = context.Length; k < 75; k++) {
-                            context += " ";
-                        }  
-                    }
-                    GUILayout.Label(i.ToString(), GUILayout.Width(0.05f * baseWidth),
-                        GUILayout.MaxWidth(0.05f * maxBaseWidth),
-                        GUILayout.MinWidth(0.05f * minBaseWidth));
-                    if (GUILayout.Button(context, 
-                        GUILayout.Width(0.65f * baseWidth),
-                        GUILayout.MaxWidth(0.65f * maxBaseWidth),
-                        GUILayout.MinWidth(0.65f * minBaseWidth) )) {
-                        NewActionOrConditionWindow.NewWindow(eventActionArgs, (bool success) => { });
-                    }
-                    if (i >= 1) {
-                        if (GUILayout.Button("MoveUp",
-                        GUILayout.Width(0.1f * baseWidth),
-                        GUILayout.MaxWidth(0.1f * maxBaseWidth),
-                        GUILayout.MinWidth(0.1f * minBaseWidth))) {
-                            page.ActionCalls.RemoveAt(i);
-                            page.ActionCalls.Insert(i - 1, eventActionArgs);
-                            break;
-                        }
-                    }
-                    else {
-                        GUILayout.Box("MoveUp", 
-                            GUILayout.Width(0.1f * baseWidth), 
-                            GUILayout.MaxWidth(0.1f * maxBaseWidth),
-                            GUILayout.MinWidth(0.1f * minBaseWidth));  
-                    }
-                    if (i < page.ActionCalls.Count - 1) {
-                        if (GUILayout.Button("MoveDown",
-                        GUILayout.Width(0.1f * baseWidth),
-                        GUILayout.MaxWidth(0.1f * maxBaseWidth),
-                        GUILayout.MinWidth(0.1f * minBaseWidth))) {
-                            page.ActionCalls.RemoveAt(i);
-                            page.ActionCalls.Insert(i + 1, eventActionArgs);
-                            break;
-                        }
-                    }
-                    else {
-                        GUILayout.Box("MoveDown", 
-                            GUILayout.Width(0.1f * baseWidth),
-                            GUILayout.MaxWidth(0.1f * maxBaseWidth),
-                            GUILayout.MinWidth(0.1f * minBaseWidth));
-                    }
-                    if (GUILayout.Button("Del", 
-                        GUILayout.Width(0.1f * baseWidth), 
-                        GUILayout.MaxWidth(0.1f * maxBaseWidth),
-                        GUILayout.MinWidth(0.1f * minBaseWidth))) {
-                        page.ActionCalls.RemoveAt(i);
-                        break;
-                    }
-                    EditorGUILayout.EndHorizontal();
-                }
+                page.Draw(this, baseWidth, maxBaseWidth, minBaseWidth);
             }
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
@@ -314,6 +302,10 @@ public class EventActionEditor : EditorWindow {
         }
     }
 
+    public void AddNewAction(object userData, Action<bool, object> callback) {
+        AddActionOrConditionSelectList.NewWindow(EEventActionSpawnType.Action, callback);
+    }
+
     private void AddNewAction(object userData) {
         AddActionOrConditionSelectList.NewWindow(EEventActionSpawnType.Action,
                     (bool success, object inst) => {
@@ -326,6 +318,10 @@ public class EventActionEditor : EditorWindow {
                             AssetDatabase.AddObjectToAsset(inst as EventActionCallback, _path);
                         }
                     });
+    }
+
+    public string GetPath() {
+        return _path;
     }
 
 }

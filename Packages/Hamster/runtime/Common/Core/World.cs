@@ -1,10 +1,14 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Hamster {
     public class World : MonoBehaviour {
 
         private static World _instance = null;
+
+        private Dictionary<Type, object> _managers = new Dictionary<Type, object>();
 
         public static T GetWorld<T>() where T : World {
             return _instance as T; 
@@ -23,6 +27,16 @@ namespace Hamster {
         public UIManager UIManager {
             get;
             protected set;
+        }
+
+        protected void Register<T>(T manager) {
+            _managers.Add(typeof(T), manager);
+        }
+
+        public T GetManager<T>() {
+            if (_managers.TryGetValue(typeof(T), out object value))
+                return (T)value;
+            return default;
         }
 
         protected virtual void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {

@@ -11,6 +11,13 @@ public class EventActionInst : ScriptableObject {
 
     private int ValidPageIndex = -1;
 
+    public void Initialize() {
+        for (int i = 0; i < Pages.Count; i++) {
+            Pages[i].Owner = this;
+            Pages[i].Initialize();
+        }
+    }
+
     public void Reset() {
         ValidPageIndex = -1;
         for (int i = 0; i < Pages.Count; i++) {

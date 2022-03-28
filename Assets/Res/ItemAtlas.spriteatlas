@@ -33,13 +33,16 @@ SpriteAtlas:
     - {fileID: 2800000, guid: c512802c5e1bc6040a09883fef20adf8, type: 3}
     - {fileID: 2800000, guid: 303cbef44ec21214f9be6c59d33e33d4, type: 3}
     - {fileID: 2800000, guid: b5dcc329bf9b6114cb7a780956b8d08c, type: 3}
+    - {fileID: 2800000, guid: 80c52a24b5bc84149bd105fa3aaa8b34, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 80c52a24b5bc84149bd105fa3aaa8b34, type: 3}
   - {fileID: 21300000, guid: 303cbef44ec21214f9be6c59d33e33d4, type: 3}
   - {fileID: 21300000, guid: b5dcc329bf9b6114cb7a780956b8d08c, type: 3}
   - {fileID: 21300000, guid: c512802c5e1bc6040a09883fef20adf8, type: 3}
   m_PackedSpriteNamesToIndex:
+  - PhotoPartIcon
   - CakeIcon
   - Matches
   - CandleIcon

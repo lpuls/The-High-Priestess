@@ -3,6 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Hamster.TouchPuzzle {
+
+    public class ShowMessageBoxMessage : IPool, IMessage {
+        public string Message = string.Empty;
+
+        public void Reset() {
+            Message = string.Empty;
+        }
+    }
+
     public class MainUIPanel : MonoBehaviour {
 
         private Button _leftButton = null;
@@ -11,6 +20,9 @@ namespace Hamster.TouchPuzzle {
         private Field _currentField = null;
 
         private List<ItemBoxUI> _itemUIs = new List<ItemBoxUI>(8);
+
+        public Text _messageBoxText = null;
+        public Animator _messageBoxAnimator = null;
 
         private void Start() {
             _leftButton = transform.GetComponentInChild<Button>("Left");
@@ -30,6 +42,7 @@ namespace Hamster.TouchPuzzle {
 
             Single<FieldManager>.GetInstance().BindOnGotoField(OnGotoField);
             World.GetWorld<TouchPuzzeWorld>().ItemManager.BindChangeCallback(OnItemChange);
+            World.GetWorld<TouchPuzzeWorld>().MessageManager.Bind<ShowMessageBoxMessage>(OnReceiveShowMessage);
         }
 
         private void OnDestroy() {
@@ -106,6 +119,13 @@ namespace Hamster.TouchPuzzle {
             if (index >= 0 && index < _itemUIs.Count) {
                 _itemUIs[index].Clean();
             }
+        }
+
+        public void OnReceiveShowMessage(ShowMessageBoxMessage message) {
+            if (null != _messageBoxText)
+                _messageBoxText.text = message.Message;
+            _messageBoxAnimator.Play("Show", 0, 0);
+            //_messageBoxAnimator.SetTrigger("Show");
         }
     }
 }

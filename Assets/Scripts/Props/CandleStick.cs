@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
+
+    public class OnFireCandleStickMessage : IPool, IMessage {
+        public void Reset() {
+        }
+    }
+
     public class CandleStick : Props {
         public int ID = 0;
 
@@ -11,6 +17,7 @@ namespace Hamster.TouchPuzzle {
         public BoxCollider2D UnSetupCollider = null;
 
         private bool _setUp = false;
+        private bool _isFire = false;
 
         private void Awake() {
             if (null != Candle)
@@ -46,16 +53,28 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void OnFire() {
+            _isFire = true;
             Fire.enabled = true;
-            World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetIsFireKey(), 1);
+
+            // 写入黑板数据
+            EventActionBlackboard blackboard = World.GetWorld<TouchPuzzeWorld>().Blackboard;
+            blackboard.SetValue(GetIsFireKey(), 1);
+            int candleCountKey = TouchPuzzeWorld.GetCandleCountKey();
+            blackboard.TryGetValue(candleCountKey, out int candleCount);
+            blackboard.SetValue(candleCountKey, candleCount + 1);
+
+            // 发送消息
+            OnFireCandleStickMessage message = ObjectPool<OnFireCandleStickMessage>.Malloc();
+            World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger<OnFireCandleStickMessage>(message);
+            ObjectPool<OnFireCandleStickMessage>.Free(message);
         }
 
         public override void OnClick(int propID) {
-            if (propID == (int)EPropID.Candle) {
+            if (propID == (int)EPropID.Candle && !_setUp) {
                 World.GetWorld<TouchPuzzeWorld>().ItemManager.RemoveItem((int)EPropID.Candle);
                 OnSetUp();
             }
-            if (_setUp && propID == (int)EPropID.Matches) {
+            if (_setUp && !_isFire && propID == (int)EPropID.Matches) {
                 OnFire();
             }
         }

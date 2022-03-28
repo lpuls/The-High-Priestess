@@ -5,7 +5,10 @@
         CandleStick,
         Matches,
         Cake,
-        Door
+        Door,
+        PhotoPart1,
+        PhotoPart2,
+        PhotoPart3,
     }
 
     public enum EFieldID {
@@ -14,18 +17,29 @@
         Right,
         Left,
         ExitDoor,
-        DetailTraibuteTableLeftUp
+        DetailTraibuteTableLeftUp,
+        DetailTraibuteTableRightUp,
     }
 
     public enum EBlackBoardKey {
         None,
         System = 1,
-        Prop = 2
+        Prop = 2,
+        Event = 3
+    }
+
+    public enum EEventKey {
+        None,
+        CandleCount
     }
 
     public enum ESystemBlackboardKey {
         None,
         ITEM_MANAGER = 1,
+    }
+
+    public static class CommonString {
+        public const string LOCK_DOOR = "上锁了";
     }
 
 }
