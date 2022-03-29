@@ -10,7 +10,8 @@ public class EventActionPlayer : MonoBehaviour {
     public bool PlayOnStar = false;
 
     public void Awake() {
-        _instance.Initialize(gameObject);
+        if (null != _instance)
+            _instance.Initialize(gameObject);
         if (PlayOnAwake) {
             Execute();
         }
@@ -24,7 +25,7 @@ public class EventActionPlayer : MonoBehaviour {
 
     public void SetInstance(EventActionInst inst) {
         _instance = inst;
-        _instance.Owner = gameObject;
+        _instance.Initialize(gameObject);
     }
 
     public EventActionInst GetInstance() {
@@ -32,6 +33,7 @@ public class EventActionPlayer : MonoBehaviour {
     }
 
     public void Execute() {
-        _instance.Execute();
+        if (null != _instance)
+            _instance.Execute();
     }
 }
