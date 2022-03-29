@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using Hamster.BP;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 #endif
 
 namespace Hamster.TouchPuzzle {
-    [BlackPrint("如果拥有", "Item")]
-    public class BPAction_HasItem : BlackPrintConditionAction {
+    [Hamster.BP.BlackPrint("如果拥有", "Item")]
+    public class BPAction_HasItem : Hamster.BP.BlackPrintConditionAction {
         public int TargetItem = 0;
 
         private List<BlackPrintAction> OnHas = new List<BlackPrintAction>();

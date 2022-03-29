@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Reflection;
 using System.Collections.Generic;
 using System;
+using Hamster.BP;
 
 
 public class BlackPrintEditor : EditorWindow, IActionListDrawer {
@@ -32,7 +33,7 @@ public class BlackPrintEditor : EditorWindow, IActionListDrawer {
     public BlackPrintEditor() {
         this.titleContent = new GUIContent("Event Action Editor");
         BlackPrintAttribute.Clean();
-        BlackPrintAttribute.Spawner(typeof(Hamster.GameEvent.BPAction_DebugInfo).Assembly);
+        BlackPrintAttribute.Spawner(typeof(Hamster.BP.BPAction_DebugInfo).Assembly);
     }
 
     public void OnGUI() {
@@ -311,7 +312,7 @@ public class BlackPrintEditor : EditorWindow, IActionListDrawer {
                     (bool success, object inst) => {
                         if (success) {
                             BlackPrintPage page = _currentActionInst.Pages[_currentActionPageIndex];
-                            page.Condition = ScriptableObject.CreateInstance<Hamster.GameEvent.BPContidiont_Default>();
+                            page.Condition = ScriptableObject.CreateInstance<Hamster.BP.BPContidiont_Default>();
                             AssetDatabase.AddObjectToAsset(page.Condition, _path);
 
                             page.ActionCalls.Add(inst as BlackPrintAction);

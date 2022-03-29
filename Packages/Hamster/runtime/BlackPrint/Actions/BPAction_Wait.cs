@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hamster.GameEvent {
+namespace Hamster.BP {
     [BlackPrint("等待", "Common")]
     public class BPAction_Wait : BlackPrintAction {
         public float Wait = 0.0f;

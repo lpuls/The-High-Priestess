@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hamster.GameEvent {
+namespace Hamster.BP {
     [BlackPrint("打印", "Common")]
     public class BPAction_DebugInfo : BlackPrintAction {
         public string Log = string.Empty;

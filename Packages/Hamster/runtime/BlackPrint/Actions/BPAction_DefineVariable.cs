@@ -2,7 +2,7 @@
 using UnityEditor;
 #endif
 
-namespace Hamster.GameEvent {
+namespace Hamster.BP {
 
     public class BPAction_DefineVariable : BlackPrintAction {
         public enum EDefineVariableType {

@@ -1,5 +1,5 @@
 ﻿
-namespace Hamster.GameEvent {
+namespace Hamster.BP {
     [BlackPrint("默认成功", "Common")]
     public class BPContidiont_Default : BlackPrintCondition {
 

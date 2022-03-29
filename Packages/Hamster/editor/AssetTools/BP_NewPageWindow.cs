@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System;
+using Hamster.BP;
 
 public class BP_NewPageWindow : EditorWindow {
 

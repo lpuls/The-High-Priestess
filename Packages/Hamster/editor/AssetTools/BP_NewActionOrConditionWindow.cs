@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.Reflection;
 using System;
+using Hamster.BP;
 using System.Collections.Generic;
 
 public class BP_NewActionOrConditionWindow : EditorWindow {
