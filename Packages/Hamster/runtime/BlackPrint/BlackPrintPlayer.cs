@@ -2,9 +2,9 @@
 using Hamster;
 
 
-public class EventActionPlayer : MonoBehaviour {
+public class BlackPrintPlayer : MonoBehaviour {
     [SerializeField]
-    private EventActionInst _instance = null;
+    private BlackPrintInst _instance = null;
 
     public bool PlayOnAwake = false;
     public bool PlayOnStar = false;
@@ -23,12 +23,12 @@ public class EventActionPlayer : MonoBehaviour {
         }
     }
 
-    public void SetInstance(EventActionInst inst) {
+    public void SetInstance(BlackPrintInst inst) {
         _instance = inst;
         _instance.Initialize(gameObject);
     }
 
-    public EventActionInst GetInstance() {
+    public BlackPrintInst GetInstance() {
         return _instance;
     }
 

@@ -4,10 +4,10 @@ using System.Reflection;
 using System;
 using System.Collections.Generic;
 
-public class NewActionOrConditionWindow : EditorWindow {
+public class BP_NewActionOrConditionWindow : EditorWindow {
 
-    public static NewActionOrConditionWindow NewWindow(IEventActionDrawInspector inst, Action<bool> onComplete) {
-        NewActionOrConditionWindow instance = EditorWindow.GetWindow(typeof(NewActionOrConditionWindow), false) as NewActionOrConditionWindow;
+    public static BP_NewActionOrConditionWindow NewWindow(IBlackPrintActionDrawInspector inst, Action<bool> onComplete) {
+        BP_NewActionOrConditionWindow instance = EditorWindow.GetWindow(typeof(BP_NewActionOrConditionWindow), false) as BP_NewActionOrConditionWindow;
         instance.Inst = inst;
         instance.OnComplete = onComplete;
         return instance;
@@ -15,7 +15,7 @@ public class NewActionOrConditionWindow : EditorWindow {
 
 
     public Action<bool> OnComplete = null;
-    public IEventActionDrawInspector Inst = null;
+    public IBlackPrintActionDrawInspector Inst = null;
 
     public void OnGUI() {
         GUILayout.BeginVertical();
@@ -35,18 +35,18 @@ public class NewActionOrConditionWindow : EditorWindow {
     }
 }
 
-public class AddActionOrConditionSelectList : EditorWindow {
+public class BP_AddActionOrConditionSelectList : EditorWindow {
 
-    private EEventActionSpawnType _type = EEventActionSpawnType.Action;
+    private EBlackPrintSpawnType _type = EBlackPrintSpawnType.Action;
 
     private object _inst = null;
     private string _selectCategory = string.Empty;
     private Vector2 _listPosition = Vector2.zero;
     private Action<bool, object> _onSelectComplete = null;
-    private NewActionOrConditionWindow _currentWindow = null;
+    private BP_NewActionOrConditionWindow _currentWindow = null;
 
-    public static void NewWindow(EEventActionSpawnType type, Action<bool, object> onSelectComplete) {
-        AddActionOrConditionSelectList instance = EditorWindow.GetWindow(typeof(AddActionOrConditionSelectList), false) as AddActionOrConditionSelectList;
+    public static void NewWindow(EBlackPrintSpawnType type, Action<bool, object> onSelectComplete) {
+        BP_AddActionOrConditionSelectList instance = EditorWindow.GetWindow(typeof(BP_AddActionOrConditionSelectList), false) as BP_AddActionOrConditionSelectList;
         instance.maxSize = new Vector2(400, 600);
         instance.minSize = new Vector2(400, 600);
 
@@ -61,7 +61,7 @@ public class AddActionOrConditionSelectList : EditorWindow {
     public void OnGUI() {
         _listPosition = EditorGUILayout.BeginScrollView(_listPosition);
         if (string.IsNullOrEmpty(_selectCategory)) {
-            var it = EventActionInfoAttribute.CallbackAndCallbacks.GetEnumerator();
+            var it = BlackPrintAttribute.CallbackAndCallbacks.GetEnumerator();
             while (it.MoveNext()) {
                 string Category = it.Current.Key;
                 if (GUILayout.Button(Category)) {
@@ -70,7 +70,7 @@ public class AddActionOrConditionSelectList : EditorWindow {
             }
         }
         else {
-            Dictionary<string, Type> result = EventActionInfoAttribute.GetTypesByCategory(_selectCategory);
+            Dictionary<string, Type> result = BlackPrintAttribute.GetTypesByCategory(_selectCategory);
             if (null == result)
                 return;
 
@@ -79,12 +79,13 @@ public class AddActionOrConditionSelectList : EditorWindow {
                 Type value = it.Current.Value;
                 string Name = it.Current.Key;
 
-                EventActionInfoAttribute attribute = value.GetCustomAttribute<EventActionInfoAttribute>();
+                BlackPrintAttribute attribute = value.GetCustomAttribute<BlackPrintAttribute>();
                 if (null == attribute)
                     continue;
 
-                if ((EEventActionSpawnType.Action == _type && value.IsSubclassOf(typeof(EventActionCallback))) 
-                    || EEventActionSpawnType.Condition == _type && value.IsSubclassOf(typeof(EventActionCondition))) {
+
+                if ((EBlackPrintSpawnType.Action == _type && value.IsSubclassOf(typeof(BlackPrintAction))) 
+                    || EBlackPrintSpawnType.Condition == _type && value.IsSubclassOf(typeof(BlackPrintCondition))) {
                     if (GUILayout.Button(attribute.DisplayName)) {
                         _inst = ScriptableObject.CreateInstance(value);
                         // _inst = Activator.CreateInstance(value);
@@ -93,7 +94,7 @@ public class AddActionOrConditionSelectList : EditorWindow {
             }
 
             if (null != _inst) {
-                _currentWindow = NewActionOrConditionWindow.NewWindow(_inst as IEventActionDrawInspector, OnCreateNewActionOrConditionComplete);
+                _currentWindow = BP_NewActionOrConditionWindow.NewWindow(_inst as IBlackPrintActionDrawInspector, OnCreateNewActionOrConditionComplete);
             }
 
         }

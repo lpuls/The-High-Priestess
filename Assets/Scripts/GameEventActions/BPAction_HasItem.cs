@@ -5,15 +5,15 @@ using UnityEngine;
 #endif
 
 namespace Hamster.TouchPuzzle {
-    [EventActionInfo("如果拥有", "Item")]
-    public class EventActionCallback_HasItem : EventActionConditionCallback {
+    [BlackPrint("如果拥有", "Item")]
+    public class BPAction_HasItem : BlackPrintConditionAction {
         public int TargetItem = 0;
 
-        private List<EventActionCallback> OnHas = new List<EventActionCallback>();
-        private List<EventActionCallback> OnNot = new List<EventActionCallback>();
+        private List<BlackPrintAction> OnHas = new List<BlackPrintAction>();
+        private List<BlackPrintAction> OnNot = new List<BlackPrintAction>();
 
 
-        public override EEventActionResult Execute() {
+        public override EBPActionResult Execute() {
             TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
             Debug.Assert(null != world, "Can't Find World");
             Debug.Assert(null != world.ItemManager, "Can't Find World.ItemManager");
@@ -35,7 +35,7 @@ namespace Hamster.TouchPuzzle {
             Descript = "如果拥有" + TargetItem;
         }
 
-        public override void Draw(IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
+        public override void Draw(IActionListDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
             EditorGUILayout.LabelField("如果拥有" + TargetItem);
             DrawAction(OnHas, drawer, baseWidth, maxWidth, minWidth);
             EditorGUILayout.LabelField("当未拥有" + TargetItem);

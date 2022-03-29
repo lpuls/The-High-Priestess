@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace Hamster.GameEvent {
 
-    public class EventActionCallback_DefineVariable : EventActionCallback {
+    public class BPAction_DefineVariable : BlackPrintAction {
         public enum EDefineVariableType {
             None,
             Integer,
@@ -20,7 +20,7 @@ namespace Hamster.GameEvent {
         private string _name = string.Empty;
         private string _value = string.Empty;
 
-        public override EEventActionResult Execute() {
+        public override EBPActionResult Execute() {
             switch (_index) {
                 case EDefineVariableType.None:
                     UnityEngine.Debug.LogError("Invalid Type");
@@ -38,7 +38,7 @@ namespace Hamster.GameEvent {
                     break;
             }
 
-            return EEventActionResult.Normal;
+            return EBPActionResult.Normal;
         }
 
 #if UNITY_EDITOR

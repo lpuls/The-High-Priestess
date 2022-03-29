@@ -5,40 +5,40 @@ using UnityEngine;
 using System.Reflection;
 using UnityEditor;
 
-public interface IActionDrawer {
+public interface IActionListDrawer {
     void DrawMoveUp(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveUp);
     void DrawMoveDown(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveDown);
     void DrawDel(float baseWidth, float maxWidth, float minWidth, Action Del);
-    void OnClickAction(EventActionCallback eventAction, Action<bool> callback);
+    void OnClickAction(BlackPrintAction eventAction, Action<bool> callback);
 
     void AddNewAction(object userData, Action<bool, object> callback);
 
     string GetPath();
 }
 
-public interface IDrawContext {
-    void Draw(IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth);
+public interface IDrawActionContext {
+    void Draw(IActionListDrawer drawer, float baseWidth, float maxWidth, float minWidth);
 }
 
 #endif
 
 [System.Serializable]
-public class EventActionPage : ScriptableObject, IDrawContext {
+public class BlackPrintPage : ScriptableObject, IDrawActionContext {
     public delegate bool CheckActionComplete();
 
     public string Name = string.Empty;
 
-    public EventActionInst Owner { get; protected set; }
-    public EventActionCondition Condition = null;
-    public List<EventActionCallback> ActionCalls = new List<EventActionCallback>();
+    public BlackPrintInst Owner { get; protected set; }
+    public BlackPrintCondition Condition = null;
+    public List<BlackPrintAction> ActionCalls = new List<BlackPrintAction>();
 
-    protected Dictionary<string, IBackboardVar> _variables = new Dictionary<string, IBackboardVar>();
+    protected Dictionary<string, int> _propertys = new Dictionary<string, int>();
 
     public int CodeIndex {
         get; set;
     }
 
-    public void Initialize(EventActionInst ownerInst) {
+    public void Initialize(BlackPrintInst ownerInst) {
         Owner = ownerInst;
         Condition.SetOwnerPage(this);
         for (int i = 0; i < ActionCalls.Count; i++) {
@@ -52,8 +52,8 @@ public class EventActionPage : ScriptableObject, IDrawContext {
 
     public void Execute() {
         while (CodeIndex < ActionCalls.Count) {
-            EventActionCallback callback = ActionCalls[CodeIndex];
-            if (EEventActionResult.Block == callback.Execute()) {
+            BlackPrintAction callback = ActionCalls[CodeIndex];
+            if (EBPActionResult.Block == callback.Execute()) {
                 break;
             }
             CodeIndex++;
@@ -69,6 +69,21 @@ public class EventActionPage : ScriptableObject, IDrawContext {
             Condition.Reset();
     }
 
+    public void AddProperty(string key, int value) {
+        _propertys.Add(key, value);
+    }
+
+    public bool TryGetProperty(string key, out int value) {
+        return _propertys.TryGetValue(key, out value);
+    }
+
+    public bool TryModifyProperty(string key, int newValue) {
+        if (_propertys.ContainsKey(key)) {
+            _propertys[key] = newValue;
+            return true;
+        }
+        return false;
+    }
 
 #if UNITY_EDITOR
     public void Save() {
@@ -79,15 +94,15 @@ public class EventActionPage : ScriptableObject, IDrawContext {
         UnityEditor.EditorUtility.SetDirty(this);
     }
 
-    public void Draw(IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
+    public void Draw(IActionListDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
         for (int i = 0; i < ActionCalls.Count; i++) {
-            EventActionCallback eventActionArgs = ActionCalls[i];
-            if (eventActionArgs is IDrawContext) {
-                (eventActionArgs as IDrawContext).Draw(drawer, baseWidth, maxWidth, minWidth);
+            BlackPrintAction eventActionArgs = ActionCalls[i];
+            if (eventActionArgs is IDrawActionContext) {
+                (eventActionArgs as IDrawActionContext).Draw(drawer, baseWidth, maxWidth, minWidth);
             }
             else {
                 EditorGUILayout.BeginHorizontal();
-                EventActionInfoAttribute attribute = eventActionArgs.GetType().GetCustomAttribute<EventActionInfoAttribute>();
+                BlackPrintAttribute attribute = eventActionArgs.GetType().GetCustomAttribute<BlackPrintAttribute>();
                 string context = attribute.DisplayName + " -> " + eventActionArgs.Descript;
                 if (context.Length >= 75) {
                     context = context.Substring(0, 75);

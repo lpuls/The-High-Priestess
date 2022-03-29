@@ -6,27 +6,27 @@ using UnityEngine;
 #endif
 
 [System.Serializable]
-public class EventActionCallback : EventActionBase, IEventActionCallback {
-    public virtual EEventActionResult Execute() {
-        return EEventActionResult.Normal;
+public class BlackPrintAction : BlackPrintActionBase, IBlackPrintActionCallback {
+    public virtual EBPActionResult Execute() {
+        return EBPActionResult.Normal;
     }
 }
 
 [System.Serializable]
-public class EventActionConditionCallback : EventActionCallback, IDrawContext {
+public class BlackPrintConditionAction : BlackPrintAction, IDrawActionContext {
 
     protected int CodeIndex = 0;
-    protected List<EventActionCallback> Current = null;
+    protected List<BlackPrintAction> Current = null;
 
-    public override EEventActionResult Execute() {
+    public override EBPActionResult Execute() {
         while (CodeIndex < Current.Count) {
-            EventActionCallback callback = Current[CodeIndex];
-            if (EEventActionResult.Block == callback.Execute()) {
-                return EEventActionResult.Block;
+            BlackPrintAction callback = Current[CodeIndex];
+            if (EBPActionResult.Block == callback.Execute()) {
+                return EBPActionResult.Block;
             }
             CodeIndex++;
         }
-        return EEventActionResult.Normal;
+        return EBPActionResult.Normal;
     }
 
     public override void Reset() {
@@ -37,15 +37,15 @@ public class EventActionConditionCallback : EventActionCallback, IDrawContext {
 
 #if UNITY_EDITOR
 
-    protected virtual void DrawAction(List<EventActionCallback> actions, IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
+    protected virtual void DrawAction(List<BlackPrintAction> actions, IActionListDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
         for (int i = 0; i < actions.Count; i++) {
-            EventActionCallback eventActionArgs = actions[i];
-            if (eventActionArgs is IDrawContext) {
-                (eventActionArgs as IDrawContext).Draw(drawer, baseWidth, maxWidth, minWidth);
+            BlackPrintAction eventActionArgs = actions[i];
+            if (eventActionArgs is IDrawActionContext) {
+                (eventActionArgs as IDrawActionContext).Draw(drawer, baseWidth, maxWidth, minWidth);
             }
             else {
                 EditorGUILayout.BeginHorizontal();
-                EventActionInfoAttribute attribute = eventActionArgs.GetType().GetCustomAttribute<EventActionInfoAttribute>();
+                BlackPrintAttribute attribute = eventActionArgs.GetType().GetCustomAttribute<BlackPrintAttribute>();
                 string context = attribute.DisplayName + " -> " + eventActionArgs.Descript;
                 if (context.Length >= 75) {
                     context = context.Substring(0, 75);
@@ -84,13 +84,13 @@ public class EventActionConditionCallback : EventActionCallback, IDrawContext {
         GUILayout.MaxWidth(0.65f * maxWidth),
         GUILayout.MinWidth(0.65f * minWidth))) {
             drawer.AddNewAction(null, (bool success, object inst) => {
-                AssetDatabase.AddObjectToAsset(inst as EventActionCallback, drawer.GetPath());
-                actions.Add(inst as EventActionCallback);
+                AssetDatabase.AddObjectToAsset(inst as BlackPrintAction, drawer.GetPath());
+                actions.Add(inst as BlackPrintAction);
             });
         }
     }
 
-    public virtual void Draw(IActionDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
+    public virtual void Draw(IActionListDrawer drawer, float baseWidth, float maxWidth, float minWidth) {
     }
 #endif
 }

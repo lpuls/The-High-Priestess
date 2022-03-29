@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EventActionInst : ScriptableObject {
+public class BlackPrintInst : ScriptableObject {
     public string Name = string.Empty;
     public string Desc = string.Empty;
 
     public GameObject Owner { get; protected set; }
     public EventActionBlackboard Blackboard = new EventActionBlackboard();
-    public List<EventActionPage> Pages = new List<EventActionPage>();
+    public List<BlackPrintPage> Pages = new List<BlackPrintPage>();
 
     private int ValidPageIndex = -1;
 
@@ -28,7 +28,7 @@ public class EventActionInst : ScriptableObject {
     public void Execute() {
         if (ValidPageIndex < 0) {
             for (int i = 0; i < Pages.Count; i++) {
-                EventActionPage page = Pages[i];
+                BlackPrintPage page = Pages[i];
                 if (!page.CheckCondition()) {
                     break;
                 }

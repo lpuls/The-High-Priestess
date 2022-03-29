@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System;
 
 
-public class EventActionEditor : EditorWindow, IActionDrawer {
+public class BlackPrintEditor : EditorWindow, IActionListDrawer {
 
     public static void ShowEventActionEditor(List<Assembly> assemblies) {
-        EditorWindow editorWindow = EditorWindow.GetWindow(typeof(EventActionEditor));
+        EditorWindow editorWindow = EditorWindow.GetWindow(typeof(BlackPrintEditor));
         for (int i = 0; i < assemblies.Count; i++) {
-            EventActionInfoAttribute.Spawner(assemblies[i]);
+            BlackPrintAttribute.Spawner(assemblies[i]);
         }
     }
 
@@ -26,20 +26,20 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
 
     private string _path = string.Empty;
     private int _currentActionPageIndex = 0;
-    private EventActionInst _currentActionInst = null;
+    private BlackPrintInst _currentActionInst = null;
 
 
-    public EventActionEditor() {
+    public BlackPrintEditor() {
         this.titleContent = new GUIContent("Event Action Editor");
-        EventActionInfoAttribute.Clean();
-        EventActionInfoAttribute.Spawner(typeof(Hamster.GameEvent.EventActionCallback_DebugInfo).Assembly);
+        BlackPrintAttribute.Clean();
+        BlackPrintAttribute.Spawner(typeof(Hamster.GameEvent.BPAction_DebugInfo).Assembly);
     }
 
     public void OnGUI() {
         if (null == _styleView)
             _styleView = new GUIStyle(GUI.skin.box);
 
-        _currentActionInst = EditorGUILayout.ObjectField("当前事件实例：", _currentActionInst, typeof(EventActionInst), true) as EventActionInst;
+        _currentActionInst = EditorGUILayout.ObjectField("当前事件实例：", _currentActionInst, typeof(BlackPrintInst), true) as BlackPrintInst;
         if (null == _currentActionInst) {
             OnAciontInstanceIsNull();
         }
@@ -54,10 +54,10 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
         if (GUILayout.Button("编辑事件实例")) {
             _path = EditorUtility.OpenFilePanel("打开实例", Application.dataPath + "/Res/Configs/EventAction/", "asset");
             _path = _path.Replace(Application.dataPath, "Assets");
-            _currentActionInst = AssetDatabase.LoadAssetAtPath<EventActionInst>(_path);
+            _currentActionInst = AssetDatabase.LoadAssetAtPath<BlackPrintInst>(_path);
 
             if (_currentActionInst.Pages.Count <= 0) {
-                EventActionPage page = ScriptableObject.CreateInstance<EventActionPage>();
+                BlackPrintPage page = ScriptableObject.CreateInstance<BlackPrintPage>();
                 page.Name = "Page 0";
                 _currentActionInst.Pages.Add(page);
                 AssetDatabase.AddObjectToAsset(page, _path);
@@ -66,13 +66,13 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
             }
         }
         if (GUILayout.Button("创建事件实例")) {
-            _currentActionInst = ScriptableObject.CreateInstance<EventActionInst>();
+            _currentActionInst = ScriptableObject.CreateInstance<BlackPrintInst>();
             _path = EditorUtility.SaveFilePanel("保存实例", Application.dataPath + "/Res/Configs/EventAction/", "NewEventAction.asset", "asset");
             _path = _path.Replace(Application.dataPath, "Assets");
             AssetDatabase.CreateAsset(_currentActionInst, _path);
 
             if (_currentActionInst.Pages.Count <= 0) {
-                EventActionPage page = ScriptableObject.CreateInstance<EventActionPage>();
+                BlackPrintPage page = ScriptableObject.CreateInstance<BlackPrintPage>();
                 page.Name = "Page 0";
                 _currentActionInst.Pages.Add(page);
                 AssetDatabase.AddObjectToAsset(page, _path);
@@ -136,35 +136,35 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
                 GUILayout.MaxWidth(maxSize.y * _descTextSize),
                 GUILayout.MinWidth(minSize.y * _descTextSize));
             if (GUILayout.Button("新建页面")) {
-                NewPageWindow.ShowWindow(OnCreateNewPageComplete);
+                BP_NewPageWindow.ShowWindow(OnCreateNewPageComplete);
             }
             EditorGUILayout.Space();
             EditorGUILayout.Space();
 
             // page信息
-            EventActionPage page = _currentActionInst.Pages[_currentActionPageIndex];
+            BlackPrintPage page = _currentActionInst.Pages[_currentActionPageIndex];
             page.Name = EditorGUILayout.TextField(page.Name);
             EditorGUILayout.BeginHorizontal();
             {
                 string conditionDisplay = string.Empty;
                 if (null != page.Condition) {
-                    EventActionInfoAttribute attribute = page.Condition.GetType().GetCustomAttribute<EventActionInfoAttribute>();
+                    BlackPrintAttribute attribute = page.Condition.GetType().GetCustomAttribute<BlackPrintAttribute>();
                     if (null != attribute)
                         conditionDisplay = attribute.DisplayName;
                 }
                 EditorGUILayout.LabelField("解发条件: " + conditionDisplay);
                 if (GUILayout.Button("New Condition")) {
-                    AddActionOrConditionSelectList.NewWindow(EEventActionSpawnType.Condition,
+                    BP_AddActionOrConditionSelectList.NewWindow(EBlackPrintSpawnType.Condition,
                         (bool success, object inst) => {
                             if (success) {
-                                page.Condition = inst as EventActionCondition;
+                                page.Condition = inst as BlackPrintCondition;
                                 AssetDatabase.AddObjectToAsset(page.Condition, _path);
                             }
                         });
                 }
                 if (null != page.Condition) {
                     if (GUILayout.Button(/*"编辑条件"*/page.Condition.Descript)) {
-                        NewActionOrConditionWindow.NewWindow(page.Condition, (bool value)=> { });
+                        BP_NewActionOrConditionWindow.NewWindow(page.Condition, (bool value)=> { });
                         //page.Condition.DrawInspector();
                     }
                 }
@@ -239,8 +239,8 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
         }
     }
 
-    public void OnClickAction(EventActionCallback eventAction, Action<bool> callback) {
-        NewActionOrConditionWindow.NewWindow(eventAction, callback);
+    public void OnClickAction(BlackPrintAction eventAction, Action<bool> callback) {
+        BP_NewActionOrConditionWindow.NewWindow(eventAction, callback);
     }
 
     private void DrawActionList() {
@@ -256,7 +256,7 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
                 float baseWidth = position.width * _listPanelSize;
                 float maxBaseWidth = maxSize.x * _listPanelSize;
                 float minBaseWidth = minSize.x * _listPanelSize;
-                EventActionPage page = _currentActionInst.Pages[_currentActionPageIndex];
+                BlackPrintPage page = _currentActionInst.Pages[_currentActionPageIndex];
                 page.Draw(this, baseWidth, maxBaseWidth, minBaseWidth);
             }
             EditorGUILayout.EndScrollView();
@@ -268,7 +268,7 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
     private void DrawPages() {
         EditorGUILayout.BeginHorizontal();
         for (int i = 0; i < _currentActionInst.Pages.Count; i++) {
-            EventActionPage page = _currentActionInst.Pages[i];
+            BlackPrintPage page = _currentActionInst.Pages[i];
             string PageName = string.IsNullOrEmpty(page.Name) ? ("Page " + i) : page.Name;
             if (i == _currentActionPageIndex)
                 PageName = "->" + PageName;
@@ -280,7 +280,7 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
     }
 
     private void OnCreateNewPageComplete(string pageName) {
-        EventActionPage page = ScriptableObject.CreateInstance<EventActionPage>();
+        BlackPrintPage page = ScriptableObject.CreateInstance<BlackPrintPage>();
         page.Name = pageName;
         _currentActionInst.Pages.Add(page);
         AssetDatabase.AddObjectToAsset(page, _path);
@@ -303,19 +303,19 @@ public class EventActionEditor : EditorWindow, IActionDrawer {
     }
 
     public void AddNewAction(object userData, Action<bool, object> callback) {
-        AddActionOrConditionSelectList.NewWindow(EEventActionSpawnType.Action, callback);
+        BP_AddActionOrConditionSelectList.NewWindow(EBlackPrintSpawnType.Action, callback);
     }
 
     private void AddNewAction(object userData) {
-        AddActionOrConditionSelectList.NewWindow(EEventActionSpawnType.Action,
+        BP_AddActionOrConditionSelectList.NewWindow(EBlackPrintSpawnType.Action,
                     (bool success, object inst) => {
                         if (success) {
-                            EventActionPage page = _currentActionInst.Pages[_currentActionPageIndex];
-                            page.Condition = ScriptableObject.CreateInstance<Hamster.GameEvent.EventActionContidiont_Default>();
+                            BlackPrintPage page = _currentActionInst.Pages[_currentActionPageIndex];
+                            page.Condition = ScriptableObject.CreateInstance<Hamster.GameEvent.BPContidiont_Default>();
                             AssetDatabase.AddObjectToAsset(page.Condition, _path);
 
-                            page.ActionCalls.Add(inst as EventActionCallback);
-                            AssetDatabase.AddObjectToAsset(inst as EventActionCallback, _path);
+                            page.ActionCalls.Add(inst as BlackPrintAction);
+                            AssetDatabase.AddObjectToAsset(inst as BlackPrintAction, _path);
                         }
                     });
     }

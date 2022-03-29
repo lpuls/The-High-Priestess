@@ -2,13 +2,13 @@
 using UnityEditor;
 using System;
 
-public class NewPageWindow : EditorWindow {
+public class BP_NewPageWindow : EditorWindow {
 
     private string _pageName = string.Empty;
     private Action<string> _onCreateComplete = null;
 
     public static void ShowWindow(Action<string> onCreateComplete) {
-        NewPageWindow editorWindow = EditorWindow.GetWindow(typeof(NewPageWindow), false) as NewPageWindow;
+        BP_NewPageWindow editorWindow = EditorWindow.GetWindow(typeof(BP_NewPageWindow), false) as BP_NewPageWindow;
         editorWindow.maxSize = new Vector2(400, 200);
         editorWindow.minSize = new Vector2(400, 200);
         editorWindow._onCreateComplete = onCreateComplete;

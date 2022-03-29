@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
 namespace Hamster.GameEvent {
-    [EventActionInfo("打印", "Common")]
-    public class EventActionCallback_DebugInfo : EventActionCallback {
+    [BlackPrint("打印", "Common")]
+    public class BPAction_DebugInfo : BlackPrintAction {
         public string Log = string.Empty;
 
-        public override EEventActionResult Execute() {
+        public override EBPActionResult Execute() {
             Debug.Log(Log);
 
-            return EEventActionResult.Normal;
+            return EBPActionResult.Normal;
         }
 
 #if UNITY_EDITOR

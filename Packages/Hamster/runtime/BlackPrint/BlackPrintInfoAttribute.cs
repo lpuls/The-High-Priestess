@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-public enum EEventActionSpawnType {
+public enum EBlackPrintSpawnType {
     Action,
     Condition
 }
@@ -12,11 +12,11 @@ public interface IDrawInspector {
     void Draw(object args);
 }
 
-public class EventActionInfoAttribute : System.Attribute {
+public class BlackPrintAttribute : System.Attribute {
     public string DisplayName = string.Empty;
     public string Category = string.Empty;
 
-    public EventActionInfoAttribute(string displayName, string category) {
+    public BlackPrintAttribute(string displayName, string category) {
         DisplayName = displayName;
         Category = category;
     }
@@ -46,7 +46,7 @@ public class EventActionInfoAttribute : System.Attribute {
         for (int i = 0; i < types.Length; i++) {
             Type classType = types[i];
 
-            EventActionInfoAttribute attribute = classType.GetCustomAttribute<EventActionInfoAttribute>();
+            BlackPrintAttribute attribute = classType.GetCustomAttribute<BlackPrintAttribute>();
             if (null == attribute)
                 continue;
 

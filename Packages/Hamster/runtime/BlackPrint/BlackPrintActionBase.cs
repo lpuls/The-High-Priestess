@@ -2,32 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEventActionCallback {
-    EEventActionResult Execute();
+public interface IBlackPrintActionCallback {
+    EBPActionResult Execute();
 }
 
-public interface IEventActionCondition {
+public interface IBlackPrintCondition {
     bool CheckCondition();
 }
 
 #if UNITY_EDITOR
-public interface IEventActionDrawInspector {
+public interface IBlackPrintActionDrawInspector {
     void DrawInspector();
 }
 #endif
 
 #if UNITY_EDITOR
-public class EventActionBase : ScriptableObject, IEventActionDrawInspector {
+public class BlackPrintActionBase : ScriptableObject, IBlackPrintActionDrawInspector {
 #else
-public class EventActionBase : ScriptableObject {
+public class BlackPrintActionBase : ScriptableObject {
 #endif
 
-    protected EventActionPage OwnerPage {
+    protected BlackPrintPage OwnerPage {
         get;
         private set;
     }
 
-    public virtual void SetOwnerPage(EventActionPage page) {
+    public virtual void SetOwnerPage(BlackPrintPage page) {
         OwnerPage = page;
     }
 

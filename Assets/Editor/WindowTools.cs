@@ -8,8 +8,8 @@ namespace Hamster.TouchPuzzle.Editor {
     public class WindowTools : EditorWindow {
         [MenuItem("Tools/Editor/EventActionEditor")]
         static void OpenEventActionEditor() {
-            List<Assembly> assemblies = new List<Assembly>{ typeof(EventActionCallback_HasItem).Assembly};
-            EventActionEditor.ShowEventActionEditor(assemblies);
+            List<Assembly> assemblies = new List<Assembly>{ typeof(BPAction_HasItem).Assembly};
+            BlackPrintEditor.ShowEventActionEditor(assemblies);
         }
     }
 }

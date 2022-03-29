@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
 namespace Hamster.GameEvent {
-    [EventActionInfo("等待", "Common")]
-    public class EventActionCallback_Wait : EventActionCallback {
+    [BlackPrint("等待", "Common")]
+    public class BPAction_Wait : BlackPrintAction {
         public float Wait = 0.0f;
         public float CurrentTime = 0;
 
 
-        public override EEventActionResult Execute() {
+        public override EBPActionResult Execute() {
             CurrentTime -= Time.deltaTime;
             if (CurrentTime > 0)
-                return EEventActionResult.Block;
-            return EEventActionResult.Normal;
+                return EBPActionResult.Block;
+            return EBPActionResult.Normal;
         }
 
         public override void Reset() {

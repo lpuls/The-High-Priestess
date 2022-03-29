@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public enum EEventActionResult {
+public enum EBPActionResult {
     Normal,
     Block,
     Async
 }
 
-public class EventActionRuntime {
-    public delegate bool CheckCondition(EventActionPage owner, EventActionCondition Codition);
-    public delegate EEventActionResult ExecuteAction(EventActionPage owner, EventActionCallback Args);
+public class BlackPrintRuntime {
+    public delegate bool CheckCondition(BlackPrintPage owner, BlackPrintCondition Codition);
+    public delegate EBPActionResult ExecuteAction(BlackPrintPage owner, BlackPrintAction Args);
 
     public Dictionary<Type, ExecuteAction> ActionDict = new Dictionary<Type, ExecuteAction>();
     public Dictionary<Type, CheckCondition> ConditionDict = new Dictionary<Type, CheckCondition>();
 
-    public void RegisterAction<T>(ExecuteAction action) where T : EventActionCallback {
+    public void RegisterAction<T>(ExecuteAction action) where T : BlackPrintAction {
         ActionDict.Add(typeof(T), action);
     }
 
-    public EEventActionResult CallAction(EventActionPage owner, EventActionCallback args) {
+    public EBPActionResult CallAction(BlackPrintPage owner, BlackPrintAction args) {
         if (ActionDict.TryGetValue(args.GetType(), out ExecuteAction callback)) {
             return callback.Invoke(owner, args);
         }
@@ -30,11 +30,11 @@ public class EventActionRuntime {
         }
     }
 
-    public void RegisterCondition<T>(CheckCondition condition) where T : EventActionCondition {
+    public void RegisterCondition<T>(CheckCondition condition) where T : BlackPrintCondition {
         ConditionDict.Add(typeof(T), condition);
     }
 
-    public bool CallCondition(EventActionPage owner, EventActionCondition args) {
+    public bool CallCondition(BlackPrintPage owner, BlackPrintCondition args) {
         if (ConditionDict.TryGetValue(args.GetType(), out CheckCondition callback)) {
             return callback.Invoke(owner, args);
         }
@@ -47,10 +47,10 @@ public class EventActionRuntime {
         Type[] types = assembly.GetTypes();
         for (int i = 0; i < types.Length; i++) {
             Type classType = types[i];
-            if (classType.IsSubclassOf(typeof(EventActionCallback))) {
+            if (classType.IsSubclassOf(typeof(BlackPrintAction))) {
 
             }
-            else if (classType.IsSubclassOf(typeof(EventActionCondition))) {
+            else if (classType.IsSubclassOf(typeof(BlackPrintCondition))) {
                  
             }
         }
