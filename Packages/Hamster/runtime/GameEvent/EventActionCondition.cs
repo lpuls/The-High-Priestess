@@ -1,12 +1,6 @@
 ﻿[System.Serializable]
 public class EventActionCondition : EventActionBase, IEventActionCondition {
 
-    protected EventActionPage _ownerPage = null;
-
-    public virtual void SetOwnerPage(EventActionPage page) {
-        _ownerPage = page;
-    } 
-
     public virtual bool CheckCondition() {
         return false;
     }

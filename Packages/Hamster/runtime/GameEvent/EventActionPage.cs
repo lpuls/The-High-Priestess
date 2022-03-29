@@ -28,7 +28,7 @@ public class EventActionPage : ScriptableObject, IDrawContext {
 
     public string Name = string.Empty;
 
-    public EventActionInst Owner = null;
+    public EventActionInst Owner { get; protected set; }
     public EventActionCondition Condition = null;
     public List<EventActionCallback> ActionCalls = new List<EventActionCallback>();
 
@@ -38,8 +38,12 @@ public class EventActionPage : ScriptableObject, IDrawContext {
         get; set;
     }
 
-    public void Initialize() {
+    public void Initialize(EventActionInst ownerInst) {
+        Owner = ownerInst;
         Condition.SetOwnerPage(this);
+        for (int i = 0; i < ActionCalls.Count; i++) {
+            ActionCalls[i].SetOwnerPage(this);
+        }
     }
 
     public bool CheckCondition() {
@@ -65,36 +69,6 @@ public class EventActionPage : ScriptableObject, IDrawContext {
             Condition.Reset();
     }
 
-    public void AddVariable<T>(string name, T value = default) {
-        if (_variables.ContainsKey(name)) {
-            Debug.LogError("Variable Name Redefine");
-            return; 
-        }
-
-        BackboardVar<T> inst = BackboardVar<T>.Malloc();
-        inst.SetName(name);
-        inst.SetValue(value);
-        _variables.Add(name, inst);
-    }
-
-    public void DelVariable<T>(string name) {
-        if (!_variables.TryGetValue(name, out IBackboardVar inst)) {
-            Debug.LogError("Variable Name not define");
-            return;
-        }
-
-        _variables.Remove(name);
-        BackboardVar<T>.Free(inst);
-    }
-
-    public void ModifyVaraible<T>(string name, T value) {
-        if (!_variables.TryGetValue(name, out IBackboardVar inst)) {
-            Debug.LogError("Variable Name not define");
-            return;
-        }
-
-        (inst as BackboardVar<T>).SetValue(value);
-    }
 
 #if UNITY_EDITOR
     public void Save() {

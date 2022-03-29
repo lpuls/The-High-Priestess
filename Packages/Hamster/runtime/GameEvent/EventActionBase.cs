@@ -22,6 +22,15 @@ public class EventActionBase : ScriptableObject, IEventActionDrawInspector {
 public class EventActionBase : ScriptableObject {
 #endif
 
+    protected EventActionPage OwnerPage {
+        get;
+        private set;
+    }
+
+    public virtual void SetOwnerPage(EventActionPage page) {
+        OwnerPage = page;
+    }
+
     public virtual void Reset() {
 #if UNITY_EDITOR
         Descript = string.Empty;

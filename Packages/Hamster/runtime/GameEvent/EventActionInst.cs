@@ -5,16 +5,16 @@ public class EventActionInst : ScriptableObject {
     public string Name = string.Empty;
     public string Desc = string.Empty;
 
-    public GameObject Owner = null;
+    public GameObject Owner { get; protected set; }
     public EventActionBlackboard Blackboard = new EventActionBlackboard();
     public List<EventActionPage> Pages = new List<EventActionPage>();
 
     private int ValidPageIndex = -1;
 
-    public void Initialize() {
+    public void Initialize(GameObject owner) {
+        Owner = owner;
         for (int i = 0; i < Pages.Count; i++) {
-            Pages[i].Owner = this;
-            Pages[i].Initialize();
+            Pages[i].Initialize(this);
         }
     }
 
