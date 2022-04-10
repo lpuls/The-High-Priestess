@@ -4,8 +4,10 @@ using UnityEngine;
 #if UNITY_EDITOR
 using System.Reflection;
 using UnityEditor;
+#endif
 
 namespace Hamster.BP {
+#if UNITY_EDITOR
     public interface IActionListDrawer {
         void DrawMoveUp(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveUp);
         void DrawMoveDown(float baseWidth, float maxWidth, float minWidth, bool valid, Action OnMoveDown);
@@ -24,8 +26,12 @@ namespace Hamster.BP {
 #endif
 
     [System.Serializable]
+#if UNITY_EDITOR
     public class BlackPrintPage : ScriptableObject, IDrawActionContext {
-        public delegate bool CheckActionComplete();
+#else
+        public class BlackPrintPage : ScriptableObject {
+#endif
+            public delegate bool CheckActionComplete();
 
         public string Name = string.Empty;
 

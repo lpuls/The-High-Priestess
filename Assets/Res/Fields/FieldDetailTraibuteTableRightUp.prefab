@@ -332,6 +332,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhotoPart1
       objectReference: {fileID: 0}
+    - target: {fileID: 2207512678594477604, guid: 652c1cd498af92d40acc488b11dbb680,
+        type: 3}
+      propertyPath: ItemID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207512678594477604, guid: 652c1cd498af92d40acc488b11dbb680,
+        type: 3}
+      propertyPath: SaveKey
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7247795881705990034, guid: 652c1cd498af92d40acc488b11dbb680,
         type: 3}
       propertyPath: m_RootOrder

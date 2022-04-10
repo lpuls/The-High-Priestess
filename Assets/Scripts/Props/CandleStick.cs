@@ -57,7 +57,7 @@ namespace Hamster.TouchPuzzle {
             Fire.enabled = true;
 
             // 写入黑板数据
-            EventActionBlackboard blackboard = World.GetWorld<TouchPuzzeWorld>().Blackboard;
+            Blackboard blackboard = World.GetWorld<TouchPuzzeWorld>().Blackboard;
             blackboard.SetValue(GetIsFireKey(), 1);
             int candleCountKey = TouchPuzzeWorld.GetCandleCountKey();
             blackboard.TryGetValue(candleCountKey, out int candleCount);

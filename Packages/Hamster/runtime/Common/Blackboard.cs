@@ -63,8 +63,8 @@ public class BackboardVar<T> : IBackboardVar, IPool {
 #endif
 }
 
-public class EventActionBlackboard {
-    private Dictionary<int, int> _data = new Dictionary<int, int>(new Int32Comparer());
+public class Blackboard {
+    protected Dictionary<int, int> _data = new Dictionary<int, int>(new Int32Comparer());
 
     public bool TryGetValue(int key, out int value) {
         return _data.TryGetValue(key, out value);
@@ -76,5 +76,9 @@ public class EventActionBlackboard {
 
     public bool HasValue(int key) {
         return _data.ContainsKey(key);
+    }
+
+    public void Clean() {
+        _data.Clear();
     }
 }

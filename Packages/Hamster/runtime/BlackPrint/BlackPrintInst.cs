@@ -9,7 +9,7 @@ namespace Hamster.BP {
         public GameObject Owner {
             get; protected set;
         }
-        public EventActionBlackboard Blackboard = new EventActionBlackboard();
+        public Blackboard Blackboard = new Blackboard();
         public List<BlackPrintPage> Pages = new List<BlackPrintPage>();
 
         private int ValidPageIndex = -1;

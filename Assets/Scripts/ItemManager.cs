@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace Hamster.TouchPuzzle {
     public class ItemManager {
+        public const int MAX_ITEM_BOX = 8;
+
         private event Action<int, int, bool> _onItemChange;
-        private List<int> _items = new List<int>(8);
+        protected List<int> _items = new List<int>(MAX_ITEM_BOX);
 
         public ItemManager() {
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < MAX_ITEM_BOX; i++) {
                 _items.Add(0);
             } 
         }

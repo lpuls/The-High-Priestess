@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Hamster.BP;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEngine;
 #endif
 
 namespace Hamster.TouchPuzzle {

@@ -18,6 +18,7 @@ namespace Hamster.TouchPuzzle {
         private Button _rightButton = null;
         private Button _backButton = null;
         private Field _currentField = null;
+        private ItemBoxUI _selectItem = null;
 
         private List<ItemBoxUI> _itemUIs = new List<ItemBoxUI>(8);
 
@@ -38,6 +39,7 @@ namespace Hamster.TouchPuzzle {
                 if (null == boxUI)
                     break;
                 _itemUIs.Add(boxUI);
+                boxUI.OnSelectItem += OnSelectItem;
             }
 
             Single<FieldManager>.GetInstance().BindOnGotoField(OnGotoField);
@@ -107,6 +109,13 @@ namespace Hamster.TouchPuzzle {
             else {
                 CleanItem(index);
             }
+        }
+
+        private void OnSelectItem(ItemBoxUI select) {
+            if (null != _selectItem) {
+                _selectItem.SetSelect(false);
+            }
+            _selectItem = select;
         }
 
         public void SetItemIcon(int index, int id, string itemName, Sprite sprite) {

@@ -14,7 +14,11 @@ namespace Hamster.BP {
     }
 
     [System.Serializable]
+#if UNITY_EDITOR
     public class BlackPrintConditionAction : BlackPrintAction, IDrawActionContext {
+#else
+    public class BlackPrintConditionAction : BlackPrintAction {
+#endif
 
         protected int CodeIndex = 0;
         protected List<BlackPrintAction> Current = null;

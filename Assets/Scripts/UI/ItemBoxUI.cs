@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Hamster.TouchPuzzle {
     public class ItemBoxUI : MonoBehaviour {
+        public Action<ItemBoxUI> OnSelectItem;
+
         private Image _icon = null;
         private Text _itemName = null;
         private Button _button = null;
@@ -20,7 +23,15 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void OnClickItem() {
-            _select = !_select;
+            // _select = !_select;
+            SetSelect(!_select);
+            // World.GetWorld<TouchPuzzeWorld>().SetUsingItem(_select ? _id : 0);
+            // _icon.color = _select ? Color.black : Color.white;
+            OnSelectItem?.Invoke(this);
+        }
+
+        public void SetSelect(bool value) {
+            _select = value;
             World.GetWorld<TouchPuzzeWorld>().SetUsingItem(_select ? _id : 0);
             _icon.color = _select ? Color.black : Color.white;
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Reflection;
+﻿using System.Reflection;
 using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
@@ -8,9 +7,10 @@ namespace Hamster.TouchPuzzle {
         public TouchRaycaster TouchRaycaster = null;
         public TransitionsPanel TransitionsPanel = null;
         public AtlasManager AtlasManager = new AtlasManager();
-        public ItemManager ItemManager = new ItemManager();
-        public EventActionBlackboard Blackboard = new EventActionBlackboard();
+        public ItemManager ItemManager = new ItemManagerForSave();
+        public Blackboard Blackboard = new BlackboardForSave();
         public MessageManager MessageManager = new MessageManager();
+        public SaveHelper SaveHelper = null;
 
         private int _usingItemID = 0;
 
@@ -22,14 +22,19 @@ namespace Hamster.TouchPuzzle {
 
             TransitionsPanel.gameObject.SetActive(true);
             TransitionsPanel.Execute(BeginLoad);
-
-            ItemManager.BindChangeCallback(OnItemChange);
         }
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
+            // 初始化配置
             ConfigHelper = new ConfigHelper();
             base.InitWorld(typeof(Config.Props).Assembly, uiAssembly, gmAssemlby);
 
+            // 初始化存档管理器
+            SaveHelper = new SaveHelper(@"H:\Dev\Demo\HighPriestess\Dava.sav", 0, 
+                Blackboard as BlackboardForSave, 
+                ItemManager as ItemManagerForSave);
+
+            // 加载图集
             AtlasManager.LoadAtlas("Res/ItemAtlas");
         }
 
@@ -63,10 +68,16 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void BeginLoad() {
+            // 加载存档
+            SaveHelper.Load();
+
+            // 加载场景
             LoadField("Res/Fields/Field_Middle", true);
             LoadField("Res/Fields/Field_Right");
+            LoadField("Res/Fields/Field_Left");
             LoadField("Res/Fields/FieldDetailTraibuteTableLeftUp");
             LoadField("Res/Fields/FieldDetailTraibuteTableRightUp");
+            LoadField("Res/Fields/Field_PhoteFrame");
         }
 
         private void OnLoadFirstFieldComplete(Object field) {
@@ -105,16 +116,14 @@ namespace Hamster.TouchPuzzle {
             return (blackBoardTypeKey << 24) | (MainKey << 16) | (ID << 8) | value;
         }
 
-        private int GetItemManagerKey(int index) {
-            return GetBlockboardKey((int)EBlackBoardKey.System, (int)ESystemBlackboardKey.ITEM_MANAGER, 0, index);
-        }
-
-        private void OnItemChange(int id, int index, bool isAdd) {
-            Blackboard.SetValue(GetItemManagerKey(index), isAdd ? id : 0);
-        }
-
         public static int GetCandleCountKey() {
             return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.CandleCount, 0, 0);
+        }
+
+        void OnGUI() {
+            if (GUILayout.Button("Save")) {
+                SaveHelper.Save();
+            }
         }
     }
 

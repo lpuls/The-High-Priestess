@@ -2,13 +2,38 @@
 
 namespace Hamster.TouchPuzzle {
 
-    public class Door : Props {
+    public class LockItem : Props {
+        public bool IsLock = false;
+
+        protected void CheckLock(int id) {
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(id, out int value)) {
+                IsLock = 1 == value;
+            }
+        }
+
+        public virtual void OnClickUnlocak(int propID) {
+        }
+
+        public override void OnClick(int propID) {
+            if (!IsLock) {
+                OnClickUnlocak(propID);
+            }
+            else {
+                ShowMessageBoxMessage message = ObjectPool<ShowMessageBoxMessage>.Malloc();
+                message.Message = CommonString.LOCK_DOOR;
+                World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger(message);
+                ObjectPool<ShowMessageBoxMessage>.Free(message);
+            }
+        }
+    }
+
+
+    public class Door : LockItem {
         public int ID = 0;
 
         public AudioSource AudioPlayer = null;
         public SpriteRenderer DoorForwardground = null;
         public SpriteRenderer DoorBackground = null;
-        public bool IsLock = false;
 
         private bool IsOpenDoor = false;
 
@@ -18,25 +43,15 @@ namespace Hamster.TouchPuzzle {
                 DoorForwardground.enabled = true;
             if (null != DoorBackground)
                 DoorBackground.enabled = false;
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetDoorKey(), out int value)) {
-                IsLock = 1 == value;
-            }
+            CheckLock(GetDoorKey());
 
             World.GetWorld<TouchPuzzeWorld>().MessageManager.Bind<OnFireCandleStickMessage>(OnReceiveFireCandleStickMessage);
         }
 
-        public override void OnClick(int propID) {
-            if (!IsLock) {
-                IsOpenDoor = !IsOpenDoor;
-                DoorForwardground.enabled = !IsOpenDoor;
-                DoorBackground.enabled = IsOpenDoor;
-            }
-            else {
-                ShowMessageBoxMessage message = ObjectPool<ShowMessageBoxMessage>.Malloc();
-                message.Message = CommonString.LOCK_DOOR;
-                World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger(message);
-                ObjectPool<ShowMessageBoxMessage>.Free(message);
-            }
+        public override void OnClickUnlocak(int propID) {
+            IsOpenDoor = !IsOpenDoor;
+            DoorForwardground.enabled = !IsOpenDoor;
+            DoorBackground.enabled = IsOpenDoor;
         }
 
         public int GetDoorKey() {
