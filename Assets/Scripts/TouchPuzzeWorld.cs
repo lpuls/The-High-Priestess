@@ -30,7 +30,9 @@ namespace Hamster.TouchPuzzle {
             base.InitWorld(typeof(Config.Props).Assembly, uiAssembly, gmAssemlby);
 
             // 初始化存档管理器
-            SaveHelper = new SaveHelper(@"H:\Dev\Demo\HighPriestess\Dava.sav", 0, 
+            Debug.Log("存档位置在: " + Application.persistentDataPath);
+            SaveHelper = new SaveHelper(Application.persistentDataPath + "/Save.save", // @"H:\Dev\Demo\HighPriestess\Dava.sav",
+                0, 
                 Blackboard as BlackboardForSave, 
                 ItemManager as ItemManagerForSave);
 
