@@ -112,7 +112,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void OnSelectItem(ItemBoxUI select) {
-            if (null != _selectItem) {
+            if (null != _selectItem && _selectItem != select) {
                 _selectItem.SetSelect(false);
             }
             _selectItem = select;

@@ -10,6 +10,9 @@ namespace Hamster.TouchPuzzle {
 
     public class PhotoFrame : Props {
         public List<int> PhotoIDs = new List<int>();
+        public Renderer ResultRenderer = null;
+        public GameObject ShowOnAllFind = null;
+
         public List<SpriteRenderer> Photos = new List<SpriteRenderer>();
         private List<bool> PhotoReady = new List<bool>();
 
@@ -24,6 +27,10 @@ namespace Hamster.TouchPuzzle {
 
                 Photos[i].enabled = PhotoReady[i];
                 result &= PhotoReady[i];
+
+                if (null != ShowOnAllFind)
+                    ShowOnAllFind.SetActive(false);
+                ResultRenderer.enabled = false;
             }
 
             if (result)
@@ -64,6 +71,15 @@ namespace Hamster.TouchPuzzle {
                 result &= PhotoReady[i];
             }
             if (result) {
+                // 显示目标结果，隐藏碎片
+                if (null != ShowOnAllFind)
+                    ShowOnAllFind.SetActive(true);
+                ResultRenderer.enabled = true;
+                for (int i = 0; i < Photos.Count; i++) {
+                    Photos[i].enabled = false;
+                }
+
+                // 发送消息
                 SendAllFindMessage();
             }
         }

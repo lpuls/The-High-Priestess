@@ -48,6 +48,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -95,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2640687fa78c346478a09606ae58c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 6
+  SaveKey: 0
+  ItemID: 0
 --- !u!61 &3298754091187092198
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -109,16 +111,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0630281, y: 0.0031513572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.11, y: 0.69}
+    oldSize: {x: 1.99, y: 1.63}
     newSize: {x: 3.11, y: 0.69}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.11, y: 0.69}
+  m_Size: {x: 1.8368356, y: 1.6291162}
   m_EdgeRadius: 0

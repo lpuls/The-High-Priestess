@@ -51,7 +51,7 @@ namespace Hamster {
                 messageProcessor.Trigger(message);
             }
             else {
-                UnityEngine.Debug.LogError("Not bind event" + typeof(T).Name);
+                // UnityEngine.Debug.LogError("Not bind event" + typeof(T).Name);
             }
         }
 

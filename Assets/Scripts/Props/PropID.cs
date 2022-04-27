@@ -6,12 +6,19 @@
         Matches,
         Cake,
         Door,
+        
         PhotoPart1 = 6,
         PhotoPart2,
         PhotoPart3,
         PhotoPart4,
         PhotoFrame,
+        
         TributeTableLitterDrawer,
+        
+        Necklace = 10,
+        Ash= 11,
+
+        Sandalwood = 15,
     }
 
     public enum EFieldID {
@@ -22,7 +29,8 @@
         ExitDoor,
         DetailTraibuteTableLeftUp,
         DetailTraibuteTableRightUp,
-        DetailPhotoFrame
+        DetailPhotoFrame,
+        UnderTable
     }
 
     public enum EBlackBoardKey {
@@ -35,7 +43,13 @@
 
     public enum EEventKey {
         None,
-        CandleCount
+        CandleCount,
+
+        ChildFood,
+        WomanNecklace,
+        ManKnife,
+        ManMoney
+
     }
 
     public enum ESystemBlackboardKey {
@@ -55,6 +69,14 @@
         FIELD_DETIAL_TRAIBUTE_TABLE_RIGHT_UP_PHOTO_PARTY = 2, // 大贡桌左侧抽屉的照片碎片
         FIELD_DETIAL_TRAIBUTE_TABLE_MIDDLE_CAKE = 2, // 中间贡桌的糕点
         FIELD_DETAIL_RIGHT_PAPER_CHILD_MATCHES = 3,  // 右侧纸人小孩火柴
+
+        NECKLACE_IN_PHOTO_FRAME = 4,  // 照片上的项链
+
+        PHOTO_PARTY_1 = 10,  // 照片碎片1
+        PHOTO_PARTY_2 = 11,  // 照片碎片1
+
+        SANDAL_WOOD = 15,  // 香
+
     }
 
     public static class CommonString {

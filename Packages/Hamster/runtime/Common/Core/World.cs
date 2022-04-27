@@ -29,7 +29,7 @@ namespace Hamster {
             protected set;
         }
 
-        protected void Register<T>(T manager) {
+        protected void RegisterManager<T>(T manager) {
             _managers.Add(typeof(T), manager);
         }
 

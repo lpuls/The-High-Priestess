@@ -24,10 +24,10 @@ namespace Hamster.TouchPuzzle {
 
         private void OnClickItem() {
             // _select = !_select;
+            OnSelectItem?.Invoke(this);
             SetSelect(!_select);
             // World.GetWorld<TouchPuzzeWorld>().SetUsingItem(_select ? _id : 0);
             // _icon.color = _select ? Color.black : Color.white;
-            OnSelectItem?.Invoke(this);
         }
 
         public void SetSelect(bool value) {

@@ -2,6 +2,7 @@
 
 namespace Hamster.TouchPuzzle {
     public class BlackboardForSave : Blackboard, ISaver {
+
         public int GetSaveID() {
             return (int)ESaverID.BLOACK_BOARD_ID;
         }
