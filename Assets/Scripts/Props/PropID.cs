@@ -79,6 +79,8 @@
 
         SANDAL_WOOD = 15,  // 香
 
+        PAPER_CHILD_MATCHES = 20,  // 小孩纸人 火柴
+
     }
 
     public static class CommonString {

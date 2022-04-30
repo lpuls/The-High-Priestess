@@ -38,6 +38,8 @@
             _animator.Play("RightHandUp");
             _isGive = true;
             World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetBBKeyGive(), 1);
+
+            World.GetWorld<TouchPuzzeWorld>().ItemManager.RemoveItem((int)TargetProp);
         }
 
         protected virtual void OnPickItem(ItemPicker item) {
