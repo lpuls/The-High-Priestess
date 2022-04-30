@@ -30,7 +30,8 @@
         DetailTraibuteTableLeftUp,
         DetailTraibuteTableRightUp,
         DetailPhotoFrame,
-        UnderTable
+        UnderTable,
+        PaperChild
     }
 
     public enum EBlackBoardKey {

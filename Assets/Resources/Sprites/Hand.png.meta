@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2f7b799f16e98445830727f081297e2
+guid: 76cd4842c4d90174c87998dcbcc50c6b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -92,5 +92,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: res/fields/field_middle
+  assetBundleName: res/fields/field_paperchild
   assetBundleVariant: 
