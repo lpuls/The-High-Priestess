@@ -27,7 +27,7 @@ namespace Hamster.TouchPuzzle {
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
             // 初始化配置
             ConfigHelper = new ConfigHelper();
-            base.InitWorld(typeof(Config.Props).Assembly, uiAssembly, gmAssemlby);
+            base.InitWorld(typeof(Config.Props).Assembly, uiAssembly, GetType().Assembly);
 
             // 初始化存档管理器
             Debug.Log("存档位置在: " + Application.persistentDataPath);
@@ -123,11 +123,18 @@ namespace Hamster.TouchPuzzle {
             return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.CandleCount, 0, 0);
         }
 
-        void OnGUI() {
-            if (GUILayout.Button("Save")) {
-                SaveHelper.Save();
-            }
+        #region GM
+        [GM]
+        public static void GM_AddItem(string[] args) {
+            if (int.TryParse(args[1], out int value))
+                World.GetWorld<TouchPuzzeWorld>().ItemManager.AddItem(value);
         }
+
+        public static void GM_Save(string[] args) {
+            World.GetWorld<TouchPuzzeWorld>().SaveHelper.Save();
+        }
+        #endregion
+
     }
 
 }
