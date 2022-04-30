@@ -8,10 +8,10 @@
         Door,
         
         PhotoPart1 = 6,
-        PhotoPart2,
-        PhotoPart3,
-        PhotoPart4,
-        PhotoFrame,
+        PhotoPart2 = 7,
+        PhotoPart3 = 8,
+        PhotoPart4 = 9,
+        PhotoFrame = 101,
         
         TributeTableLitterDrawer,
         
@@ -31,7 +31,8 @@
         DetailTraibuteTableRightUp,
         DetailPhotoFrame,
         UnderTable,
-        PaperChild
+        PaperChild,
+        PaperWoman,
     }
 
     public enum EBlackBoardKey {

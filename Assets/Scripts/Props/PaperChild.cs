@@ -1,8 +1,8 @@
 ﻿namespace Hamster.TouchPuzzle {
     public class PaperChild : PaperHuman {
 
-        private bool _isGive = false;
-        private bool _isTake = false;
+        protected bool _isGive = false;
+        protected bool _isTake = false;
         public ItemPicker _targetPicker = null;
 
         protected override void OnAwake() {
@@ -13,7 +13,8 @@
                 _isTake = true;
             }
 
-            if (!_isTake) {
+            if (_isGive && !_isTake) {
+                TargetItem.SetActive(true);
                 _animator.Play("RightHandUp", 0, 1);
             }
 
@@ -27,31 +28,36 @@
         }
 
         protected override void OnClickByTargetProps(int propID) {
-            if (_isTake) {
+            if (_isGive) {
                 return;
             }
 
             OriginItem.SetActive(true);
             TargetItem.SetActive(true);
-
+            
             _animator.Play("RightHandUp");
-            _isTake = true;
+            _isGive = true;
             World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetBBKeyGive(), 1);
         }
 
-        protected void OnPickItem(ItemPicker item) {
+        protected virtual void OnPickItem(ItemPicker item) {
             if (item == _targetPicker) {
                 OriginItem.SetActive(false);
                 TargetItem.SetActive(false);
+                
                 _animator.Play("LeftHand");
+                
+                _isTake = true;
+                World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetBBKeyTake(), 1);
+
             }
         }
 
-        protected int GetBBKeyGive() {
+        protected virtual int GetBBKeyGive() {
             return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.Matches, 0, 0);
         }
 
-        protected int GetBBKeyTake() {
+        protected virtual int GetBBKeyTake() {
             return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.Matches, 0, 0);
         }
     }

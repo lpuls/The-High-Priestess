@@ -1,23 +1,28 @@
 ﻿namespace Hamster.TouchPuzzle {
-    public class PaperWoman : PaperHuman {
+    public class PaperWoman : PaperChild {
 
-        private bool _setup = false;
 
         protected override void Awake() {
-            // 读取记录值
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetParperWomanKey(), out int value)) {
-                _setup = true;
-            }
+            base.Awake();
         }
 
-        public override void OnClick(int propID) {
-            if (EPropID.Necklace == (EPropID)propID && !_setup) {
-                // ... 
-            }
+        protected override void OnClickByTargetProps(int propID) {
+            base.OnClickByTargetProps(propID);
         }
 
-        private int GetParperWomanKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
+        protected override void OnPickItem(ItemPicker item) {
+            base.OnPickItem(item);
+
+            if (item == _targetPicker) 
+                OriginItem.SetActive(true);
+        }
+
+        protected override int GetBBKeyGive() {
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.Necklace, 0, 0);
+        }
+
+        protected override int GetBBKeyTake() {
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.Sandalwood, 0, 0);
         }
 
     }
