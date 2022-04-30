@@ -30,6 +30,11 @@ namespace Hamster.TouchPuzzle {
             _onItemChange?.Invoke(id, index, false);
         }
 
+        public void RemoveItemByIndex(int index) {
+            if (index >= 0 && index < _items.Count)
+                RemoveItem(_items[index]);
+        }
+
         public bool HasItem(int id) {
             return _items.Contains(id); 
         }

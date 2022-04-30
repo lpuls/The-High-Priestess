@@ -27,7 +27,8 @@ namespace Hamster.TouchPuzzle {
             if (EPropID.Sandalwood == (EPropID)propID) {
                 _count++;
                 UpdateSandalwood();
-                
+
+                World.GetWorld<TouchPuzzeWorld>().RemoveCurrentUsingItem();
                 World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetFurnaceKey(), _count);
             }
         }

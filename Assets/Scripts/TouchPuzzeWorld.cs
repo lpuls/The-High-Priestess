@@ -13,6 +13,7 @@ namespace Hamster.TouchPuzzle {
         public SaveHelper SaveHelper = null;
 
         private int _usingItemID = 0;
+        private int _usingItemIndex = 0;
 
         public void Awake() {
             ActiveWorld();
@@ -113,8 +114,13 @@ namespace Hamster.TouchPuzzle {
             }
         }
 
-        public void SetUsingItem(int id) {
+        public void SetUsingItem(int id, int index) {
             _usingItemID = id;
+            _usingItemIndex = index;
+        }
+
+        public void RemoveCurrentUsingItem() {
+            ItemManager.RemoveItemByIndex(_usingItemIndex);
         }
 
         public static int GetBlockboardKey(int blackBoardTypeKey, int MainKey, int ID, int value) {

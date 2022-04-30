@@ -6,6 +6,8 @@ namespace Hamster.TouchPuzzle {
     public class ItemBoxUI : MonoBehaviour {
         public Action<ItemBoxUI> OnSelectItem;
 
+        public int Index = 0;
+
         private Image _icon = null;
         private Text _itemName = null;
         private Button _button = null;
@@ -32,7 +34,7 @@ namespace Hamster.TouchPuzzle {
 
         public void SetSelect(bool value) {
             _select = value;
-            World.GetWorld<TouchPuzzeWorld>().SetUsingItem(_select ? _id : 0);
+            World.GetWorld<TouchPuzzeWorld>().SetUsingItem(_select ? _id : 0, Index);
             _icon.color = _select ? Color.black : Color.white;
         }
 
