@@ -138,8 +138,14 @@ namespace Hamster.TouchPuzzle {
                 World.GetWorld<TouchPuzzeWorld>().ItemManager.AddItem(value);
         }
 
+        [GM]
         public static void GM_Save(string[] args) {
             World.GetWorld<TouchPuzzeWorld>().SaveHelper.Save();
+        }
+
+        [GM]
+        public static void GM_Del(string[] args) {
+            World.GetWorld<TouchPuzzeWorld>().SaveHelper.Delete();
         }
         #endregion
 
