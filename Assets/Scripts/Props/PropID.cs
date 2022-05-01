@@ -2,37 +2,40 @@
     public enum EPropID {
         None,
         Candle,
-        CandleStick,
-        Matches,
-        Cake,
-        Door,
+        CandleStick,                // 烛台
+        Matches,                    // 小孩纸人给的火柴
+        Cake,                       // 给小孩纸人的蛋糕
+        Door,                       // 
         
-        PhotoPart1 = 6,
-        PhotoPart2 = 7,
-        PhotoPart3 = 8,
-        PhotoPart4 = 9,
-        PhotoFrame = 101,
+        PhotoPart1 = 6,             // 照片碎片
+        PhotoPart2 = 7,             // 照片碎片
+        PhotoPart3 = 8,             // 照片碎片
+        PhotoPart4 = 9,             // 照片碎片
+        PhotoFrame = 101,           // 全家福
         
-        TributeTableLitterDrawer,
-        
-        Necklace = 10,
-        Ash= 11,
+        TributeTableLitterDrawer,   // 小贡桌抽屉
 
-        Sandalwood = 15,
+        Necklace = 10,              // 项链
+        Ash= 11,                    // 金纸灰烬
+           
+        Sandalwood = 15,            // 香
+        Knife = 16,                 // 刀
+        Deed = 17,                  // 房产证
     }
 
     public enum EFieldID {
         None,
-        Middle,
-        Right,
-        Left,
-        ExitDoor,
-        DetailTraibuteTableLeftUp,
-        DetailTraibuteTableRightUp,
-        DetailPhotoFrame,
-        UnderTable,
-        PaperChild,
-        PaperWoman,
+        Middle,                         // 房间中央
+        Right,                          // 房间右侧
+        Left,                           // 房间左侧
+        ExitDoor,                       // 房间后侧，出口
+        DetailTraibuteTableLeftUp,      // 贡桌左上抽屉
+        DetailTraibuteTableRightUp,     // 贡桌右上抽屉
+        DetailPhotoFrame,               // 全家福
+        UnderTable,                     // 项桌下方
+        PaperChild,                     // 小孩纸人
+        PaperWoman,                     // 女人纸人
+        PaperMan,                       // 男人纸人
     }
 
     public enum EBlackBoardKey {
@@ -47,10 +50,14 @@
         None,
         CandleCount,
 
-        ChildFood,
-        WomanNecklace,
-        ManKnife,
-        ManMoney
+        ChildFood,          // 小孩纸人得到食物
+        ChildMatches,       // 小孩纸人拿到火柴
+        WomanNecklace,      // 女人纸人得到项链
+        WomanSandalwood,    // 女人纸人拿出香
+        ManKnife,           // 男人纸人拿到刀
+        ManMoney,           // 男人纸人拿到房产证
+        ManKill,            // 男人纸人杀人
+        ManSandalwood,      // 男人纸人拿出香
 
     }
 

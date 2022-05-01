@@ -1,35 +1,32 @@
-﻿using UnityEngine;
+﻿namespace Hamster.TouchPuzzle {
+    public class PaperMan : PaperHuman {
 
-namespace Hamster.TouchPuzzle {
+        private bool _womanDead = false;
 
-    public class PaperHuman : Props {
-        public EPropID TargetProp = EPropID.None;
-        public string AnimaTriggerName = string.Empty;
-        public GameObject OriginItem = null;
-        public GameObject TargetItem = null;
+        protected override void OnAwake() {
+            base.OnAwake();
 
-        protected Animator _animator = null;
-
-        protected virtual void Awake() {
-            _animator = GetComponent<Animator>();
-            OriginItem.SetActive(false);
-            TargetItem.SetActive(false);
-            OnAwake();
-        }
-
-        public override void OnClick(int propID) {
-            if (propID == (int)TargetProp) {
-                OnClickByTargetProps(propID);
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetWomanDeadKey(), out int _)) {
+                _womanDead = true;
             }
         }
 
-        protected virtual void OnClickByTargetProps(int propID) {
+        public override void OnEnterField() {
+            base.OnEnterField();
+
+            gameObject.SetActive(_womanDead);
         }
 
-        protected virtual void OnAwake() {
+        protected override int GetBBKeyGive() {
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ManMoney, 0, 0);
         }
-    }
 
-    public class PaperMan : PaperHuman {
+        protected override int GetBBKeyTake() {
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ManSandalwood, 0, 0);
+        }
+
+        private int GetWomanDeadKey() {
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ManKill, 0, 0);
+        }
     }
 }

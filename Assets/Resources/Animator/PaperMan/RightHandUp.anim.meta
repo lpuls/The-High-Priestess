@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 57267db290c4d2a43a7f6f714398820b
-PrefabImporter:
+guid: debfb11133c0ccf4ba2bf80ed0b1fa68
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 7400000
   userData: 
   assetBundleName: res/fields/field_paperman
   assetBundleVariant: 
