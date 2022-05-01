@@ -2,6 +2,7 @@
 using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
+
     public class Props : MonoBehaviour, IProps {
 
         protected IField _filed = null;

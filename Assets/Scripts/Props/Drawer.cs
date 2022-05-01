@@ -7,14 +7,18 @@ namespace Hamster.TouchPuzzle {
         private bool _isOpen = false;
         private Animator _animator = null;
 
-        private void Awake() {
+        protected override void Awake() {
+            base.Awake();
+
             _animator = GetComponent<Animator>();
             CheckLock(GetDoorKey());
+            EnableProps(false);
         }
 
         public override void OnClickUnlocak(int propID) {
             _isOpen = !_isOpen;
             _animator.SetBool("Open", _isOpen);
+            EnableProps(_isOpen);
         }
 
         public int GetDoorKey() {

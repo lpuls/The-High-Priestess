@@ -5,7 +5,6 @@ namespace Hamster.TouchPuzzle {
     public class PaperManBeforKill : Props {
 
         private bool _hasKnife = false;
-        private bool _hasKillWoman = false;
         private Animator _animator = null;
 
         public void Awake() {
@@ -13,9 +12,6 @@ namespace Hamster.TouchPuzzle {
 
             if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasKnifeKey(), out int _)) {
                 _hasKnife = true;
-            }
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasKillKey(), out int _)) {
-                _hasKillWoman = true;
             }
 
         }
@@ -33,15 +29,9 @@ namespace Hamster.TouchPuzzle {
         public override void OnEnterField() {
             base.OnEnterField();
 
-            bool womanHasNecklace = false;
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetWomanHasNecklace(), out int _)) {
-                womanHasNecklace = true;
-            }
-
-            if (_hasKnife && !_hasKillWoman && womanHasNecklace) {
-                _hasKillWoman = true;
+            // 女人已经被杀死了，不显示杀人前的男人
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasKillKey(), out int _)) {
                 gameObject.SetActive(false);
-                World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetHasKillKey(), 1);
             }
         }
 

@@ -1,20 +1,14 @@
 ﻿namespace Hamster.TouchPuzzle {
     public class PaperMan : PaperHuman {
 
-        private bool _womanDead = false;
-
-        protected override void OnAwake() {
-            base.OnAwake();
-
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetWomanDeadKey(), out int _)) {
-                _womanDead = true;
-            }
-        }
-
         public override void OnEnterField() {
             base.OnEnterField();
 
-            gameObject.SetActive(_womanDead);
+            bool show = false;
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetWomanDeadKey(), out int _)) {
+                show = true;
+            }
+            gameObject.SetActive(show);
         }
 
         protected override int GetBBKeyGive() {

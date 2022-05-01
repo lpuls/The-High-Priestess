@@ -21,6 +21,9 @@
         Sandalwood = 15,            // 香
         Knife = 16,                 // 刀
         Deed = 17,                  // 房产证
+
+        Bowl = 20,                  // 碗
+        Blood = 21,                 // 血
     }
 
     public enum EFieldID {
@@ -58,6 +61,7 @@
         ManMoney,           // 男人纸人拿到房产证
         ManKill,            // 男人纸人杀人
         ManSandalwood,      // 男人纸人拿出香
+        PlayerLeaveRight,   // 玩家离开纸人的房间
 
     }
 
@@ -87,6 +91,9 @@
         SANDAL_WOOD = 15,  // 香
 
         PAPER_CHILD_MATCHES = 20,  // 小孩纸人 火柴
+
+        EMPTY_BOWL = 21,        // 空碗
+        KNIFE_COBINET = 22,     // 柜子里的刀
 
     }
 

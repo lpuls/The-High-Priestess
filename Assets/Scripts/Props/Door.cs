@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
 
     public class LockItem : Props {
         public bool IsLock = false;
+        private Props[] _LockProps = null;
+
+        protected virtual void Awake() {
+            _LockProps = GetComponentsInChildren<Props>();
+        }
 
         protected void CheckLock(int id) {
             if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(id, out int value)) {
@@ -25,6 +31,17 @@ namespace Hamster.TouchPuzzle {
                 ObjectPool<ShowMessageBoxMessage>.Free(message);
             }
         }
+
+        public void EnableProps(bool enable) {
+            if (null == _LockProps)
+                return;
+
+            for (int i = 0; i < _LockProps.Length; i++) {
+                if (null != _LockProps[i] && this != _LockProps[i])
+                    _LockProps[i].enabled = enable;
+            }
+        }
+
     }
 
 
@@ -34,16 +51,28 @@ namespace Hamster.TouchPuzzle {
         public AudioSource AudioPlayer = null;
         public SpriteRenderer DoorForwardground = null;
         public SpriteRenderer DoorBackground = null;
+        public Collider2D ForwardgroundCollid = null;
+        public Collider2D BackgroundCollid = null;
 
         private bool IsOpenDoor = false;
 
+        protected override void Awake() {
+            base.Awake();
 
-        public void Awake() {
-            if (null != DoorForwardground)
+            if (null != DoorForwardground) {
                 DoorForwardground.enabled = true;
-            if (null != DoorBackground)
+            }
+            if (null != ForwardgroundCollid) {
+                ForwardgroundCollid.enabled = true;
+            }
+            if (null != DoorBackground) {
                 DoorBackground.enabled = false;
+            }
+            if (null != BackgroundCollid) {
+                BackgroundCollid.enabled = true;
+            }
             CheckLock(GetDoorKey());
+            EnableProps(false);
 
             World.GetWorld<TouchPuzzeWorld>().MessageManager.Bind<OnFireCandleStickMessage>(OnReceiveFireCandleStickMessage);
         }
@@ -52,6 +81,11 @@ namespace Hamster.TouchPuzzle {
             IsOpenDoor = !IsOpenDoor;
             DoorForwardground.enabled = !IsOpenDoor;
             DoorBackground.enabled = IsOpenDoor;
+            if (null != ForwardgroundCollid)
+                ForwardgroundCollid.enabled = !IsOpenDoor;
+            if (null != BackgroundCollid)
+                BackgroundCollid.enabled = IsOpenDoor;
+            EnableProps(IsOpenDoor);
         }
 
         public int GetDoorKey() {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b1eaf3c5ab6ec3d42af9d29ff47a050b
+guid: fbcd8a0aca789334e9d89f6fa84edade
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -92,5 +92,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: resources/sprites/squaremask
+  assetBundleName: res/fields/field_right
   assetBundleVariant: 

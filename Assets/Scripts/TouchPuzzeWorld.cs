@@ -43,21 +43,21 @@ namespace Hamster.TouchPuzzle {
 
         public void OnTouchDown(GameObject gameObject) {
             Props props = gameObject.GetComponent<Props>();
-            if (null != props) {
+            if (null != props && props.enabled) {
                 props.OnClickDown(_usingItemID);
             }
         }
 
         public void OnTouchUp(GameObject gameObject) {
             Props props = gameObject.GetComponent<Props>();
-            if (null != props) {
+            if (null != props && props.enabled) {
                 props.OnClickDown(_usingItemID);
             }
         }
 
         public void OnClick(GameObject gameObject) {
             Props props = gameObject.GetComponent<Props>();
-            if (null != props) {
+            if (null != props && props.enabled) {
                 props.OnClick(_usingItemID);
             }
         }
