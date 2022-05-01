@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e8c92bf669bb25e4b9dda4f6ed9558fb
+guid: ca648f702bf013846ac802e9ea556036
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -92,5 +92,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: resources/sprites/bowl
+  assetBundleName: res/fields/field_paperwomandead
   assetBundleVariant: 

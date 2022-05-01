@@ -216,9 +216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 8
-  GoLeftID: 1
+  GoLeftID: 0
   GoRightID: 0
-  GoBackID: 0
+  GoBackID: 1
 --- !u!1001 &590259387374717375
 PrefabInstance:
   m_ObjectHideFlags: 0

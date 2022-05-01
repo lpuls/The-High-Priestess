@@ -1,5 +1,5 @@
 ﻿namespace Hamster.TouchPuzzle {
-    public class PaperWoman : PaperChild {
+    public class PaperWoman : PaperHuman {
 
         protected override void OnPickItem(ItemPicker item) {
             base.OnPickItem(item);
@@ -9,11 +9,11 @@
         }
 
         protected override int GetBBKeyGive() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EPropID.Necklace, 0, 0);
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
         }
 
         protected override int GetBBKeyTake() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EPropID.Sandalwood, 0, 0);
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanSandalwood, 0, 0);
         }
 
     }

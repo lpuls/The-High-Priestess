@@ -85,6 +85,7 @@ namespace Hamster.TouchPuzzle {
             LoadField("Res/Fields/Field_PaperChild");
             LoadField("Res/Fields/Field_PaperWoman");
             LoadField("Res/Fields/Field_PaperMan");
+            LoadField("Res/Fields/Field_PaperWomanDead");
         }
 
         private void OnLoadFirstFieldComplete(Object field) {
@@ -135,8 +136,11 @@ namespace Hamster.TouchPuzzle {
         #region GM
         [GM]
         public static void GM_AddItem(string[] args) {
-            if (int.TryParse(args[1], out int value))
-                World.GetWorld<TouchPuzzeWorld>().ItemManager.AddItem(value);
+            for (int i = 1; i < args.Length; i++) {
+                if (int.TryParse(args[i], out int value))
+                    World.GetWorld<TouchPuzzeWorld>().ItemManager.AddItem(value);
+            }
+            
         }
 
         [GM]

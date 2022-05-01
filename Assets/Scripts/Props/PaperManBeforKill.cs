@@ -44,7 +44,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetWomanHasNecklace() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EPropID.Necklace, 0, 0);
+            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
         }
     }
 }

@@ -39,6 +39,7 @@
         PaperChild,                     // 小孩纸人
         PaperWoman,                     // 女人纸人
         PaperMan,                       // 男人纸人
+        PaperWomanDead,                 // 女人纸人死亡
     }
 
     public enum EBlackBoardKey {
@@ -62,6 +63,7 @@
         ManKill,            // 男人纸人杀人
         ManSandalwood,      // 男人纸人拿出香
         PlayerLeaveRight,   // 玩家离开纸人的房间
+        TakeBlood,          // 从死亡的女人纸人身上得到血
 
     }
 
