@@ -8,6 +8,9 @@ namespace Hamster.TouchPuzzle {
         private event Action<int, int, bool> _onItemChange;
         protected List<int> _items = new List<int>(MAX_ITEM_BOX);
 
+        public int UsingItemKey { get; set; }
+        public int UsingItemIndex { get; set; }
+
         public ItemManager() {
             for (int i = 0; i < MAX_ITEM_BOX; i++) {
                 _items.Add(0);
@@ -37,6 +40,10 @@ namespace Hamster.TouchPuzzle {
 
         public bool HasItem(int id) {
             return _items.Contains(id); 
+        }
+
+        public void RemoveUsingItem() {
+            RemoveItemByIndex(UsingItemIndex);
         }
 
         public void BindChangeCallback(Action<int, int, bool> callback) {
