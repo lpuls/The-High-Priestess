@@ -14,7 +14,7 @@
         }
 
         public void BeginGoTo() {
-            Single<FieldManager>.GetInstance().GoTo(GoToField);
+            World.GetWorld<TouchPuzzeWorld>().FieldManager.GoTo(GoToField);
             World.GetWorld<TouchPuzzeWorld>().TransitionsPanel.SetComplete();
         }
     }

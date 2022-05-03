@@ -11,7 +11,7 @@ namespace Hamster.TouchPuzzle {
             base.Awake();
 
             _animator = GetComponent<Animator>();
-            CheckLock(GetDoorKey());
+            CheckLock(GetLockKey());
             EnableProps(false);
         }
 
@@ -19,10 +19,6 @@ namespace Hamster.TouchPuzzle {
             _isOpen = !_isOpen;
             _animator.SetBool("Open", _isOpen);
             EnableProps(_isOpen);
-        }
-
-        public int GetDoorKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.TributeTableLitterDrawer, ID, 0);
         }
 
     }

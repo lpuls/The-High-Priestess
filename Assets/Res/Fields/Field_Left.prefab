@@ -744,6 +744,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250134310775258987, guid: 9753b2570b231c44c912b1c1f302a9e8,
         type: 3}
+      propertyPath: LockBBKey
+      value: 118
+      objectReference: {fileID: 0}
+    - target: {fileID: 250134310775258987, guid: 9753b2570b231c44c912b1c1f302a9e8,
+        type: 3}
       propertyPath: AudioPlayer
       value: 
       objectReference: {fileID: 0}
@@ -791,6 +796,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsLock
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486988809482857385, guid: 9753b2570b231c44c912b1c1f302a9e8,
+        type: 3}
+      propertyPath: LockBBKey
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 7486988809482857385, guid: 9753b2570b231c44c912b1c1f302a9e8,
         type: 3}

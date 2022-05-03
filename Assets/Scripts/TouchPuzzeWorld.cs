@@ -11,6 +11,7 @@ namespace Hamster.TouchPuzzle {
         public Blackboard Blackboard = new BlackboardForSave();
         public MessageManager MessageManager = new MessageManager();
         public SaveHelper SaveHelper = null;
+        public FieldManager FieldManager = new FieldManagerForSave();
 
         public void Awake() {
             ActiveWorld();
@@ -32,7 +33,8 @@ namespace Hamster.TouchPuzzle {
             SaveHelper = new SaveHelper(Application.persistentDataPath + "/Save.save", // @"H:\Dev\Demo\HighPriestess\Dava.sav",
                 0, 
                 Blackboard as BlackboardForSave, 
-                ItemManager as ItemManagerForSave);
+                ItemManager as ItemManagerForSave,
+                FieldManager as FieldManagerForSave);
 
             // 加载图集
             AtlasManager.LoadAtlas("Res/ItemAtlas");
@@ -90,7 +92,10 @@ namespace Hamster.TouchPuzzle {
         private void OnLoadFirstFieldComplete(Object field) {
             OnLoadFieldComplete(field);
             TransitionsPanel.SetComplete();
-            Single<FieldManager>.GetInstance().GoTo(1);
+
+            int currentID = FieldManager.GetCurrentID();
+            if (0 == currentID)
+                FieldManager.GoTo(1);
         }
 
         private void OnLoadFieldComplete(Object fieldObject) {
@@ -103,7 +108,12 @@ namespace Hamster.TouchPuzzle {
                 return;
             }
             field.Init();
-            Single<FieldManager>.GetInstance().Register(field);
+            FieldManager.Register(field);
+
+            int currentID = FieldManager.GetCurrentID();
+            if (0 != currentID && field.GetID() == currentID) {
+                FieldManager.GoTo(currentID);
+            }
         }
 
         private void LoadField(string path, bool isFirst = false) {
@@ -116,20 +126,15 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void SetUsingItem(int id, int index) {
-            ItemManager.UsingItemIndex = id;
-            ItemManager.UsingItemIndex = index;
+            ItemManager.SetUsingItem(id, index);
         }
 
         public void RemoveCurrentUsingItem() {
             ItemManager.RemoveUsingItem();
         }
 
-        public static int GetBlockboardKey(int blackBoardTypeKey, int MainKey, int ID, int value) {
-            return (blackBoardTypeKey << 24) | (MainKey << 16) | (ID << 8) | value;
-        }
-
         public static int GetCandleCountKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.CandleCount, 0, 0);
+            return (int)ESaveKey.CANDLE_COUNT;
         }
 
         #region GM

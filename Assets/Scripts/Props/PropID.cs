@@ -84,7 +84,8 @@
     public enum ESaverID {
         None,
         BLOACK_BOARD_ID = 1,
-        ITEM_MANAGER_ID = 2
+        ITEM_MANAGER_ID = 2,
+        FIELD_MANAGER_ID = 3
     }
 
     public enum ESaveKey {
@@ -131,6 +132,9 @@
         TAKE_BLOOD = 115,                                       // 从死亡的女人纸人身上得到血
         REMAIN_PHOTO_CANDLE = 116,                              // 从遗像上拿到蜡烛
         FAMILY_PHOTO_READLY = 117,                              // 全家福照片集刘
+        LOW_COBINET_LEFT_DOOR = 118,                            // 左侧矮柜左边柜门
+        LOW_COBINET_Right_DOOR = 119,                           // 左侧矮柜右边柜门
+        CANDLE_COUNT = 120,                                     // 点燃蜡烛数量
 
     }
 

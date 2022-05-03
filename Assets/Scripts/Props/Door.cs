@@ -84,7 +84,7 @@ namespace Hamster.TouchPuzzle {
             if (null != BackgroundCollid) {
                 BackgroundCollid.enabled = true;
             }
-            CheckLock(GetDoorKey());
+            CheckLock(GetLockKey());
             EnableProps(false);
 
             World.GetWorld<TouchPuzzeWorld>().MessageManager.Bind<OnFireCandleStickMessage>(OnReceiveFireCandleStickMessage);
@@ -99,10 +99,6 @@ namespace Hamster.TouchPuzzle {
             if (null != BackgroundCollid)
                 BackgroundCollid.enabled = IsOpenDoor;
             EnableProps(IsOpenDoor);
-        }
-
-        public int GetDoorKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.Door, ID, 0);
         }
 
         private void OnReceiveFireCandleStickMessage(OnFireCandleStickMessage message) {

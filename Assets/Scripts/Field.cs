@@ -25,7 +25,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void OnDestroy() {
-            Single<FieldManager>.GetInstance().Unregister(this);
+            World.GetWorld<TouchPuzzeWorld>().FieldManager.Unregister(this);
         }
 
         public void DestoryProp(IProps props) {

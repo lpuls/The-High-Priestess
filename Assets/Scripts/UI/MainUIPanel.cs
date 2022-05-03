@@ -43,7 +43,7 @@ namespace Hamster.TouchPuzzle {
                 boxUI.OnSelectItem += OnSelectItem;
             }
 
-            Single<FieldManager>.GetInstance().BindOnGotoField(OnGotoField);
+            World.GetWorld<TouchPuzzeWorld>().FieldManager.BindOnGotoField(OnGotoField);
             World.GetWorld<TouchPuzzeWorld>().ItemManager.BindChangeCallback(OnItemChange);
             World.GetWorld<TouchPuzzeWorld>().MessageManager.Bind<ShowMessageBoxMessage>(OnReceiveShowMessage);
         }
@@ -91,7 +91,7 @@ namespace Hamster.TouchPuzzle {
 
         private void GotoField(int id) {
             World.GetWorld<TouchPuzzeWorld>().TransitionsPanel.Execute(()=> {
-                Single<FieldManager>.GetInstance().GoTo(id);
+                World.GetWorld<TouchPuzzeWorld>().FieldManager.GoTo(id);
                 World.GetWorld<TouchPuzzeWorld>().TransitionsPanel.SetComplete();
             });
         }

@@ -45,6 +45,12 @@ namespace Hamster {
             _onSaveComplete?.Invoke();
         }
 
+        public void Delete() {
+            if (HasSaveData()) {
+                File.Delete(_savePath);
+            }
+        }
+
         public void Load() {
             if (!HasSaveData())
                 return;

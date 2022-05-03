@@ -177,8 +177,9 @@ GameObject:
   - component: {fileID: 1080792104819755576}
   - component: {fileID: 6049604152149884931}
   - component: {fileID: 5689537205397624562}
-  - component: {fileID: 2758248809182159405}
-  m_Layer: 0
+  - component: {fileID: 6048145726993909853}
+  - component: {fileID: 2808974549707688257}
+  m_Layer: 8
   m_Name: PaperMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +263,7 @@ Animator:
   m_GameObject: {fileID: 1492245856842395753}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b3b747efde08d444480a0146cdfab894, type: 2}
+  m_Controller: {fileID: 9100000, guid: bf1a4e7c91024f9449487f4d6c5785b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -271,7 +272,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2758248809182159405
+--- !u!114 &6048145726993909853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,9 +281,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1492245856842395753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6950b0e7f368584eb7e6004076b5dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0076b19d0f817114f98a9c2e24b3d428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetProp: 17
+  AnimaTriggerName: 
+  OriginItem: {fileID: 2003067753904460781}
+  TargetItem: {fileID: 161950387200214453}
+  _targetPicker: {fileID: 549964162582344300}
+--- !u!64 &2808974549707688257
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492245856842395753}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &2003067753904460781
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sandalwood
       objectReference: {fileID: 0}
+    - target: {fileID: 549964161708663493, guid: de68a4220bf7efd4eab69b2146a0571a,
+        type: 3}
+      propertyPath: SaveKey
+      value: 113
+      objectReference: {fileID: 0}
     - target: {fileID: 5885168202140899075, guid: de68a4220bf7efd4eab69b2146a0571a,
         type: 3}
       propertyPath: m_RootOrder
@@ -405,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 5885168202140899075, guid: de68a4220bf7efd4eab69b2146a0571a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 5885168202140899075, guid: de68a4220bf7efd4eab69b2146a0571a,
         type: 3}
@@ -454,9 +479,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de68a4220bf7efd4eab69b2146a0571a, type: 3}
+--- !u!1 &161950387200214453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 161950386867082524, guid: de68a4220bf7efd4eab69b2146a0571a,
+    type: 3}
+  m_PrefabInstance: {fileID: 876433577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5885168202882025386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5885168202140899075, guid: de68a4220bf7efd4eab69b2146a0571a,
     type: 3}
   m_PrefabInstance: {fileID: 876433577}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &549964162582344300 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 549964161708663493, guid: de68a4220bf7efd4eab69b2146a0571a,
+    type: 3}
+  m_PrefabInstance: {fileID: 876433577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161950387200214453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2640687fa78c346478a09606ae58c347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
