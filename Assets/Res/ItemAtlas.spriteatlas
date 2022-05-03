@@ -42,6 +42,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 9a9b95da84f4fad40a5362b3196780b7, type: 3}
     - {fileID: 2800000, guid: ef9889c6ad48fcc40be070d455fd9b6a, type: 3}
     - {fileID: 2800000, guid: ca13c3fc71c54524b804825b49c1b84c, type: 3}
+    - {fileID: 2800000, guid: 60107be8f239be44f8a988dc13e20674, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -53,6 +54,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 303cbef44ec21214f9be6c59d33e33d4, type: 3}
   - {fileID: 21300000, guid: ef9889c6ad48fcc40be070d455fd9b6a, type: 3}
   - {fileID: 21300000, guid: 3610c918a4e7bdc43b80f234329167fd, type: 3}
+  - {fileID: 21300000, guid: 60107be8f239be44f8a988dc13e20674, type: 3}
   - {fileID: 21300000, guid: b5dcc329bf9b6114cb7a780956b8d08c, type: 3}
   - {fileID: 21300000, guid: 9a9b95da84f4fad40a5362b3196780b7, type: 3}
   - {fileID: 21300000, guid: c512802c5e1bc6040a09883fef20adf8, type: 3}
@@ -64,6 +66,7 @@ SpriteAtlas:
   - CakeIcon
   - BowlIcon
   - KnifeIcon
+  - KeyIcon
   - Matches
   - DeedIcon
   - CandleIcon

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2f7b799f16e98445830727f081297e2
+guid: 60107be8f239be44f8a988dc13e20674
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -92,5 +92,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: resources/sprites/oldwomanremains
+  assetBundleName: 
   assetBundleVariant: 

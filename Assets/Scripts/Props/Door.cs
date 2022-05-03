@@ -4,7 +4,11 @@ using UnityEngine;
 namespace Hamster.TouchPuzzle {
 
     public class LockItem : Props {
+        public EPropID UnLockItem = EPropID.Max;
+        public ESaveKye LockBBKey = ESaveKye.None;
+        
         public bool IsLock = false;
+
         private Props[] _LockProps = null;
 
         protected virtual void Awake() {
@@ -21,6 +25,11 @@ namespace Hamster.TouchPuzzle {
         }
 
         public override void OnClick(int propID) {
+            if (UnLockItem == (EPropID)propID) {
+                IsLock = false;
+                World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetLockKey(), 1);
+            }
+
             if (!IsLock) {
                 OnClickUnlocak(propID);
             }
@@ -30,6 +39,10 @@ namespace Hamster.TouchPuzzle {
                 World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger(message);
                 ObjectPool<ShowMessageBoxMessage>.Free(message);
             }
+        }
+
+        protected virtual int GetLockKey() {
+            return (int)LockBBKey;
         }
 
         public void EnableProps(bool enable) {

@@ -63,11 +63,11 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void OnEnter() {
+            gameObject.SetActive(true);
             for (int i = 0; i < _props.Count; i++) {
                 IProps p = _props[i];
                 p.OnEnterField();
             }
-            gameObject.SetActive(true);
         }
 
         public void OnLeave() {

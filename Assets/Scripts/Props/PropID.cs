@@ -24,6 +24,10 @@
 
         Bowl = 20,                  // 碗
         Blood = 21,                 // 血
+        KeyInVase = 22,             // 花瓶中的钥匙
+
+
+        Max
     }
 
     public enum EFieldID {
@@ -40,6 +44,8 @@
         PaperWoman,                     // 女人纸人
         PaperMan,                       // 男人纸人
         PaperWomanDead,                 // 女人纸人死亡
+        RemainPhoto,                    // 遗像
+        FlowerInVase,                   // 花瓶
     }
 
     public enum EBlackBoardKey {
@@ -65,6 +71,9 @@
         PlayerLeaveRight,   // 玩家离开纸人的房间
         TakeBlood,          // 从死亡的女人纸人身上得到血
 
+        FurnaceSandalwood,  // 香炉上香的数量
+        PhotoCandle,        // 从遗像上拿到蜡烛
+
     }
 
     public enum ESystemBlackboardKey {
@@ -80,22 +89,28 @@
 
     public enum ESaveKye {
         None,
-        FIELD_DETIAL_TRAIBUTE_TABLE_LEFT_UP_CANDLE = 1,  // 大贡桌左侧抽屉的蜡烛
-        FIELD_DETIAL_TRAIBUTE_TABLE_RIGHT_UP_PHOTO_PARTY = 2, // 大贡桌左侧抽屉的照片碎片
-        FIELD_DETIAL_TRAIBUTE_TABLE_MIDDLE_CAKE = 2, // 中间贡桌的糕点
-        FIELD_DETAIL_RIGHT_PAPER_CHILD_MATCHES = 3,  // 右侧纸人小孩火柴
+        FIELD_DETIAL_TRAIBUTE_TABLE_LEFT_UP_CANDLE = 1,         // 大贡桌左侧抽屉的蜡烛
+        FIELD_DETIAL_TRAIBUTE_TABLE_RIGHT_UP_PHOTO_PARTY = 2,   // 大贡桌左侧抽屉的照片碎片
+        FIELD_DETIAL_TRAIBUTE_TABLE_MIDDLE_CAKE = 2,            // 中间贡桌的糕点
+        FIELD_DETAIL_RIGHT_PAPER_CHILD_MATCHES = 3,             // 右侧纸人小孩火柴
 
-        NECKLACE_IN_PHOTO_FRAME = 4,  // 照片上的项链
+        NECKLACE_IN_PHOTO_FRAME = 4,                            // 照片上的项链
 
-        PHOTO_PARTY_1 = 10,  // 照片碎片1
-        PHOTO_PARTY_2 = 11,  // 照片碎片1
+        PHOTO_PARTY_1 = 10,                                     // 照片碎片1
+        PHOTO_PARTY_2 = 11,                                     // 照片碎片1
 
-        SANDAL_WOOD = 15,  // 香
+        SANDAL_WOOD = 15,                                       // 香
 
-        PAPER_CHILD_MATCHES = 20,  // 小孩纸人 火柴
+        PAPER_CHILD_MATCHES = 20,                               // 小孩纸人 火柴
 
-        EMPTY_BOWL = 21,        // 空碗
-        KNIFE_COBINET = 22,     // 柜子里的刀
+        EMPTY_BOWL = 21,                                        // 空碗
+        KNIFE_COBINET = 22,                                     // 柜子里的刀
+        KEY_IN_VASE = 23,                                       // 花瓶中的钥匙
+
+        VASE_HAS_BLOOD = 30,                                    // 花瓶中是否放血了
+        VASE_KEY_BE_TAKE = 31,                                  // 花瓶中是否被拿了
+        OPEN_DRAWER_BY_VASE_KEY = 32,                           // 贡桌中间的抽屉是否用钥匙打开了
+        MIDDLE_DRAWER_DEED = 33,                                // 贡桌中间的抽屉中的房产证
 
     }
 

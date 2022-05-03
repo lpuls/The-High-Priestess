@@ -86,6 +86,8 @@ namespace Hamster.TouchPuzzle {
             LoadField("Res/Fields/Field_PaperWoman");
             LoadField("Res/Fields/Field_PaperMan");
             LoadField("Res/Fields/Field_PaperWomanDead");
+            LoadField("Res/Fields/Field_OldManRemain");
+            LoadField("Res/Fields/Filed_Flower");
         }
 
         private void OnLoadFirstFieldComplete(Object field) {
