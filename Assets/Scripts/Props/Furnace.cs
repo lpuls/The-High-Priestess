@@ -46,7 +46,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetFurnaceKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.FurnaceSandalwood, 0, 0);
+            return (int)ESaveKey.FURNACE_SANDALWOOD_COUNT;
         }
 
     }

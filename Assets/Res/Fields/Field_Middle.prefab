@@ -2123,6 +2123,16 @@ PrefabInstance:
       propertyPath: ID
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3662174896228009983, guid: 5f092f0a5587c004eacd19ec2b686495,
+        type: 3}
+      propertyPath: FireKey
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 3662174896228009983, guid: 5f092f0a5587c004eacd19ec2b686495,
+        type: 3}
+      propertyPath: SetUpKey
+      value: 102
+      objectReference: {fileID: 0}
     - target: {fileID: 5432043180075844755, guid: 5f092f0a5587c004eacd19ec2b686495,
         type: 3}
       propertyPath: m_RootOrder

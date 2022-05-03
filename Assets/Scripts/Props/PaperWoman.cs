@@ -9,11 +9,11 @@
         }
 
         protected override int GetBBKeyGive() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
+            return (int)ESaveKey.WOMAN_NECKLACE;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
         }
 
         protected override int GetBBKeyTake() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanSandalwood, 0, 0);
+            return (int)ESaveKey.WOMAN_SANDALWOOD;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanSandalwood, 0, 0);
         }
 
     }

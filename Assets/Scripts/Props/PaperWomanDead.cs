@@ -27,7 +27,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetTakeBloodKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.TakeBlood, 0, 0);
+            return (int)ESaveKey.TAKE_BLOOD;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.TakeBlood, 0, 0);
         }
 
         public void OnAnimTakeBlood() {

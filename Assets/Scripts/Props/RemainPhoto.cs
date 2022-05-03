@@ -32,11 +32,11 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetHasTakeCandleKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.PhotoCandle, 0, 0);
+            return (int)ESaveKey.REMAIN_PHOTO_CANDLE;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.PhotoCandle, 0, 0);
         }
 
         private int GetHasEnoughSandalwood() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.FurnaceSandalwood, 0, 0);
+            return (int)ESaveKey.FURNACE_SANDALWOOD_COUNT;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.FurnaceSandalwood, 0, 0);
         }
 
     }

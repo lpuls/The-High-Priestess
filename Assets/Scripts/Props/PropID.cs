@@ -87,7 +87,7 @@
         ITEM_MANAGER_ID = 2
     }
 
-    public enum ESaveKye {
+    public enum ESaveKey {
         None,
         FIELD_DETIAL_TRAIBUTE_TABLE_LEFT_UP_CANDLE = 1,         // 大贡桌左侧抽屉的蜡烛
         FIELD_DETIAL_TRAIBUTE_TABLE_RIGHT_UP_PHOTO_PARTY = 2,   // 大贡桌左侧抽屉的照片碎片
@@ -111,6 +111,26 @@
         VASE_KEY_BE_TAKE = 31,                                  // 花瓶中是否被拿了
         OPEN_DRAWER_BY_VASE_KEY = 32,                           // 贡桌中间的抽屉是否用钥匙打开了
         MIDDLE_DRAWER_DEED = 33,                                // 贡桌中间的抽屉中的房产证
+
+        // 修改了存档key之后补入
+        MOVE_ASH = 100,                                         // 移动烧金炉的灰
+        SETUP_CANDLE_LEFT = 101,                                // 左侧烛台是否设置蜡烛
+        SETUP_CANDLE_RIGHT = 102,                               // 右侧烛台是否设置蜡烛
+        FIRE_CANDLE_LEFT = 103,                                 // 左侧烛台是否设置蜡烛
+        FIRE_CANDLE_RIGHT = 104,                                // 右侧烛台是否设置蜡烛
+        FURNACE_SANDALWOOD_COUNT = 105,                         // 香炉上的香的数量
+        CHILD_FOOD = 106,                                       // 小孩纸人得到食物
+        CHILD_MATCHES = 107,                                    // 小孩纸人拿到火柴
+        WOMAN_NECKLACE = 108,                                   // 女人纸人得到项链
+        WOMAN_SANDALWOOD = 109,                                 // 女人纸人拿出香
+        MAN_KNIFE = 110,                                        // 男人纸人拿到刀
+        MAN_MONEY = 111,                                        // 男人纸人拿到房产证
+        MAN_KILL = 112,                                         // 男人纸人杀人
+        MAN_SANDALWOOD = 113,                                   // 男人纸人拿出香
+        PLAYER_LEAVE_RIGHT = 114,                               // 玩家离开纸人的房间
+        TAKE_BLOOD = 115,                                       // 从死亡的女人纸人身上得到血
+        REMAIN_PHOTO_CANDLE = 116,                              // 从遗像上拿到蜡烛
+        FAMILY_PHOTO_READLY = 117,                              // 全家福照片集刘
 
     }
 

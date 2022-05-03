@@ -2,11 +2,11 @@
     public class PaperChild : PaperHuman {
 
         protected override int GetBBKeyGive() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ChildFood, 0, 0);
+            return (int)ESaveKey.CHILD_FOOD;
         }
 
         protected override int GetBBKeyTake() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ChildMatches, 0, 0);
+            return (int)ESaveKey.CHILD_MATCHES;
         }
     }
 }

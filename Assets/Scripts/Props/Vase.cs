@@ -33,7 +33,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetHasBloodKey() {
-            return (int)ESaveKye.VASE_HAS_BLOOD;
+            return (int)ESaveKey.VASE_HAS_BLOOD;
         }
         
 

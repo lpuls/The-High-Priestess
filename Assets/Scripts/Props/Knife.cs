@@ -36,15 +36,15 @@
         }
 
         private int GetManHasKillKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ManKill, 0, 0);
+            return (int)ESaveKey.MAN_KILL;
         }
 
         private int GetManHasKnifeKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ManKnife, 0, 0);
+            return (int)ESaveKey.MAN_KNIFE;
         }
 
         private int GetWomanHasNecklace() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
+            return (int)ESaveKey.WOMAN_NECKLACE;
         }
     }
 }

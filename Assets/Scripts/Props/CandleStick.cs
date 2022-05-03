@@ -16,6 +16,9 @@ namespace Hamster.TouchPuzzle {
         public BoxCollider2D SetupCollider = null;
         public BoxCollider2D UnSetupCollider = null;
 
+        public ESaveKey SetUpKey = ESaveKey.SETUP_CANDLE_LEFT;
+        public ESaveKey FireKey = ESaveKey.FIRE_CANDLE_LEFT;
+
         private bool _setUp = false;
         private bool _isFire = false;
 
@@ -30,18 +33,18 @@ namespace Hamster.TouchPuzzle {
                 UnSetupCollider.enabled = true;
 
             // 读取记录值
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetIsSetUpKey(), out int isSetUpValue))
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetIsSetUpKey(), out int _))
                 OnSetUp();
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetIsFireKey(), out int IsFireValue))
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetIsFireKey(), out int _))
                 OnFire();
         }
 
         private int GetIsSetUpKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.CandleStick, ID, 0);
+            return (int)SetUpKey;
         }
 
         private int GetIsFireKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.CandleStick, ID, 1);
+            return (int)FireKey;
         }
 
         private void OnSetUp() {

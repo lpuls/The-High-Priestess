@@ -3,7 +3,7 @@
 namespace Hamster.TouchPuzzle {
     public class ItemPicker : Props {
 
-        public ESaveKye SaveKey = ESaveKye.None;
+        public ESaveKey SaveKey = ESaveKey.None;
         public EPropID ItemID = EPropID.None;
 
         public event Action<ItemPicker> OnPick; 
@@ -22,7 +22,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetItemKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)ItemID, (int)SaveKey, 0);
+            return (int)SaveKey;
         }
     }
 }

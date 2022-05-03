@@ -16,7 +16,7 @@ namespace Hamster.TouchPuzzle {
             _origin = transform.position;
 
             // 读取记录值
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetAshKey(), out int result)) {
+            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetAshKey(), out int _)) {
                 _isMoving = false;
                 _isMoveComplete = true;
                 transform.position = TargetLocation;
@@ -43,7 +43,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetAshKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.Ash, ID, 0);
+            return (int)ESaveKey.MOVE_ASH;
         }
 
 #if UNITY_EDITOR

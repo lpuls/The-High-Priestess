@@ -181,9 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GotoFieldID: 12
-  EventKey: 8
-  ID: 0
-  Value: 0
+  EventKey: 112
   ShowOnHasValue: 1
 --- !u!61 &6053729419921728519
 BoxCollider2D:
@@ -221,8 +219,8 @@ GameObject:
   m_Component:
   - component: {fileID: 416010514985002125}
   - component: {fileID: 2196836670835143013}
-  - component: {fileID: 424643894341245098}
   - component: {fileID: 9128890542560732785}
+  - component: {fileID: 3210893857695722081}
   m_Layer: 8
   m_Name: PaperChild
   m_TagString: Untagged
@@ -295,19 +293,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &424643894341245098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377732967935717181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72360d1ef8a0b86498cf177117a4e002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GotoFieldID: 9
 --- !u!61 &9128890542560732785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -334,6 +319,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &3210893857695722081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377732967935717181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9078c6d6067d1b4c81869124696a7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GotoFieldID: 9
+  EventKey: 112
+  ShowOnHasValue: 0
 --- !u!1 &1652900120927594441
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,9 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GotoFieldID: 10
-  EventKey: 8
-  ID: 0
-  Value: 0
+  EventKey: 112
   ShowOnHasValue: 0
 --- !u!1 &4210528545201754214
 GameObject:

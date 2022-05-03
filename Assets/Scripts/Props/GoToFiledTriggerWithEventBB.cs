@@ -1,8 +1,6 @@
 ﻿namespace Hamster.TouchPuzzle {
     public class GoToFiledTriggerWithEventBB : GoToFieldTrigger {
-        public EEventKey EventKey = EEventKey.None;
-        public int ID = 0;
-        public int Value = 0;
+        public ESaveKey EventKey = ESaveKey.None;
         public bool ShowOnHasValue = true;
 
         public override void Init(IField field) {
@@ -18,7 +16,8 @@
         }
 
         protected int GetKey() {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EventKey, ID, Value);
+            return (int)EventKey;
+            // return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EventKey, ID, Value);
         }
 
         protected void CheckShow() {

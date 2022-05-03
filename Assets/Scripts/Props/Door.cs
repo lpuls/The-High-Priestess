@@ -5,7 +5,7 @@ namespace Hamster.TouchPuzzle {
 
     public class LockItem : Props {
         public EPropID UnLockItem = EPropID.Max;
-        public ESaveKye LockBBKey = ESaveKye.None;
+        public ESaveKey LockBBKey = ESaveKey.None;
         
         public bool IsLock = false;
 

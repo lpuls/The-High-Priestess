@@ -50,7 +50,8 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetPhotoReady(int id) {
-            return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.PhotoFrame, id, 0);
+            return (int)ESaveKey.FAMILY_PHOTO_READLY;
+            // return TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Prop, (int)EPropID.PhotoFrame, id, 0);
         }
 
         public override void OnClick(int propID) {
