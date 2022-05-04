@@ -139,6 +139,8 @@
         LOW_COBINET_Right_DOOR = 119,                           // 左侧矮柜右边柜门
         CANDLE_COUNT = 120,                                     // 点燃蜡烛数量
 
+        EXIT_SAVE,                                              // 有过存档                              
+        PASS_GAME,                                              // 是否通关
     }
 
     public static class CommonString {

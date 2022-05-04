@@ -25,7 +25,7 @@ namespace Hamster.TouchPuzzle {
         public Text _messageBoxText = null;
         public Animator _messageBoxAnimator = null;
 
-        private void Start() {
+        public void InitMainUI() {
             _leftButton = transform.GetComponentInChild<Button>("Left");
             _rightButton = transform.GetComponentInChild<Button>("Right");
             _backButton = transform.GetComponentInChild<Button>("Back");

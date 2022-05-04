@@ -5,8 +5,11 @@ using UnityEngine;
 namespace Hamster.TouchPuzzle {
 
     public class TouchPuzzeWorld : World, ITouchProcessor {
-        public TouchRaycaster TouchRaycaster = null;
         public TransitionsPanel TransitionsPanel = null;
+        public MainUIPanel MainUIPanel = null;
+        public BeginGamePanel BeginGamePanel = null;
+
+        public TouchRaycaster TouchRaycaster = null;
         public AtlasManager AtlasManager = new AtlasManager();
         public ItemManager ItemManager = new ItemManagerForSave();
         public Blackboard Blackboard = new BlackboardForSave();
@@ -19,13 +22,11 @@ namespace Hamster.TouchPuzzle {
         public void Awake() {
             ActiveWorld();
 
-            RegisterManager<Blackboard>(Blackboard);
-
             InitWorld();
             TouchRaycaster.TouchProcessor = this;
 
-            TransitionsPanel.gameObject.SetActive(true);
-            TransitionsPanel.Execute(BeginLoad);
+            // 显示开始游戏
+            BeginGamePanel.gameObject.SetActive(true);
         }
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
@@ -40,6 +41,11 @@ namespace Hamster.TouchPuzzle {
                 Blackboard as BlackboardForSave, 
                 ItemManager as ItemManagerForSave,
                 FieldManager as FieldManagerForSave);
+            SaveHelper.Load();
+
+            // 注册管理器
+            RegisterManager<Blackboard>(Blackboard);
+            RegisterManager<SaveHelper>(SaveHelper);
 
             // 加载图集
             AtlasManager.LoadAtlas("Res/ItemAtlas");
@@ -74,13 +80,11 @@ namespace Hamster.TouchPuzzle {
             return 1 << 8;
         }
 
-        private void BeginLoad() {
-            // 加载存档
-            SaveHelper.Load();
-
+        private void BeginLoadField() {
             // 加载场景
             FieldManager.LoadFieldByArray(LoadFieldName, () => {
                 TransitionsPanel.SetComplete();
+                MainUIPanel.gameObject.SetActive(true);
             });
         }
 
@@ -94,6 +98,15 @@ namespace Hamster.TouchPuzzle {
 
         public static int GetCandleCountKey() {
             return (int)ESaveKey.CANDLE_COUNT;
+        }
+
+        public void EnterGame() {
+            MainUIPanel.InitMainUI();
+
+            TransitionsPanel.gameObject.SetActive(true);
+            TransitionsPanel.Execute(BeginLoadField);
+
+            BeginGamePanel.gameObject.SetActive(false);
         }
 
         #region GM
