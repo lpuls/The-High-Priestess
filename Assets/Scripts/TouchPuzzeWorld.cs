@@ -82,19 +82,6 @@ namespace Hamster.TouchPuzzle {
             FieldManager.LoadFieldByArray(LoadFieldName, () => {
                 TransitionsPanel.SetComplete();
             });
-            //LoadField("Res/Fields/Field_Middle", true);
-            //LoadField("Res/Fields/Field_Right");
-            //LoadField("Res/Fields/Field_Left");
-            //LoadField("Res/Fields/FieldDetailTraibuteTableLeftUp");
-            //LoadField("Res/Fields/FieldDetailTraibuteTableRightUp");
-            //LoadField("Res/Fields/Field_PhoteFrame");
-            //LoadField("Res/Fields/Field_UnderTable");
-            //LoadField("Res/Fields/Field_PaperChild");
-            //LoadField("Res/Fields/Field_PaperWoman");
-            //LoadField("Res/Fields/Field_PaperMan");
-            //LoadField("Res/Fields/Field_PaperWomanDead");
-            //LoadField("Res/Fields/Field_OldManRemain");
-            //LoadField("Res/Fields/Filed_Flower");
         }
 
         public void SetUsingItem(int id, int index) {

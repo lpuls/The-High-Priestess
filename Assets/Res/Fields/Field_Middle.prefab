@@ -2347,6 +2347,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791892087369882228, guid: 73463a34101c26445b4b4dcc8af08d67,
         type: 3}
+      propertyPath: DestroyKey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791892087369882228, guid: 73463a34101c26445b4b4dcc8af08d67,
+        type: 3}
       propertyPath: UnLockItem
       value: 22
       objectReference: {fileID: 0}

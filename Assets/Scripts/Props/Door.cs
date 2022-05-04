@@ -8,6 +8,7 @@ namespace Hamster.TouchPuzzle {
         public ESaveKey LockBBKey = ESaveKey.None;
         
         public bool IsLock = false;
+        public bool DestroyKey = true;
 
         private Props[] _LockProps = null;
 
@@ -28,6 +29,10 @@ namespace Hamster.TouchPuzzle {
             if (UnLockItem == (EPropID)propID) {
                 IsLock = false;
                 World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetLockKey(), 1);
+
+                if (DestroyKey) {
+                    World.GetWorld<TouchPuzzeWorld>().RemoveCurrentUsingItem();
+                }
             }
 
             if (!IsLock) {
