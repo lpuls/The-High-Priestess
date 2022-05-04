@@ -14,7 +14,9 @@ namespace Hamster.TouchPuzzle {
         public GameObject ShowOnAllFind = null;
 
         public List<SpriteRenderer> Photos = new List<SpriteRenderer>();
+        public List<ESaveKey> PhotosSaveKey = new List<ESaveKey>();
         private List<bool> PhotoReady = new List<bool>();
+
 
         private void Awake() {
             bool result = true;
@@ -50,7 +52,7 @@ namespace Hamster.TouchPuzzle {
         }
 
         private int GetPhotoReady(int id) {
-            return (int)ESaveKey.FAMILY_PHOTO_READLY;
+            return (int)PhotosSaveKey[id];
         }
 
         public override void OnClick(int propID) {

@@ -98,7 +98,10 @@
         NECKLACE_IN_PHOTO_FRAME = 4,                            // 照片上的项链
 
         PHOTO_PARTY_1 = 10,                                     // 照片碎片1
-        PHOTO_PARTY_2 = 11,                                     // 照片碎片1
+        PHOTO_PARTY_2 = 11,                                     // 照片碎片2
+        PHOTO_FRAME_READY_1 = 12,                               // 拼好照片碎片1
+        PHOTO_FRAME_READY_2 = 13,                               // 拼好照片碎片2
+
 
         SANDAL_WOOD = 15,                                       // 香
 

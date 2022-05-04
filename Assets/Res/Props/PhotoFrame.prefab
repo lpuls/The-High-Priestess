@@ -463,6 +463,7 @@ MonoBehaviour:
   Photos:
   - {fileID: 3386632068996528976}
   - {fileID: 6138308143084534129}
+  PhotosSaveKey: 0c0000000d000000
 --- !u!1 &6602035338274436861
 GameObject:
   m_ObjectHideFlags: 0

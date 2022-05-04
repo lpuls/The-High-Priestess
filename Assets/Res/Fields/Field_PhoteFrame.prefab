@@ -46,6 +46,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -202,10 +203,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4524800130992078861, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5118969901402754838, guid: cf98534817de629438058d7b856c128a,
         type: 3}
       propertyPath: m_Name
       value: PhotoFrame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524086277596341618, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf98534817de629438058d7b856c128a, type: 3}
