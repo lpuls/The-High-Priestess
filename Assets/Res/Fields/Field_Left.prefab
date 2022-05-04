@@ -339,6 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8065219210806781371}
   - component: {fileID: 91538523627463663}
+  - component: {fileID: 5218124203910754799}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -411,6 +412,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5218124203910754799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8867202694600021692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc109a30cfa65c47a630895c47537ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlowerColor: {r: 1, g: 0, b: 0, a: 1}
+  FlowerSprite: {fileID: 91538523627463663}
 --- !u!1001 &836168597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,12 +844,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9753b2570b231c44c912b1c1f302a9e8, type: 3}
---- !u!61 &7911737046170123204 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 408846142349334129, guid: 9753b2570b231c44c912b1c1f302a9e8,
-    type: 3}
-  m_PrefabInstance: {fileID: 7521188994399464885}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2850467365597839473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5759617380544966084, guid: 9753b2570b231c44c912b1c1f302a9e8,
@@ -868,6 +877,12 @@ Transform:
 --- !u!1 &1757450707409514411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8071323072011354654, guid: 9753b2570b231c44c912b1c1f302a9e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7521188994399464885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &7911737046170123204 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 408846142349334129, guid: 9753b2570b231c44c912b1c1f302a9e8,
     type: 3}
   m_PrefabInstance: {fileID: 7521188994399464885}
   m_PrefabAsset: {fileID: 0}

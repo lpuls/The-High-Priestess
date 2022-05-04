@@ -14,6 +14,10 @@ namespace Hamster {
             return _instance as T; 
         }
 
+        public static World GetWorld() {
+            return _instance;
+        }
+
         protected void ActiveWorld() {
             _instance = this;
         }

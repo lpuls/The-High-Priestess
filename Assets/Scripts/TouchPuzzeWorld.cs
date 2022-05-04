@@ -19,6 +19,8 @@ namespace Hamster.TouchPuzzle {
         public void Awake() {
             ActiveWorld();
 
+            RegisterManager<Blackboard>(Blackboard);
+
             InitWorld();
             TouchRaycaster.TouchProcessor = this;
 

@@ -59,7 +59,7 @@ namespace Hamster.TouchPuzzle {
         public void LoadFieldByArray(List<string> path, Action OnLoadFirstComplete) {
             _onLoadFirstComplete = OnLoadFirstComplete;
 
-            // 没有存档的情况下，默认第一张图为起始图
+            // 没有存档的情况下，默认第一张图为起始图 
             if (0 == GetCurrentID())
                 SetCurrentID(1);
 
