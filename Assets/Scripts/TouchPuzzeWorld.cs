@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
@@ -12,6 +13,8 @@ namespace Hamster.TouchPuzzle {
         public MessageManager MessageManager = new MessageManager();
         public SaveHelper SaveHelper = null;
         public FieldManager FieldManager = new FieldManagerForSave();
+
+        public List<string> LoadFieldName = new List<string>(32);
 
         public void Awake() {
             ActiveWorld();
@@ -74,55 +77,22 @@ namespace Hamster.TouchPuzzle {
             SaveHelper.Load();
 
             // 加载场景
-            LoadField("Res/Fields/Field_Middle", true);
-            LoadField("Res/Fields/Field_Right");
-            LoadField("Res/Fields/Field_Left");
-            LoadField("Res/Fields/FieldDetailTraibuteTableLeftUp");
-            LoadField("Res/Fields/FieldDetailTraibuteTableRightUp");
-            LoadField("Res/Fields/Field_PhoteFrame");
-            LoadField("Res/Fields/Field_UnderTable");
-            LoadField("Res/Fields/Field_PaperChild");
-            LoadField("Res/Fields/Field_PaperWoman");
-            LoadField("Res/Fields/Field_PaperMan");
-            LoadField("Res/Fields/Field_PaperWomanDead");
-            LoadField("Res/Fields/Field_OldManRemain");
-            LoadField("Res/Fields/Filed_Flower");
-        }
-
-        private void OnLoadFirstFieldComplete(Object field) {
-            OnLoadFieldComplete(field);
-            TransitionsPanel.SetComplete();
-
-            int currentID = FieldManager.GetCurrentID();
-            if (0 == currentID)
-                FieldManager.GoTo(1);
-        }
-
-        private void OnLoadFieldComplete(Object fieldObject) {
-            GameObject gameObject = fieldObject as GameObject;
-            if (null == gameObject)
-                return;
-
-            Field field = gameObject.GetComponent<Field>();
-            if (null == field) {
-                return;
-            }
-            field.Init();
-            FieldManager.Register(field);
-
-            int currentID = FieldManager.GetCurrentID();
-            if (0 != currentID && field.GetID() == currentID) {
-                FieldManager.GoTo(currentID);
-            }
-        }
-
-        private void LoadField(string path, bool isFirst = false) {
-            if (isFirst) {
-                Asset.LoadSync(path, OnLoadFirstFieldComplete, 1);
-            }
-            else {
-                Asset.LoadSync(path, OnLoadFieldComplete, 1);
-            }
+            FieldManager.LoadFieldByArray(LoadFieldName, () => {
+                TransitionsPanel.SetComplete();
+            });
+            //LoadField("Res/Fields/Field_Middle", true);
+            //LoadField("Res/Fields/Field_Right");
+            //LoadField("Res/Fields/Field_Left");
+            //LoadField("Res/Fields/FieldDetailTraibuteTableLeftUp");
+            //LoadField("Res/Fields/FieldDetailTraibuteTableRightUp");
+            //LoadField("Res/Fields/Field_PhoteFrame");
+            //LoadField("Res/Fields/Field_UnderTable");
+            //LoadField("Res/Fields/Field_PaperChild");
+            //LoadField("Res/Fields/Field_PaperWoman");
+            //LoadField("Res/Fields/Field_PaperMan");
+            //LoadField("Res/Fields/Field_PaperWomanDead");
+            //LoadField("Res/Fields/Field_OldManRemain");
+            //LoadField("Res/Fields/Filed_Flower");
         }
 
         public void SetUsingItem(int id, int index) {

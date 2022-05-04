@@ -9,6 +9,7 @@ namespace Hamster.TouchPuzzle {
         private IField _current = null;
         private Dictionary<int, IField> _fields = new Dictionary<int, IField>(new Int32Comparer());
 
+        private Action _onLoadFirstComplete = null;
         private event Action<IField> _onGotoFiled;
 
         public void BindOnGotoField(Action<IField> callback) {
@@ -54,5 +55,36 @@ namespace Hamster.TouchPuzzle {
                 Debug.LogError("Can't Find Field By " + fieldID);
             }
         }
+
+        public void LoadFieldByArray(List<string> path, Action OnLoadFirstComplete) {
+            _onLoadFirstComplete = OnLoadFirstComplete;
+
+            // 没有存档的情况下，默认第一张图为起始图
+            if (0 == GetCurrentID())
+                SetCurrentID(1);
+
+            for (int i = 0; i < path.Count; i++) {
+                Asset.LoadSync(path[i], OnLoadFieldComplete, 1);
+            }
+        }
+
+        private void OnLoadFieldComplete(UnityEngine.Object fieldObject) {
+            GameObject gameObject = fieldObject as GameObject;
+            if (null == gameObject)
+                return;
+
+            Field field = gameObject.GetComponent<Field>();
+            if (null == field) {
+                return;
+            }
+            field.Init();
+            Register(field);
+
+            if (GetCurrentID() == field.GetID()) {
+                GoTo(field.GetID());
+                _onLoadFirstComplete.Invoke();
+            }
+        }
+
     }
 }
