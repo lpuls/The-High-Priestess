@@ -30,6 +30,9 @@ namespace Hamster.TouchPuzzle {
         }
 
         protected override void InitWorld(Assembly configAssembly = null, Assembly uiAssembly = null, Assembly gmAssemlby = null) {
+            // 初始化系统
+            Screen.SetResolution(1920, 1080, true);
+
             // 初始化配置
             ConfigHelper = new ConfigHelper();
             base.InitWorld(typeof(Config.Props).Assembly, uiAssembly, GetType().Assembly);

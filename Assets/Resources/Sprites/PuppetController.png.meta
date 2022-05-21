@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 66a4e858666860b4f9f94785c54da1da
+guid: eadb1cf1f9f3f2f4591be0393ad22035
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -92,5 +92,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: res/ui/mainui
+  assetBundleName: res/props/puppet
   assetBundleVariant: 

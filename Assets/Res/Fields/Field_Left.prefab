@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 3
-  GoLeftID: 0
+  GoLeftID: 4
   GoRightID: 1
   GoBackID: 0
 --- !u!1 &8867202694600021692

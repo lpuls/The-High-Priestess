@@ -886,7 +886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   GoLeftID: 1
-  GoRightID: 0
+  GoRightID: 4
   GoBackID: 0
 --- !u!1 &6897491860444273920
 GameObject:

@@ -139,6 +139,9 @@
         LOW_COBINET_Right_DOOR = 119,                           // 左侧矮柜右边柜门
         CANDLE_COUNT = 120,                                     // 点燃蜡烛数量
 
+        LEFT_PUPPET_POSE = 121,                                 // 左侧人偶pose
+        RIGHT_PUPPET_POSE = 122,                                // 右侧人偶pose
+
         EXIT_SAVE,                                              // 有过存档                              
         PASS_GAME,                                              // 是否通关
     }

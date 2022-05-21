@@ -11,6 +11,7 @@ namespace Hamster.TouchPuzzle {
 
         private Action _onLoadFirstComplete = null;
         private event Action<IField> _onGotoFiled;
+        private bool _isBeginLoad = false;
 
         public void BindOnGotoField(Action<IField> callback) {
             _onGotoFiled += callback;
@@ -57,6 +58,10 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void LoadFieldByArray(List<string> path, Action OnLoadFirstComplete) {
+            if (_isBeginLoad)
+                return;
+
+            _isBeginLoad = true;
             _onLoadFirstComplete = OnLoadFirstComplete;
 
             // 没有存档的情况下，默认第一张图为起始图 
@@ -77,6 +82,7 @@ namespace Hamster.TouchPuzzle {
             if (null == field) {
                 return;
             }
+            // UnityEngine.Debug.Log(string.Format("==========> {0}: {1}", field.name, field.GetID()));
             field.Init();
             Register(field);
 

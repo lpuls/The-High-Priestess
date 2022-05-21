@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 66a4e858666860b4f9f94785c54da1da
+guid: 2a327321246e8944aa8f7972b7d2c7f2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -92,5 +92,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: res/ui/mainui
+  assetBundleName: res/fields/field_exit
   assetBundleVariant: 
