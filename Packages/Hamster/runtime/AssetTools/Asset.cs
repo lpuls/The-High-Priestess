@@ -116,6 +116,10 @@ namespace Hamster {
                 return null;
             }
 
+            // 先判断是否已经在加载过了
+            if (_assets.ContainsKey(path))
+                return null;
+
             // 先看看是否已经在加载中了
             if (_syncOperation.TryGetValue(path, out SyncLoadOperation operation))
                 return operation;
@@ -392,7 +396,7 @@ namespace Hamster {
             UnityEngine.Object prefab = null;
             if (UseAssetBundle) {
                 var bundle = LoadAssetBundle(assetPath);
-                prefab = bundle.AssetBundle.LoadAsset<GameObject>(assetName);
+                prefab = bundle.AssetBundle.LoadAsset<T>(assetName);
                 bundle.Ref += 1;
             }
             else {
