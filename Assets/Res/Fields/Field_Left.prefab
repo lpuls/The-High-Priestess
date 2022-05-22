@@ -605,6 +605,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2369960498880133518}
     m_Modifications:
+    - target: {fileID: 555852077789088268, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.555
+      objectReference: {fileID: 0}
+    - target: {fileID: 555852077789088268, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1254797042799049082, guid: cf98534817de629438058d7b856c128a,
         type: 3}
       propertyPath: m_Enabled
@@ -665,19 +675,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3401827763099330881, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753747753832942038, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524800130992078861, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5118969901402754838, guid: cf98534817de629438058d7b856c128a,
         type: 3}
       propertyPath: m_Name
       value: PhotoFrame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602035338274436861, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6888950468751431930, guid: cf98534817de629438058d7b856c128a,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7524086277596341618, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8366917207869814913, guid: cf98534817de629438058d7b856c128a,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372131239230901913, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0723
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372131239230901913, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0978
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372131239230901913, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0331
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372131239230901913, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6262
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372131239230901913, guid: cf98534817de629438058d7b856c128a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

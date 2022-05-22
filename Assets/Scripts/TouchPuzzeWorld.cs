@@ -51,7 +51,8 @@ namespace Hamster.TouchPuzzle {
             RegisterManager<SaveHelper>(SaveHelper);
 
             // 加载图集
-            AtlasManager.LoadAtlas("Res/ItemAtlas");
+            AtlasManager.Init();
+            AtlasManager.LoadAtlas("Res/SpriteAtlas/ItemAtlas");
         }
 
         public void OnTouchDown(GameObject gameObject) {
@@ -84,6 +85,8 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void BeginLoadField() {
+            Asset.Load<Sprite>("OriginRes/Sprites/Room");
+
             // 加载场景
             FieldManager.LoadFieldByArray(LoadFieldName, () => {
                 TransitionsPanel.SetComplete();

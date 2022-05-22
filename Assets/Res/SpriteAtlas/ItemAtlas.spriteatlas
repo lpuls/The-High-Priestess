@@ -27,8 +27,8 @@ SpriteAtlas:
       padding: 4
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 1
-      enableTightPacking: 1
+      enableRotation: 0
+      enableTightPacking: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -43,7 +43,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: ef9889c6ad48fcc40be070d455fd9b6a, type: 3}
     - {fileID: 2800000, guid: ca13c3fc71c54524b804825b49c1b84c, type: 3}
     - {fileID: 2800000, guid: 60107be8f239be44f8a988dc13e20674, type: 3}
-    bindAsDefault: 1
+    bindAsDefault: 0
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}

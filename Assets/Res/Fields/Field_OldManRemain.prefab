@@ -286,6 +286,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: OldWomanRemains
       objectReference: {fileID: 0}
+    - target: {fileID: 8253302368217063440, guid: f852d9f3f3ac50047aa163625938d64c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0658256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253302368217063440, guid: f852d9f3f3ac50047aa163625938d64c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5864764
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253302368217063440, guid: f852d9f3f3ac50047aa163625938d64c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0327
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253302368217063440, guid: f852d9f3f3ac50047aa163625938d64c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0704
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253302368217063440, guid: f852d9f3f3ac50047aa163625938d64c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8283499456359784979, guid: f852d9f3f3ac50047aa163625938d64c,
         type: 3}
       propertyPath: m_Enabled

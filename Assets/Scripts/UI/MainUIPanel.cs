@@ -100,9 +100,9 @@ namespace Hamster.TouchPuzzle {
             if (isAdd) {
                 if (!World.GetWorld<TouchPuzzeWorld>().ConfigHelper.TryGetConfig<Config.Props>(id, out Config.Props props))
                     return;
-                Sprite sprite = World.GetWorld<TouchPuzzeWorld>().AtlasManager.GetSprite("Res/ItemAtlas", props.Icon);
+                Sprite sprite = World.GetWorld<TouchPuzzeWorld>().AtlasManager.GetSprite("Res/SpriteAtlas/ItemAtlas", props.Icon);
                 if (null == sprite) {
-                    Debug.LogError("Can't Find Sprite By Res/ItemAtlas, Candle");
+                    Debug.LogError("Can't Find Sprite By Res/SpriteAtlas/ItemAtlas, Candle");
                     return;
                 }
                 SetItemIcon(index, id, props.Name, sprite);
