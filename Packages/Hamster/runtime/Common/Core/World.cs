@@ -49,7 +49,11 @@ namespace Hamster {
                 GMAttributeProcessor.Processor(gmAssemlby);
 
             // 初始化资源
-            Asset.UseAssetBundle = false;
+#if UNITY_EDITOR
+            Asset.UseAssetBundle = true;
+#else
+            Asset.UseAssetBundle = true;
+#endif
             Asset.AssetBundleBasePath = Application.dataPath + "/../AssetBundle/Win";
             Asset.Initialize("AssetBundleConfig", new string[] { "Win" });
 
@@ -63,6 +67,10 @@ namespace Hamster {
             if (null != uiAssembly) {
                 UIManager.Initialize(uiAssembly);
             }
+        }
+
+        protected virtual void Update() {
+            Asset.Update();
         }
     }
 }

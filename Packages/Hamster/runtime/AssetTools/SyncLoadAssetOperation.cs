@@ -38,6 +38,9 @@ namespace Hamster {
             _isDone = true;
         }
 
+        public virtual void BindCustomCallback(System.Action<UnityEngine.Object> callbcak) {
+        }
+
     }
 
     public class SyncLoadAssetBundleOperation : SyncLoadOperation, IPool {
@@ -90,6 +93,7 @@ namespace Hamster {
         public override void Free() {
             ObjectPool<SyncLoadAssetBundleOperation>.Free(this);
         }
+
     }
 
     public class SyncLoadAssetAndBundleOperation : SyncLoadOperation, IPool {
@@ -103,7 +107,7 @@ namespace Hamster {
         public string AssetBundleName = string.Empty;
 
         public OnLoadComplete AssetCallBack = null;
-        public System.Action<UnityEngine.Object> CustomCallBack = null;
+        public event System.Action<UnityEngine.Object> CustomCallBack;
 
         private float _timeOut = 1;
 
@@ -113,10 +117,14 @@ namespace Hamster {
             AssetBundleName = assetBundleName;
 
             AssetCallBack = assetCallBack;
-            CustomCallBack = callBack;
+            CustomCallBack += callBack;
 
             _createRequest = request;
             _createRequest.completed += OnLoadAssetBundleComplete;
+        }
+
+        public void TriggerCustomCallback(UnityEngine.Object asset) {
+            CustomCallBack?.Invoke(asset);
         }
 
         private void OnLoadAssetBundleComplete(AsyncOperation op) {
@@ -154,6 +162,9 @@ namespace Hamster {
             ObjectPool<SyncLoadAssetAndBundleOperation>.Free(this);
         }
 
+        public override void BindCustomCallback(System.Action<UnityEngine.Object> callbcak) {
+            CustomCallBack += callbcak;
+        }
     }
 
     public class SyncLoadAssetOperation : SyncLoadOperation, IPool {
@@ -165,7 +176,7 @@ namespace Hamster {
         public string ResPath = string.Empty;
         public string AssetName = string.Empty;
         public OnLoadAssetOperationComplete AssetCallBack = null;
-        public System.Action<UnityEngine.Object> CustomCallBack = null;
+        public event System.Action<UnityEngine.Object> CustomCallBack;
 
         private float _timeOut = 1;
 
@@ -173,11 +184,15 @@ namespace Hamster {
             ResPath = resKey;
             AssetName = assetName;
 
-            CustomCallBack = callBack;
+            CustomCallBack += callBack;
             AssetCallBack = assetCallBack;
 
             _assetBundle = assetBundle;
             _assetRequest = _assetBundle.AssetBundle.LoadAssetAsync(AssetName);
+        }
+
+        public void TriggerCustomCallback(UnityEngine.Object asset) {
+            CustomCallBack?.Invoke(asset);
         }
 
         protected override bool IsDone() {
@@ -222,6 +237,10 @@ namespace Hamster {
 
         public override void Free() {
             ObjectPool<SyncLoadAssetOperation>.Free(this);
+        }
+
+        public override void BindCustomCallback(System.Action<UnityEngine.Object> callbcak) {
+            CustomCallBack += callbcak;
         }
     }
 

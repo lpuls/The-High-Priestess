@@ -6,15 +6,32 @@ using UnityEngine.U2D;
 public class AtlasManager {
     private Dictionary<string, Dictionary<string, Sprite>> _sprites = new Dictionary<string, Dictionary<string, Sprite>>();
     private Sprite[] _spriteArray = new Sprite[256];
-    public void LoadAtlas(string path) {
+
+    public void Init() {
+        SpriteAtlasManager.atlasRequested += SpriteAtlasManagerAtlasRequested;
+    }
+
+    public void Finish() {
+        SpriteAtlasManager.atlasRequested -= SpriteAtlasManagerAtlasRequested;
+    }
+
+    private void SpriteAtlasManagerAtlasRequested(string atlasName, System.Action<SpriteAtlas> callback) {
+        string atlasPath = "Res/SpriteAtlas/" + atlasName;
+        Asset.LoadSync(atlasPath, (Object asset) => {
+            SpriteAtlas spriteAtlas = asset as SpriteAtlas;
+            callback?.Invoke(spriteAtlas);
+        });
+    }
+
+    public SpriteAtlas LoadAtlas(string path) {
         if (_sprites.TryGetValue(path, out Dictionary<string, Sprite> sprites)) {
-            return;
+            return null;
         }
 
         SpriteAtlas spriteAtlas = Asset.Load<SpriteAtlas>(path);
         if (null == spriteAtlas) {
             Debug.LogError("Can't Get Sprite Atlas " + path);
-            return;
+            return null;
         }
 
         sprites = new Dictionary<string, Sprite>();
@@ -28,6 +45,8 @@ public class AtlasManager {
             Sprite sprite = _spriteArray[i];
             sprites.Add(sprite.name.Replace("(Clone)", ""), sprite);
         }
+
+        return spriteAtlas;
     }
 
     public Sprite GetSprite(string atlasPath, string spritepath) {

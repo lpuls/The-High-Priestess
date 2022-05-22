@@ -121,8 +121,10 @@ namespace Hamster {
                 return null;
 
             // 先看看是否已经在加载中了
-            if (_syncOperation.TryGetValue(path, out SyncLoadOperation operation))
+            if (_syncOperation.TryGetValue(path, out SyncLoadOperation operation)) {
+                operation.BindCustomCallback(callBack); 
                 return operation;
+            }
 
             // 尝试去加载
             if (UseAssetBundle) {
@@ -263,10 +265,12 @@ namespace Hamster {
 
             if (0 < operation.Cache) {
                 UnityObjectPool pool = InitObjectPool(operation.ResPath, operation.GetAsset(), operation.Cache);
-                operation.CustomCallBack?.Invoke(pool.Malloc());
+                // operation.CustomCallBack (pool.Malloc());
+                operation.TriggerCustomCallback(pool.Malloc());
             }
             else {
-                operation.CustomCallBack?.Invoke(operation.GetAsset());
+                operation.TriggerCustomCallback(operation.GetAsset());
+                // operation.CustomCallBack.Invoke(operation.GetAsset());
             }
 
             operation.ProcessComplete();
@@ -277,10 +281,12 @@ namespace Hamster {
 
             if (0 < operation.Cache) {
                 UnityObjectPool pool = InitObjectPool(operation.ResPath, operation.GetAsset(), operation.Cache);
-                operation.CustomCallBack?.Invoke(pool.Malloc());
+                // operation.CustomCallBack?.Invoke(pool.Malloc());
+                operation.TriggerCustomCallback(pool.Malloc());
             }
             else {
-                operation.CustomCallBack?.Invoke(operation.GetAsset());
+                operation.TriggerCustomCallback(operation.GetAsset());
+                // operation.CustomCallBack?.Invoke(operation.GetAsset());
             }
 
             operation.ProcessComplete();
@@ -328,6 +334,10 @@ namespace Hamster {
             return false;
         }
 
+        public static bool IsLoadingBySync(string assetPath, out SyncLoadOperation syncLoadOperation) {
+            return _syncOperation.TryGetValue(assetPath, out syncLoadOperation);
+        }
+
         private static AssetBundleExtend LoadAssetBundle(string assetPath, bool forceLoad = true) {
             AssetBundleExtend bundle = null;
             // 找不到AB且不要求强制加载时，直接返回空
@@ -338,6 +348,7 @@ namespace Hamster {
                 else {
                     string loadPath = System.IO.Path.Combine(AssetBundleBasePath, assetPath);
                     AssetBundle assetBundle = AssetBundle.LoadFromFile(loadPath);
+                    // Debug.Log("====> LoadAssetBundle " + assetPath + ", " + loadPath + ", " + (null != assetBundle));
 
                     bundle = ObjectPool<AssetBundleExtend>.Malloc();
                     bundle.AssetBundle = assetBundle;
@@ -346,6 +357,7 @@ namespace Hamster {
                 }
             }
             else {
+                // Debug.Log("====> LoadAssetBundle " + assetPath + ", " + (null != bundle));
                 return bundle;
             }
 
