@@ -7,6 +7,8 @@ public interface IBackboardVar {
     string GetName();
     void SetName(string name);
 
+    void Free();
+
 #if UNITY_EDITOR
     void SetValue(object value);
     object GetValueObject();
@@ -40,6 +42,10 @@ public class BackboardVar<T> : IBackboardVar, IPool {
     public void Reset() {
         _value = default;
         _name = string.Empty;
+    }
+
+    public void Free() {
+        Free(this);
     }
 
     public static BackboardVar<T> Malloc() {
@@ -87,12 +93,14 @@ public class Blackboard {
     public void SetValue<T>(string name, T value) {
         if (_vars.TryGetValue(name, out IBackboardVar bbVar)) {
             BackboardVar<T> varInst = bbVar as BackboardVar<T>;
+            varInst.SetName(name);
             varInst.SetValue(value);
         }
         else {
-            BackboardVar<T> varInst = new BackboardVar<T>();
+            BackboardVar<T> varInst = BackboardVar<T>.Malloc();
             varInst.SetValue(value);
-            _vars[name] = varInst;
+            varInst.SetName(name);
+            _vars.Add(name, varInst);
         }
     }
 
@@ -113,6 +121,11 @@ public class Blackboard {
     }
 
     public void Clean() {
+        var it = _vars.GetEnumerator();
+        while (it.MoveNext()) {
+            it.Current.Value.Free();
+        }
+
         _data.Clear();
         _vars.Clear();
     }
