@@ -8,6 +8,7 @@ namespace Hamster {
         int GetSaveID();
         void Save(BinaryWriter binaryWriter);
         void Load(BinaryReader binaryReader);
+        void Reset();
     }
 
     public class SaveHelper {
@@ -72,6 +73,13 @@ namespace Hamster {
             binaryReader.Close();
 
             _onLoadComplete?.Invoke();
+        }
+
+        public void Reset() {
+            var it = _savers.GetEnumerator();
+            while (it.MoveNext()) {
+                it.Current.Value.Reset();
+            }
         }
 
         public bool HasSaveData() {
