@@ -40,6 +40,23 @@ namespace Hamster.TouchPuzzle {
             _currentID = id;
         }
 
+        public void Reset() {
+            _currentID = 0;
+
+            var it = _fields.GetEnumerator();
+            while (it.MoveNext()) {
+                GameObject fieldObject = (it.Current.Value as Field).gameObject;
+                if (null != fieldObject) {
+                    AssetPool.Free(fieldObject);
+                }
+            }
+            _fields.Clear();
+
+            _isBeginLoad = false;
+            _current = null;
+            _onLoadFirstComplete = null;
+        }
+
         public void GoTo(int fieldID) {
             if (null != _current)
                 _current.OnLeave();

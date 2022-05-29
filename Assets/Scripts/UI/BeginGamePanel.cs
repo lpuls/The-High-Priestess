@@ -10,11 +10,9 @@ namespace Hamster.TouchPuzzle {
         public Button OldGame = null;
 
         public void Start() {
-            Blackboard bb = World.GetWorld().GetManager<Blackboard>();
-            if (bb.TryGetValue((int)ESaveKey.PASS_GAME, out int _)) {
-                Title.color = Color.red;
-            }
+            UpdateTitleColor();
 
+            Blackboard bb = World.GetWorld().GetManager<Blackboard>();
             bool exitSave = bb.TryGetValue((int)ESaveKey.EXIT_SAVE, out int _);
             OldGame.gameObject.SetActive(exitSave);
             OldGame.onClick.AddListener(OnClickOldGame);
@@ -22,12 +20,25 @@ namespace Hamster.TouchPuzzle {
             NewGame.onClick.AddListener(OnClickNewGame);
         }
 
-        private void OnClickNewGame() {
-            World.GetWorld().GetManager<SaveHelper>().Delete();
+        public void OnEnable() {
+            UpdateTitleColor();
+        }
+
+        private void UpdateTitleColor() {
             Blackboard bb = World.GetWorld().GetManager<Blackboard>();
-            bb.Clean();
+            if (bb.TryGetValue((int)ESaveKey.PASS_GAME, out int _)) {
+                Title.color = Color.red;
+            }
+        }
+
+        private void OnClickNewGame() {
+            SaveHelper saver = World.GetWorld().GetManager<SaveHelper>();
+            saver.Delete();
+            saver.Reset();
+
+            Blackboard bb = World.GetWorld().GetManager<Blackboard>();
             bb.SetValue((int)ESaveKey.EXIT_SAVE, 1);
-            World.GetWorld().GetManager<SaveHelper>().Save();
+            saver.Save();
 
             OnClickOldGame();
         }

@@ -46,6 +46,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,6 +128,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -255,11 +257,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7a30e81fa8bdf4f846fc7862ea3355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnLockItem: 23
+  LockBBKey: 0
+  IsLock: 1
+  DestroyKey: 1
   ID: 0
   AudioPlayer: {fileID: 260063784465236490}
   DoorForwardground: {fileID: 9126753391998271505}
   DoorBackground: {fileID: 6590430052557079514}
-  IsLock: 1
+  ForwardgroundCollid: {fileID: 0}
+  BackgroundCollid: {fileID: 0}
 --- !u!82 &260063784465236490
 AudioSource:
   m_ObjectHideFlags: 0

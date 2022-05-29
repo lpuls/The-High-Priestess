@@ -199,6 +199,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PaperMan
       objectReference: {fileID: 0}
+    - target: {fileID: 6119085610163363673, guid: 57267db290c4d2a43a7f6f714398820b,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.1668444
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119085610163363673, guid: 57267db290c4d2a43a7f6f714398820b,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 2.1315775
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57267db290c4d2a43a7f6f714398820b, type: 3}
 --- !u!4 &6706118023902708335 stripped
@@ -214,6 +224,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6048145727492966437}
     m_Modifications:
+    - target: {fileID: 206331228869527751, guid: 32eaf2e97a7b2524bbf612a4c5f7567f,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.2554295
+      objectReference: {fileID: 0}
+    - target: {fileID: 206331228869527751, guid: 32eaf2e97a7b2524bbf612a4c5f7567f,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 2.087285
+      objectReference: {fileID: 0}
     - target: {fileID: 431510244073801746, guid: 32eaf2e97a7b2524bbf612a4c5f7567f,
         type: 3}
       propertyPath: m_RootOrder

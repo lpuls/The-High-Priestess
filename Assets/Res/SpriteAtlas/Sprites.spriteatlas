@@ -49,7 +49,6 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 738215970fad3884c925fa5eb8fd9329, type: 3}
     - {fileID: 2800000, guid: 635897f3a1c733d4298e55cc7e4e40ea, type: 3}
     - {fileID: 2800000, guid: 7434044a81f46204fae37780477721a1, type: 3}
-    - {fileID: 2800000, guid: 7b1e6475313873e45924c5dd9cecbcbf, type: 3}
     - {fileID: 2800000, guid: 2a327321246e8944aa8f7972b7d2c7f2, type: 3}
     - {fileID: 2800000, guid: 9ed67cf94251be34da15614bd82b1b70, type: 3}
     - {fileID: 2800000, guid: 20de55835e291f34fa830beceb1941cf, type: 3}
@@ -135,7 +134,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c46de9748094be6478d0f8ae958a1126, type: 3}
   - {fileID: 21300000, guid: c903aad47e31dd34d93ecc73ea1564cf, type: 3}
   - {fileID: 21300000, guid: 1e3e26250b38b3740a0a279b4bfc5c90, type: 3}
-  - {fileID: 21300000, guid: 7b1e6475313873e45924c5dd9cecbcbf, type: 3}
   - {fileID: 21300000, guid: 188a45b5d3c415f4daf51aa72147d117, type: 3}
   - {fileID: 21300000, guid: bb8862c51991cfa47b75543959cedc00, type: 3}
   - {fileID: 21300000, guid: b1eaf3c5ab6ec3d42af9d29ff47a050b, type: 3}
@@ -211,7 +209,6 @@ SpriteAtlas:
   - Furnace
   - KeyMask
   - Deed
-  - Exit
   - Photo
   - LowCabinet
   - SquareMask

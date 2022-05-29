@@ -26,6 +26,12 @@ namespace Hamster.TouchPuzzle {
             if (propID == (int)TargetProp) {
                 OnClickByTargetProps(propID);
             }
+            else {
+                OnNotTargetProp();
+            }
+        }
+
+        protected virtual void OnNotTargetProp() {
         }
 
         protected virtual void OnClickByTargetProps(int propID) {

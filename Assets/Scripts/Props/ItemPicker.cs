@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Hamster.TouchPuzzle {
     public class ItemPicker : Props {
@@ -19,6 +20,9 @@ namespace Hamster.TouchPuzzle {
             World.GetWorld<TouchPuzzeWorld>().ItemManager.AddItem((int)ItemID);
             OnPick?.Invoke(this);
             Destroy(gameObject);
+
+            // 播放音效
+            World.GetWorld<TouchPuzzeWorld>().PlaySoundEffect((int)ESoundEffectID.PickItem);
         }
 
         private int GetItemKey() {

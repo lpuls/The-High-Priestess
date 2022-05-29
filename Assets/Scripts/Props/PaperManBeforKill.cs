@@ -24,6 +24,9 @@ namespace Hamster.TouchPuzzle {
 
                 _animator.Play("RightHandUp");
             }
+            else {
+                OnNotTargetProp();
+            }
         }
 
         public override void OnEnterField() {
@@ -45,6 +48,16 @@ namespace Hamster.TouchPuzzle {
 
         private int GetWomanHasNecklace() {
             return (int)ESaveKey.WOMAN_NECKLACE;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
+        }
+
+        protected void OnNotTargetProp() {
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+            if (!world.Blackboard.TryGetValue(GetWomanHasNecklace(), out int _)) {
+                world.ShowMessage(CommonString.MAN_WHISPER);
+            }
+            else if (!world.Blackboard.TryGetValue(GetHasKnifeKey(), out int _)) {
+                world.ShowMessage(CommonString.MAN_WHISPER_KILL);
+            }
         }
     }
 }

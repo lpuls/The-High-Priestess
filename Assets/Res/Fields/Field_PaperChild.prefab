@@ -213,6 +213,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PaperChild
       objectReference: {fileID: 0}
+    - target: {fileID: 5274172707617335791, guid: be53a8dd8778c2e4b8b55f475a325e9e,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.1007164
+      objectReference: {fileID: 0}
+    - target: {fileID: 5274172707617335791, guid: be53a8dd8778c2e4b8b55f475a325e9e,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 1.4304482
+      objectReference: {fileID: 0}
     - target: {fileID: 5978841950478981238, guid: be53a8dd8778c2e4b8b55f475a325e9e,
         type: 3}
       propertyPath: SaveKey

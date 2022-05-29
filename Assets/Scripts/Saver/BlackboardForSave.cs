@@ -16,6 +16,10 @@ namespace Hamster.TouchPuzzle {
             }
         }
 
+        public void Reset() {
+            Clean();
+        }
+
         public void Save(BinaryWriter binaryWriter) {
             binaryWriter.Write(_data.Count);
 

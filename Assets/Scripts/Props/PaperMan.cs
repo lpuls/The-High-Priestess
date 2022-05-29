@@ -22,5 +22,12 @@
         private int GetWomanDeadKey() {
             return (int)ESaveKey.MAN_KILL;  //TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.ManKill, 0, 0);
         }
+
+        protected override void OnNotTargetProp() {
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+            if (!world.Blackboard.TryGetValue(GetBBKeyGive(), out int _)) {
+                world.ShowMessage(CommonString.MAN_WHISPER_AFTER_KILL);
+            }
+        }
     }
 }

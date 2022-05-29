@@ -39,9 +39,14 @@ namespace Hamster.TouchPuzzle {
             }
 
             if (_count >= MaxSandalWood) {
+                TouchPuzzeWorld world =  World.GetWorld<TouchPuzzeWorld>();
+
                 OnSandalwoodFullMessage message = ObjectPool<OnSandalwoodFullMessage>.Malloc();
-                World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger<OnSandalwoodFullMessage>(message);
+                world.MessageManager.Trigger<OnSandalwoodFullMessage>(message);
                 ObjectPool<OnSandalwoodFullMessage>.Free(message);
+
+                // 播放怪笑
+                world.PlaySoundEffect((int)ESoundEffectID.WitchLaught);
             }
         }
 

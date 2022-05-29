@@ -18,6 +18,9 @@ namespace Hamster.TouchPuzzle {
         public FieldManager FieldManager = new FieldManagerForSave();
 
         public List<string> LoadFieldName = new List<string>(32);
+        public List<AudioClip> SoundEffectClips = new List<AudioClip>(8);
+
+        private AudioSource CommonPlayer = null;
 
         public void Awake() {
             ActiveWorld();
@@ -48,11 +51,16 @@ namespace Hamster.TouchPuzzle {
 
             // 注册管理器
             RegisterManager<Blackboard>(Blackboard);
+            RegisterManager<ItemManager>(ItemManager);
             RegisterManager<SaveHelper>(SaveHelper);
+            RegisterManager<FieldManager>(FieldManager);
 
             // 加载图集
             AtlasManager.Init();
             AtlasManager.LoadAtlas("Res/SpriteAtlas/ItemAtlas");
+
+            // 加载通用音效播放器
+            CommonPlayer = GetComponent<AudioSource>();
         }
 
         public void OnTouchDown(GameObject gameObject) {
@@ -113,6 +121,22 @@ namespace Hamster.TouchPuzzle {
             TransitionsPanel.Execute(BeginLoadField);
 
             BeginGamePanel.gameObject.SetActive(false);
+        }
+
+        public bool PlaySoundEffect(int id) {
+            if (id >= 0 && id < SoundEffectClips.Count) {
+                CommonPlayer.clip = SoundEffectClips[id];
+                CommonPlayer.Play();
+                return true;
+            }
+            return false;
+        }
+
+        public void ShowMessage(string message) {
+            ShowMessageBoxMessage messageInst = ObjectPool<ShowMessageBoxMessage>.Malloc();
+            messageInst.Message = message;
+            World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger(messageInst);
+            ObjectPool<ShowMessageBoxMessage>.Free(messageInst);
         }
 
         #region GM

@@ -4,9 +4,10 @@
             bool needShow = false;
 
             // 男人有刀且女人有项链
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetManHasKnifeKey(), out int _)
-                && World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasWomanSandalwood(), out int _)
-                && World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasChildMatchesKey(), out int _)) {
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+            if (world.Blackboard.TryGetValue(GetManHasKnifeKey(), out int _)
+                && world.Blackboard.TryGetValue(GetHasWomanSandalwood(), out int _)
+                && world.Blackboard.TryGetValue(GetHasChildMatchesKey(), out int _)) {
                 needShow = true;
             }
 
@@ -23,17 +24,20 @@
 
             // 离开时，检查女人的香是否被拿，小孩的火柴是否被拿，男人是否拥有刀
             // 如果女人的香被拿，小孩的火柴被拿，男人有刀，而还未杀人，则标记女人被杀死
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
 
             // 女人已经被杀死，不进行任务处理
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetManHasKillKey(), out int _)) {
+            if (world.Blackboard.TryGetValue(GetManHasKillKey(), out int _)) {
                 return;
             }
 
             // 男人有刀且女人有项链，在离开场景时标记男人杀人了
-            if (World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasWomanSandalwood(), out int _)
-                && World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetManHasKnifeKey(), out int _)
-                && World.GetWorld<TouchPuzzeWorld>().Blackboard.TryGetValue(GetHasChildMatchesKey(), out int _)) {
-                World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetManHasKillKey(), 1);
+            if (world.Blackboard.TryGetValue(GetHasWomanSandalwood(), out int _)
+                && world.Blackboard.TryGetValue(GetManHasKnifeKey(), out int _)
+                && world.Blackboard.TryGetValue(GetHasChildMatchesKey(), out int _)) {
+
+                world.Blackboard.SetValue(GetManHasKillKey(), 1);
+                world.PlaySoundEffect((int)ESoundEffectID.WomanBeKill);
             }
         }
 

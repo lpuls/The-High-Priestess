@@ -39,10 +39,7 @@ namespace Hamster.TouchPuzzle {
                 OnClickUnlocak(propID);
             }
             else {
-                ShowMessageBoxMessage message = ObjectPool<ShowMessageBoxMessage>.Malloc();
-                message.Message = CommonString.LOCK_DOOR;
-                World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger(message);
-                ObjectPool<ShowMessageBoxMessage>.Free(message);
+                World.GetWorld<TouchPuzzeWorld>().ShowMessage(CommonString.LOCK_DOOR);
             }
         }
 

@@ -59,5 +59,13 @@ namespace Hamster.TouchPuzzle {
         public void UnbindChangeCallback(Action<int, int, bool> callback) {
             _onItemChange -= callback;
         }
+
+        public void Reset() {
+            for (int i = 0; i < MAX_ITEM_BOX; i++) {
+                _items[i] = 0;
+            }
+            UsingItemKey = 0;
+            UsingItemIndex = -1;
+        }
     }
 }

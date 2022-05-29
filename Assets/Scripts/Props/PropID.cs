@@ -48,14 +48,6 @@
         FlowerInVase,                   // 花瓶
     }
 
-    public enum EBlackBoardKey {
-        None,
-        System = 1,
-        Prop = 2,
-        Event = 3,
-        Save = 4
-    }
-
     public enum EEventKey {
         None,
         CandleCount,
@@ -76,10 +68,6 @@
 
     }
 
-    public enum ESystemBlackboardKey {
-        None,
-        ITEM_MANAGER = 1,
-    }
 
     public enum ESaverID {
         None,
@@ -141,6 +129,8 @@
 
         LEFT_PUPPET_POSE = 121,                                 // 左侧人偶pose
         RIGHT_PUPPET_POSE = 122,                                // 右侧人偶pose
+        EXIT_DOOR_OPEN_LEFT = 123,                              // 出口左大门
+        EXIT_DOOR_OPEN_RIGHT = 124,                             // 出口右大门
 
         EXIT_SAVE,                                              // 有过存档                              
         PASS_GAME,                                              // 是否通关
@@ -148,6 +138,25 @@
 
     public static class CommonString {
         public const string LOCK_DOOR = "上锁了";
+        public const string LOCK_EXIT_DOOR = "太重了，无法推动";
+        public const string WOMAN_WHISPER = "那个祖母绿……";
+        public const string CHILD_WHISPER = "好饿……";
+        public const string MAN_WHISPER = "再搞不到钱的话……";
+        public const string MAN_WHISPER_KILL = "那个宝石!";
+        public const string MAN_WHISPER_AFTER_KILL = "还是不够!";
+        public const string NEWSPAPER_TITLE = "市年一老人被入室抢动杀害";
+        public const string NEWSPAPER_CONTENT = "老人被杀，凶手不明";
+        public const string MAIL_CONTENT_1 = "很抱歉地通知您";
+        public const string MAIL_CONTENT_2 = "该祖母绿为假宝石";
+    }
+
+    public enum ESoundEffectID {
+        PickItem,           // 拾取道具
+        OpenLock,           // 打开锁
+        OpenExitDoor,       // 打开大门
+        WomanBeKill,        // 女人被杀
+        WaterBottle,        // 水声
+        WitchLaught         // 女巫笑
     }
 
 }

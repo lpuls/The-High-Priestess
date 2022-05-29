@@ -9,11 +9,18 @@
         }
 
         protected override int GetBBKeyGive() {
-            return (int)ESaveKey.WOMAN_NECKLACE;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanNecklace, 0, 0);
+            return (int)ESaveKey.WOMAN_NECKLACE;
         }
 
         protected override int GetBBKeyTake() {
-            return (int)ESaveKey.WOMAN_SANDALWOOD;  // TouchPuzzeWorld.GetBlockboardKey((int)EBlackBoardKey.Event, (int)EEventKey.WomanSandalwood, 0, 0);
+            return (int)ESaveKey.WOMAN_SANDALWOOD;
+        }
+
+        protected override void OnNotTargetProp() {
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+            if (!world.Blackboard.TryGetValue(GetBBKeyGive(), out int _)) {
+                world.ShowMessage(CommonString.WOMAN_WHISPER);
+            }
         }
 
     }

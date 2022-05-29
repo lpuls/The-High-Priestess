@@ -20,5 +20,6 @@ namespace Hamster.TouchPuzzle {
                 binaryWriter.Write(_items[i]);
             }
         }
+
     }
 }
