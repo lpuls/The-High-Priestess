@@ -37,9 +37,15 @@ namespace Hamster.TouchPuzzle {
             ProductionPersonnelList.SetActive(true);
         }
 
-        public void OnAnimationPlayComplete() {
+        public void OnBeginTextAnimationPlayComplete() {
             HideAll();
-            World.GetWorld<TouchPuzzeWorld>().OnShowTextComplete();
+            World.GetWorld<TouchPuzzeWorld>().OnShowBeginTextComplete();
         }
+
+        public void OnEndTextAnimationPlayComplete() {
+            HideAll();
+            World.GetWorld<TouchPuzzeWorld>().OnShowEndTextComplete();
+        }
+
     }
 }

@@ -46,12 +46,19 @@ namespace Hamster.TouchPuzzle {
                 ObjectPool<OnSandalwoodFullMessage>.Free(message);
 
                 // 播放怪笑
-                world.PlaySoundEffect((int)ESoundEffectID.WitchLaught);
+                if (!world.Blackboard.HasValue(GetWitchLaught())) {
+                    world.PlaySoundEffect((int)ESoundEffectID.WitchLaught);
+                    world.Blackboard.SetValue(GetWitchLaught(), 1);
+                }
             }
         }
 
         private int GetFurnaceKey() {
             return (int)ESaveKey.FURNACE_SANDALWOOD_COUNT;
+        }
+
+        private int GetWitchLaught() {
+            return (int)ESaveKey.WITCH_LAUGHT;
         }
 
     }

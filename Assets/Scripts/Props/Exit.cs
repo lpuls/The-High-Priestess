@@ -7,7 +7,7 @@
                 // 游戏结束
                 world.Blackboard.SetValue((int)ESaveKey.PASS_GAME, 1);
 
-                // 回到开始界面
+                // 显示结束UI并回到开始界面
                 World.GetWorld<TouchPuzzeWorld>().TransitionsPanel.Execute(BeginGoTo);
             }
             else {
@@ -17,8 +17,10 @@
 
         private void BeginGoTo() {
             TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
-            world.BeginGamePanel.gameObject.SetActive(true);
-            world.TransitionsPanel.SetComplete();
+            world.ShowEndText();
+
+            // world.BeginGamePanel.gameObject.SetActive(true);
+            // world.TransitionsPanel.SetComplete();
         }
     }
 }

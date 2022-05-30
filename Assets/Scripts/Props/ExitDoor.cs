@@ -12,7 +12,13 @@ namespace Hamster.TouchPuzzle {
         public override void Init(IField field) {
             base.Init(field);
 
-            World.GetWorld<TouchPuzzeWorld>().MessageManager.Bind<OnFireCandleStickMessage>(OnReceiveFireCandleStickMessage);
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+            if (world.Blackboard.TryGetValue(TouchPuzzeWorld.GetCandleCountKey(), out int value) && value > ID) {
+                if (null != Bolt)
+                    Bolt.SetActive(false);
+            }
+
+           world.MessageManager.Bind<OnFireCandleStickMessage>(OnReceiveFireCandleStickMessage);
         }
 
         private void OnReceiveFireCandleStickMessage(OnFireCandleStickMessage obj) {

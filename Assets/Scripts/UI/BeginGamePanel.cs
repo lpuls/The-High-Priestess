@@ -32,11 +32,17 @@ namespace Hamster.TouchPuzzle {
 
         private void OnClickNewGame() {
             SaveHelper saver = World.GetWorld().GetManager<SaveHelper>();
+
+            Blackboard bb = World.GetWorld().GetManager<Blackboard>();
+            bool passedGame = bb.HasValue((int)ESaveKey.PASS_GAME);
+            
             saver.Delete();
             saver.Reset();
 
-            Blackboard bb = World.GetWorld().GetManager<Blackboard>();
             bb.SetValue((int)ESaveKey.EXIT_SAVE, 1);
+            if (passedGame) {
+                bb.SetValue((int)ESaveKey.PASS_GAME, 1);
+            }
 
             OnClickOldGame();
         }

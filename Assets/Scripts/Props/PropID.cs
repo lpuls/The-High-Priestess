@@ -132,6 +132,8 @@
         EXIT_DOOR_OPEN_LEFT = 123,                              // 出口左大门
         EXIT_DOOR_OPEN_RIGHT = 124,                             // 出口右大门
 
+        WITCH_LAUGHT = 125,                                     // 是否发出女巫笑
+
         NEW_BEGIN,                                              // 新开始
         EXIT_SAVE,                                              // 有过存档                              
         PASS_GAME,                                              // 是否通关
