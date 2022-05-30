@@ -38,6 +38,7 @@ namespace Hamster.TouchPuzzle {
                 ItemBoxUI boxUI = transform.GetComponentInChild<ItemBoxUI>("Items/Item" + index);
                 if (null == boxUI)
                     break;
+                boxUI.Init();
                 boxUI.Index = index;
                 _itemUIs.Add(boxUI);
                 boxUI.OnSelectItem += OnSelectItem;

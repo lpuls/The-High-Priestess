@@ -5,9 +5,12 @@ using UnityEngine;
 namespace Hamster.TouchPuzzle {
 
     public class TouchPuzzeWorld : World, ITouchProcessor {
+        public float MaxSaveTime = 0.5f;
+
         public TransitionsPanel TransitionsPanel = null;
         public MainUIPanel MainUIPanel = null;
         public BeginGamePanel BeginGamePanel = null;
+        public TextPanel TextPanel = null;
 
         public TouchRaycaster TouchRaycaster = null;
         public AtlasManager AtlasManager = new AtlasManager();
@@ -20,15 +23,17 @@ namespace Hamster.TouchPuzzle {
         public List<string> LoadFieldName = new List<string>(32);
         public List<AudioClip> SoundEffectClips = new List<AudioClip>(8);
 
+        private float _saveTime = 0.0f;
         private AudioSource CommonPlayer = null;
 
         public void Awake() {
             ActiveWorld();
 
-            InitWorld();
             TouchRaycaster.TouchProcessor = this;
+            InitWorld();
 
             // 显示开始游戏
+            TextPanel.gameObject.SetActive(true);
             BeginGamePanel.gameObject.SetActive(true);
         }
 
@@ -40,6 +45,22 @@ namespace Hamster.TouchPuzzle {
             ConfigHelper = new ConfigHelper();
             base.InitWorld(typeof(Config.Props).Assembly, uiAssembly, GetType().Assembly);
 
+            // 注册管理器
+            RegisterManager<Blackboard>(Blackboard);
+            RegisterManager<ItemManager>(ItemManager);
+            RegisterManager<SaveHelper>(SaveHelper);
+            RegisterManager<FieldManager>(FieldManager);
+
+            // 初始化UI
+            MainUIPanel.InitMainUI();
+
+            // 加载图集
+            AtlasManager.Init();
+            AtlasManager.LoadAtlas("Res/SpriteAtlas/ItemAtlas");
+
+            // 加载通用音效播放器
+            CommonPlayer = GetComponent<AudioSource>();
+
             // 初始化存档管理器
             Debug.Log("存档位置在: " + Application.persistentDataPath);
             SaveHelper = new SaveHelper(Application.persistentDataPath + "/Save.save", // @"H:\Dev\Demo\HighPriestess\Dava.sav",
@@ -48,19 +69,16 @@ namespace Hamster.TouchPuzzle {
                 ItemManager as ItemManagerForSave,
                 FieldManager as FieldManagerForSave);
             SaveHelper.Load();
+        }
 
-            // 注册管理器
-            RegisterManager<Blackboard>(Blackboard);
-            RegisterManager<ItemManager>(ItemManager);
-            RegisterManager<SaveHelper>(SaveHelper);
-            RegisterManager<FieldManager>(FieldManager);
+        protected override void Update() {
+            base.Update();
 
-            // 加载图集
-            AtlasManager.Init();
-            AtlasManager.LoadAtlas("Res/SpriteAtlas/ItemAtlas");
-
-            // 加载通用音效播放器
-            CommonPlayer = GetComponent<AudioSource>();
+            _saveTime += Time.deltaTime;
+            if (_saveTime > MaxSaveTime) {
+                _saveTime -= MaxSaveTime;
+                SaveHelper.Save();
+            }
         }
 
         public void OnTouchDown(GameObject gameObject) {
@@ -93,12 +111,20 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void BeginLoadField() {
-            Asset.Load<Sprite>("OriginRes/Sprites/Room");
-
             // 加载场景
             FieldManager.LoadFieldByArray(LoadFieldName, () => {
-                TransitionsPanel.SetComplete();
                 MainUIPanel.gameObject.SetActive(true);
+
+                if (!Blackboard.HasValue((int)ESaveKey.NEW_BEGIN)) {
+                    ShowBeginText();
+                    TransitionsPanel.gameObject.SetActive(true);
+                    TransitionsPanel.Execute(null);
+
+                    Blackboard.SetValue((int)ESaveKey.NEW_BEGIN, 1);
+                }
+                else {
+                    OnShowTextComplete();
+                }
             });
         }
 
@@ -115,8 +141,6 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void EnterGame() {
-            MainUIPanel.InitMainUI();
-
             TransitionsPanel.gameObject.SetActive(true);
             TransitionsPanel.Execute(BeginLoadField);
 
@@ -135,8 +159,25 @@ namespace Hamster.TouchPuzzle {
         public void ShowMessage(string message) {
             ShowMessageBoxMessage messageInst = ObjectPool<ShowMessageBoxMessage>.Malloc();
             messageInst.Message = message;
-            World.GetWorld<TouchPuzzeWorld>().MessageManager.Trigger(messageInst);
+            MessageManager.Trigger(messageInst);
             ObjectPool<ShowMessageBoxMessage>.Free(messageInst);
+        }
+
+        public void OnShowTextComplete() {
+            TextPanel.HideAll();
+            TransitionsPanel.SetComplete();
+        }
+
+        public void ShowBeginText() {
+            TextPanel.ShowBeginText();
+        }
+
+        public void ShowEndText() {
+            TextPanel.ShowEndText();
+        }
+
+        public void ShowProductionPersonnelListText() {
+            TextPanel.ShowProductionPersonnelListText();
         }
 
         #region GM

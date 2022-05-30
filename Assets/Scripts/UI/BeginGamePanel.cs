@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Hamster.TouchPuzzle {
@@ -38,7 +37,6 @@ namespace Hamster.TouchPuzzle {
 
             Blackboard bb = World.GetWorld().GetManager<Blackboard>();
             bb.SetValue((int)ESaveKey.EXIT_SAVE, 1);
-            saver.Save();
 
             OnClickOldGame();
         }

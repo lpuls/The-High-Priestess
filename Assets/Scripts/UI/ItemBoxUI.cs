@@ -15,7 +15,7 @@ namespace Hamster.TouchPuzzle {
         private int _id = 0;
         private bool _select = false;
 
-        public void Awake() {
+        public void Init() {
             _icon = transform.GetComponentInChild<Image>("ItemIcon");
             _itemName = transform.GetComponentInChild<Text>("ItemName");
             _button = transform.GetComponent<Button>();
