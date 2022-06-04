@@ -7,13 +7,13 @@ namespace Hamster.TouchPuzzle {
         public Text Title = null;
         public Button NewGame = null;
         public Button OldGame = null;
+        public GameObject ProductionPersonnelList = null;
 
         public void Start() {
             UpdateTitleColor();
 
             Blackboard bb = World.GetWorld().GetManager<Blackboard>();
-            bool exitSave = bb.TryGetValue((int)ESaveKey.EXIT_SAVE, out int _);
-            OldGame.gameObject.SetActive(exitSave);
+            
             OldGame.onClick.AddListener(OnClickOldGame);
 
             NewGame.onClick.AddListener(OnClickNewGame);
@@ -28,6 +28,11 @@ namespace Hamster.TouchPuzzle {
             if (bb.TryGetValue((int)ESaveKey.PASS_GAME, out int _)) {
                 Title.color = Color.red;
             }
+
+            // 无存档或当前存档已经通关则不显示继续游戏
+            bool exitSave = bb.TryGetValue((int)ESaveKey.EXIT_SAVE, out int _);
+            bool gameWin = bb.TryGetValue((int)ESaveKey.GAME_WIN, out int _);
+            OldGame.gameObject.SetActive(exitSave && !gameWin);
         }
 
         private void OnClickNewGame() {
@@ -48,7 +53,16 @@ namespace Hamster.TouchPuzzle {
         }
 
         private void OnClickOldGame() {
-            World.GetWorld<TouchPuzzeWorld>().EnterGame();
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+            world.EnterGame();
+        }
+
+        public void ShowProductionPersonnelList() {
+            ProductionPersonnelList.gameObject.SetActive(true);
+        }
+
+        public void HideProductionPersonnelList() {
+            ProductionPersonnelList.gameObject.SetActive(false);
         }
 
     }

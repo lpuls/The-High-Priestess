@@ -9,6 +9,7 @@ namespace Hamster.TouchPuzzle {
         public MainUIPanel MainUIPanel = null;
         public BeginGamePanel BeginGamePanel = null;
         public TextPanel TextPanel = null;
+        public BackToBeginPanel BackToBeginPanel = null;
 
         public TouchRaycaster TouchRaycaster = null;
         public AtlasManager AtlasManager = new AtlasManager();
@@ -21,7 +22,8 @@ namespace Hamster.TouchPuzzle {
         public List<string> LoadFieldName = new List<string>(32);
         public List<AudioClip> SoundEffectClips = new List<AudioClip>(8);
 
-        private AudioSource CommonPlayer = null;
+        private AudioSource _commonPlayer = null;
+        private bool _isRunning = true;
 
         public void Awake() {
             ActiveWorld();
@@ -47,13 +49,15 @@ namespace Hamster.TouchPuzzle {
             AtlasManager.LoadAtlas("Res/SpriteAtlas/ItemAtlas");
 
             // 加载通用音效播放器
-            CommonPlayer = GetComponent<AudioSource>();
+            _commonPlayer = GetComponent<AudioSource>();
 
             // 绑定事件
             Blackboard.BindModifyValue(OnModifyValue);
 
+            // 初始化UI
+            MainUIPanel.InitMainUI();
+
             // 注册管理器
-            RegisterManager<SaveHelper>(SaveHelper);
             RegisterManager<Blackboard>(Blackboard);
             RegisterManager<ItemManager>(ItemManager);
             RegisterManager<FieldManager>(FieldManager);
@@ -61,17 +65,18 @@ namespace Hamster.TouchPuzzle {
             // 初始化存档管理器
             Debug.Log("存档位置在: " + Application.persistentDataPath);
             SaveHelper = new SaveHelper(Application.persistentDataPath + "/Save.save", // @"H:\Dev\Demo\HighPriestess\Dava.sav",
-                0, 
-                Blackboard as BlackboardForSave, 
+                0,
+                Blackboard as BlackboardForSave,
                 ItemManager as ItemManagerForSave,
                 FieldManager as FieldManagerForSave);
+            RegisterManager<SaveHelper>(SaveHelper);
             SaveHelper.Load();
-
-            // 初始化UI
-            MainUIPanel.InitMainUI();
         }
 
         public void OnTouchDown(GameObject gameObject) {
+            if (!_isRunning)
+                return;
+
             Props props = gameObject.GetComponent<Props>();
             if (null != props && props.enabled) {
                 props.OnClickDown(ItemManager.UsingItemKey);
@@ -79,6 +84,9 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void OnTouchUp(GameObject gameObject) {
+            if (!_isRunning)
+                return;
+
             Props props = gameObject.GetComponent<Props>();
             if (null != props && props.enabled) {
                 props.OnClickDown(ItemManager.UsingItemKey);
@@ -86,6 +94,9 @@ namespace Hamster.TouchPuzzle {
         }
 
         public void OnClick(GameObject gameObject) {
+            if (!_isRunning)
+                return;
+
             Props props = gameObject.GetComponent<Props>();
             if (null != props && props.enabled) {
                 props.OnClick(ItemManager.UsingItemKey);
@@ -107,8 +118,8 @@ namespace Hamster.TouchPuzzle {
 
                 if (!Blackboard.HasValue((int)ESaveKey.NEW_BEGIN)) {
                     ShowBeginText();
-                    TransitionsPanel.gameObject.SetActive(true);
-                    TransitionsPanel.Execute(null);
+                    // TransitionsPanel.gameObject.SetActive(true);
+                    // TransitionsPanel.Execute(null);
 
                     Blackboard.SetValue((int)ESaveKey.NEW_BEGIN, 1);
                 }
@@ -116,6 +127,13 @@ namespace Hamster.TouchPuzzle {
                     OnShowBeginTextComplete();
                 }
             });
+        }
+
+        public void ResetFields() {
+            FieldManager.Reset();
+            for (int i = 0; i < LoadFieldName.Count; i++) {
+                Asset.Unload(LoadFieldName[i]);
+            }
         }
 
         public void SetUsingItem(int id, int index) {
@@ -139,8 +157,8 @@ namespace Hamster.TouchPuzzle {
 
         public bool PlaySoundEffect(int id) {
             if (id >= 0 && id < SoundEffectClips.Count) {
-                CommonPlayer.clip = SoundEffectClips[id];
-                CommonPlayer.Play();
+                _commonPlayer.clip = SoundEffectClips[id];
+                _commonPlayer.Play();
                 return true;
             }
             return false;
@@ -160,6 +178,11 @@ namespace Hamster.TouchPuzzle {
 
         public void OnShowEndTextComplete() {
             TextPanel.gameObject.SetActive(true);
+            ShowBeginGamePanel();
+        }
+
+        public void ShowBeginGamePanel() {
+            FieldManager.Reset();
             BeginGamePanel.gameObject.SetActive(true);
         }
 
@@ -177,6 +200,19 @@ namespace Hamster.TouchPuzzle {
 
         private void OnModifyValue(int key, int value) {
             SaveHelper.Save();
+        }
+
+        public void ShowBackToBegin() {
+            BackToBeginPanel.Show();
+        }
+
+        public void PauseGame(bool pause) {
+            _isRunning = !pause;
+        }
+
+        public void ShowDetialInfo(string atlasPath, string imagePath, string detialText) {
+            Sprite sprite = AtlasManager.GetSprite(atlasPath, imagePath);
+            MainUIPanel.ShowDetail(sprite, detialText);
         }
 
         #region GM

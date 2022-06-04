@@ -24,6 +24,8 @@ namespace Hamster.TouchPuzzle {
         }
 
         public override void OnClick(int propID) {
+            TouchPuzzeWorld world = World.GetWorld<TouchPuzzeWorld>();
+
             if (EPropID.Blood == (EPropID)propID) {
                 _animtor.Play("FloatUp");
                 if (null != Key)
@@ -31,13 +33,13 @@ namespace Hamster.TouchPuzzle {
 
                 _hasBlood = true;
 
-                World.GetWorld<TouchPuzzeWorld>().RemoveCurrentUsingItem();
-
-                World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetTakedKey(), 1);
-                World.GetWorld<TouchPuzzeWorld>().Blackboard.SetValue(GetHasBloodKey(), 1);
+                world.RemoveCurrentUsingItem();
+                world.Blackboard.SetValue(GetTakedKey(), 1);
+                world.Blackboard.SetValue(GetHasBloodKey(), 1);
             }
             else if (!_hasBlood) {
                 _animtor.Play("Float", 0, 0);
+                world.ShowMessage(CommonString.VASE_ROOT);
             }
         }
 

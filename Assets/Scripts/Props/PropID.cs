@@ -137,6 +137,7 @@
         NEW_BEGIN,                                              // 新开始
         EXIT_SAVE,                                              // 有过存档                              
         PASS_GAME,                                              // 是否通关
+        GAME_WIN,                                               // 游戏结束
     }
 
     public static class CommonString {
@@ -151,6 +152,9 @@
         public const string NEWSPAPER_CONTENT = "老人被杀，凶手不明";
         public const string MAIL_CONTENT_1 = "很抱歉地通知您";
         public const string MAIL_CONTENT_2 = "该祖母绿为假宝石";
+        public const string VASE_ROOT = "长根了，难以拿出来";
+        public const string NEWSPAPER = "我市一妇人被入室抢劫杀害<size=20>我市于今夜凌晨市效外一独幢发生一起入室抢劫，凶手不明，只知道是左撇子</size>";
+        public const string LETTER = "经机构鉴定，祖母绿宝石为假";
     }
 
     public enum ESoundEffectID {

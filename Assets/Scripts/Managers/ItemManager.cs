@@ -63,6 +63,7 @@ namespace Hamster.TouchPuzzle {
         public void Reset() {
             for (int i = 0; i < MAX_ITEM_BOX; i++) {
                 _items[i] = 0;
+                _onItemChange?.Invoke(0, i, false);
             }
             UsingItemKey = 0;
             UsingItemIndex = -1;

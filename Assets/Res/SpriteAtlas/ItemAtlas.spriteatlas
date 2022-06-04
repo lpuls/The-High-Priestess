@@ -43,6 +43,8 @@ SpriteAtlas:
     - {fileID: 2800000, guid: ef9889c6ad48fcc40be070d455fd9b6a, type: 3}
     - {fileID: 2800000, guid: ca13c3fc71c54524b804825b49c1b84c, type: 3}
     - {fileID: 2800000, guid: 60107be8f239be44f8a988dc13e20674, type: 3}
+    - {fileID: 2800000, guid: dc8c4665669fd0549b84c6678274246f, type: 3}
+    - {fileID: 2800000, guid: 62115a37c43bfeb4dacf84624e076287, type: 3}
     bindAsDefault: 0
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -52,7 +54,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 728e14146c59aa144a77e4a11ed36bd3, type: 3}
   - {fileID: 21300000, guid: 80c52a24b5bc84149bd105fa3aaa8b34, type: 3}
   - {fileID: 21300000, guid: 303cbef44ec21214f9be6c59d33e33d4, type: 3}
+  - {fileID: 21300000, guid: dc8c4665669fd0549b84c6678274246f, type: 3}
   - {fileID: 21300000, guid: ef9889c6ad48fcc40be070d455fd9b6a, type: 3}
+  - {fileID: 21300000, guid: 62115a37c43bfeb4dacf84624e076287, type: 3}
   - {fileID: 21300000, guid: 3610c918a4e7bdc43b80f234329167fd, type: 3}
   - {fileID: 21300000, guid: 60107be8f239be44f8a988dc13e20674, type: 3}
   - {fileID: 21300000, guid: b5dcc329bf9b6114cb7a780956b8d08c, type: 3}
@@ -64,7 +68,9 @@ SpriteAtlas:
   - NecklaceIcon
   - PhotoPartIcon
   - CakeIcon
+  - NewspaperUI
   - BowlIcon
+  - LetterUI
   - KnifeIcon
   - KeyIcon
   - Matches

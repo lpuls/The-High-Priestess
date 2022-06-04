@@ -20,6 +20,10 @@ namespace Hamster.TouchPuzzle {
         private Field _currentField = null;
         private ItemBoxUI _selectItem = null;
 
+        public GameObject DetialShow = null;
+        public Image DetialShowImage = null;
+        public Text DetialShowText = null;
+
         private List<ItemBoxUI> _itemUIs = new List<ItemBoxUI>(8);
 
         public Text _messageBoxText = null;
@@ -136,7 +140,21 @@ namespace Hamster.TouchPuzzle {
             if (null != _messageBoxText)
                 _messageBoxText.text = message.Message;
             _messageBoxAnimator.Play("Show", 0, 0);
-            //_messageBoxAnimator.SetTrigger("Show");
+        }
+
+        public void OnClickBackToBeginPanel() {
+            World.GetWorld<TouchPuzzeWorld>().ShowBackToBegin();
+        }
+
+        public void ShowDetail(Sprite showImage, string showText) {
+            DetialShow.SetActive(true);
+            DetialShowImage.sprite = showImage;
+            DetialShowImage.SetNativeSize();
+            DetialShowText.text = showText;
+        }
+
+        public void HideDetial() {
+            DetialShow.SetActive(false);
         }
     }
 }
