@@ -118,10 +118,9 @@ namespace Hamster {
 
             // 先判断是否已经在加载过了
             if (_assets.TryGetValue(path, out Object value)) {
-                if (!_pools.TryGetValue(path, out UnityObjectPool pool)) {
-                    pool = InitObjectPool(path, value, cache);
+                if (_pools.TryGetValue(path, out UnityObjectPool pool)) {
+                    callBack?.Invoke(pool.Malloc());
                 }
-                callBack?.Invoke(pool.Malloc());
                 return null;
             }
 
