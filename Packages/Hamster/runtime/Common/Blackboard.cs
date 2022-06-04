@@ -73,6 +73,25 @@ public class Blackboard {
     protected Dictionary<int, int> _data = new Dictionary<int, int>(new Int32Comparer());
     protected Dictionary<string, IBackboardVar> _vars = new Dictionary<string, IBackboardVar>();
 
+    private event Action<int, int> _onModifyValue;
+    private event Action<string, IBackboardVar> _onModifyVar;
+
+    public void BindModifyValue(Action<int, int> onModifyValue) {
+        _onModifyValue += onModifyValue;
+    }
+
+    public void BindModifyValue(Action<string, IBackboardVar> onModifyVar) {
+        _onModifyVar += onModifyVar;
+    }
+
+    public void UnbindModifyValue(Action<int, int> onModifyValue) {
+        _onModifyValue -= onModifyValue;
+    }
+
+    public void UnbindModifyValue(Action<string, IBackboardVar> onModifyVar) {
+        _onModifyVar -= onModifyVar;
+    }
+
     public bool TryGetValue(int key, out int value) {
         return _data.TryGetValue(key, out value);
     }
@@ -88,6 +107,7 @@ public class Blackboard {
 
     public void SetValue(int key, int value) {
         _data[key] = value;
+        _onModifyValue?.Invoke(key, value);
     }
 
     public void SetValue<T>(string name, T value) {
@@ -95,12 +115,14 @@ public class Blackboard {
             BackboardVar<T> varInst = bbVar as BackboardVar<T>;
             varInst.SetName(name);
             varInst.SetValue(value);
+            _onModifyVar?.Invoke(name, bbVar);
         }
         else {
             BackboardVar<T> varInst = BackboardVar<T>.Malloc();
             varInst.SetValue(value);
             varInst.SetName(name);
             _vars.Add(name, varInst);
+            _onModifyVar?.Invoke(name, bbVar);
         }
     }
 
@@ -113,11 +135,18 @@ public class Blackboard {
     }
 
     public void DelValue(int key) {
-        _data.Remove(key);
+        if (_data.TryGetValue(key, out int value)) {
+            _data.Remove(key);
+            _onModifyValue?.Invoke(key, value);
+        }
     }
 
     public void DelValue(string name) {
-        _vars.Remove(name);
+        if (_vars.TryGetValue(name, out IBackboardVar value)) {
+            _vars.Remove(name);
+            value.Free();
+            _onModifyVar?.Invoke(name, value);
+        }
     }
 
     public void Clean() {
